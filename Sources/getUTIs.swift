@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftCLI
-import AppKit
 
 class GetUTIs: Command {
     

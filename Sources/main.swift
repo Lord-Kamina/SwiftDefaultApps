@@ -1,5 +1,4 @@
 import Foundation
-import Cocoa
 import SwiftCLI
 
 //var test = CopyHandlerForUTI("public.data", LSRolesMask.all)
