@@ -28,7 +28,7 @@ class LSWrappers {
             else { return nil }
         }
         
-        func copyAllHandlers (_ inUTI:String, _ inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
+        func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
             
             var handlers: Array<String> = []
             
