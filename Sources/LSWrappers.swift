@@ -45,11 +45,10 @@ class LSWrappers {
         
         func copyAllUTIs () -> [(key: String, value: String)] {
             
-            let UTIs = UTCopyDeclaredTypeIdentifiers() as! Array<String>
+            let UTIs = (UTCopyDeclaredTypeIdentifiers() as! Array<String>).filter() { UTTypeConformsTo($0 as CFString,"public.item" as CFString) || UTTypeConformsTo($0 as CFString,"public.content" as CFString)} // Ignore UTIs belonging to devices and such.
             var handlers:Array<String> = []
             for UTI in UTIs {
-                
-                if let handler = UTType().copyDefaultHandler(UTI, LSRolesMask.all) {
+                if let handler = UTType().copyDefaultHandler(UTI) {
                     handlers.append(handler)
                 }
                 else {
