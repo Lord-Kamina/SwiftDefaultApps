@@ -87,6 +87,6 @@ class ReadCommand: OptionCommand {
             break
         }
         
-        if (nil != handler) { print(handler!) } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle "+self.contentType!)) }
+        if (nil != handler) { print(handler!) } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(self.contentType!)")) }
     }
 }

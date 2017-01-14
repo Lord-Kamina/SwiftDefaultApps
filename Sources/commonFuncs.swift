@@ -15,7 +15,7 @@ func copyDictionaryAsString (_ inDict: [(key:String, value:String)]?) -> String?
     if let temp = inDict {
     
         for (key, value) in temp {
-            output+=(key+" "+value+"\n")
+            output+=("\(key)        \(value)\n")
         }
     }
     else { return nil }
