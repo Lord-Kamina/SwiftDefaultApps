@@ -62,6 +62,40 @@ class LSWrappers {
             
         }
         
+        func setDefaultHandler (_ inContent: String, _ inBundleID: String, _ inRoles: LSRolesMask = LSRolesMask.all) -> OSStatus {
+            var retval: OSStatus = 0
+            if (LSWrappers().isAppInstalled(withBundleID: inBundleID) == true) {
+            
+                retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, inBundleID as CFString)
+            
+            }
+            else {
+            if let tempBundle = Bundle(path:inBundleID)?.bundleIdentifier {
+                
+                retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, tempBundle as CFString)
+                
+            }
+            else {
+                if let tempUrl = URL(string:inBundleID) { // If we get a file url, we can convert that to a bundle id.
+                    
+                    if ((tempUrl.absoluteString).hasPrefix("file://")) {
+                        
+                        if let tempBundle = Bundle(url:tempUrl)?.bundleIdentifier {
+                            
+                            retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, tempBundle as CFString)
+                            
+                        }
+                        else { retval = kLSApplicationNotFoundErr }
+                    }
+                    else { retval = Int32(NSFileReadUnsupportedSchemeError) }
+                }
+            }
+            
+         
+        }
+               return retval
+        }
+        
     }
     
     class Schemes {
@@ -114,6 +148,54 @@ class LSWrappers {
             else { return nil }
             return (handlers.isEmpty ? nil : handlers)
         }
+        
+        func setDefaultHandler (_ inScheme: String, _ inBundleID: String) -> OSStatus {
+            var retval: OSStatus = 0
+            
+            if let matches = inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$" {
+                
+                if (matches == true) {
+                    
+                    if (LSWrappers().isAppInstalled(withBundleID:inBundleID) == true) {
+                        
+                        
+                        retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
+                        
+                        
+                    }
+                    else {
+                        
+                        if let tempBundle = Bundle(path:inBundleID)?.bundleIdentifier {
+                            
+                            retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
+                            
+                        }
+                        else {
+                            if let tempUrl = URL(string:inBundleID) { // If we get a file url, we can convert that to a bundle id.
+                                
+                                if ((tempUrl.absoluteString).hasPrefix("file://")) {
+                                    
+                                    if let tempBundle = Bundle(url:tempUrl)?.bundleIdentifier {
+                                        
+                                        retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
+                                        
+                                    }
+                                    else { retval = kLSApplicationNotFoundErr }
+                                }
+                                else { retval = Int32(NSFileReadUnsupportedSchemeError) }
+                            }
+                        }
+                        
+                    }
+                }
+                else { retval = Int32(NSFileReadUnsupportedSchemeError) }
+                
+            }
+            else { retval = Int32(NSFileReadUnsupportedSchemeError) }
+            
+            return retval
+        }
+        
     }
     
     func copyAllApps () -> Array<String>? {
@@ -131,6 +213,17 @@ class LSWrappers {
             else { return nil }
         }
         else { return nil }
+    }
+    
+    func isAppInstalled (withBundleID: String) -> Bool {
+        let temp = withBundleID as CFString
+        
+        if let appURL = (LSCopyApplicationURLsForBundleIdentifier(temp,nil)?.takeRetainedValue() as NSArray?) {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
 }
