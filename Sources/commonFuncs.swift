@@ -56,3 +56,22 @@ func convertAppURLsToPaths (_ inArray:Array<URL>?) -> Array<String>? {
     }
     else { return nil }
 }
+
+infix operator =~
+prefix operator /
+
+func =~ (string: String, regex: NSRegularExpression?) -> Bool? {
+    guard let matches = regex?.numberOfMatches(in:string,
+                                        options: [],
+                                        range: NSMakeRange(0, string.characters.count))
+        else { return nil }
+    return matches > 0
+}
+
+prefix func /(pattern:String) -> NSRegularExpression? {
+    let options: NSRegularExpression.Options =
+        NSRegularExpression.Options.dotMatchesLineSeparators
+    guard let retval = try? NSRegularExpression(pattern:pattern,
+                                                options:options) else { return nil }
+    return retval
+}
