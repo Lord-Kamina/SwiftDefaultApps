@@ -64,7 +64,7 @@ class LSWrappers {
         
         func setDefaultHandler (_ inContent: String, _ inBundleID: String, _ inRoles: LSRolesMask = LSRolesMask.all) -> OSStatus {
             var retval: OSStatus = 0
-            if (LSWrappers().isAppInstalled(withBundleID: inBundleID) == true) {
+            if ((LSWrappers().isAppInstalled(withBundleID: inBundleID) == true) || (inBundleID == "None")) {
             
                 retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, inBundleID as CFString)
             
@@ -156,7 +156,7 @@ class LSWrappers {
                 
                 if (matches == true) {
                     
-                    if (LSWrappers().isAppInstalled(withBundleID:inBundleID) == true) {
+                    if ((LSWrappers().isAppInstalled(withBundleID:inBundleID)) == true || (inBundleID == "None")) {
                         
                         
                         retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
