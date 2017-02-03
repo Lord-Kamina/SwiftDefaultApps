@@ -15,9 +15,7 @@ import AppKit
 
 class LSWrappers {
     class UTType {
-        
         func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
-            
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {
                 let handlerID = (value.takeRetainedValue() as String)
                 if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
@@ -29,9 +27,7 @@ class LSWrappers {
         }
         
         func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
-            
             var handlers: Array<String> = []
-            
             if let value = LSCopyAllRoleHandlersForContentType(inUTI as CFString, inRoles) {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
                 for handlerID in handlerIDs {
@@ -45,7 +41,6 @@ class LSWrappers {
         }
         
         func copyAllUTIs () -> [(key: String, value: String)] {
-            
             let UTIs = (UTCopyDeclaredTypeIdentifiers() as! Array<String>).filter() { UTTypeConformsTo($0 as CFString,"public.item" as CFString) || UTTypeConformsTo($0 as CFString,"public.content" as CFString)} // Ignore UTIs belonging to devices and such.
             var handlers:Array<String> = []
             for UTI in UTIs {
@@ -65,43 +60,16 @@ class LSWrappers {
         func setDefaultHandler (_ inContent: String, _ inBundleID: String, _ inRoles: LSRolesMask = LSRolesMask.all) -> OSStatus {
             var retval: OSStatus = 0
             if ((LSWrappers().isAppInstalled(withBundleID: inBundleID) == true) || (inBundleID == "None")) {
-            
                 retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, inBundleID as CFString)
-            
             }
-            else {
-            if let tempBundle = Bundle(path:inBundleID)?.bundleIdentifier {
-                
-                retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, tempBundle as CFString)
-                
-            }
-            else {
-                if let tempUrl = URL(string:inBundleID) { // If we get a file url, we can convert that to a bundle id.
-                    
-                    if ((tempUrl.absoluteString).hasPrefix("file://")) {
-                        
-                        if let tempBundle = Bundle(url:tempUrl)?.bundleIdentifier {
-                            
-                            retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, tempBundle as CFString)
-                            
-                        }
-                        else { retval = kLSApplicationNotFoundErr }
-                    }
-                    else { retval = Int32(NSFileReadUnsupportedSchemeError) }
-                }
-            }
-            
-         
+            else { retval = kLSApplicationNotFoundErr }
+            return retval
         }
-               return retval
-        }
-        
     }
     
     class Schemes {
         
         func copySchemesAndHandlers() -> [(key: String, value: String)]? {
-            
             var schemes_array: NSArray?
             var apps_array: NSMutableArray?
             if (LSCopySchemesAndHandlerURLs(&schemes_array, &apps_array) == 0) {
@@ -150,56 +118,22 @@ class LSWrappers {
         }
         
         func setDefaultHandler (_ inScheme: String, _ inBundleID: String) -> OSStatus {
-            var retval: OSStatus = 0
-            
+            var retval: OSStatus = kLSUnknownErr
             if let matches = inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$" {
-                
                 if (matches == true) {
-                    
                     if ((LSWrappers().isAppInstalled(withBundleID:inBundleID)) == true || (inBundleID == "None")) {
-                        
-                        
                         retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
-                        
-                        
                     }
-                    else {
-                        
-                        if let tempBundle = Bundle(path:inBundleID)?.bundleIdentifier {
-                            
-                            retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
-                            
-                        }
-                        else {
-                            if let tempUrl = URL(string:inBundleID) { // If we get a file url, we can convert that to a bundle id.
-                                
-                                if ((tempUrl.absoluteString).hasPrefix("file://")) {
-                                    
-                                    if let tempBundle = Bundle(url:tempUrl)?.bundleIdentifier {
-                                        
-                                        retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
-                                        
-                                    }
-                                    else { retval = kLSApplicationNotFoundErr }
-                                }
-                                else { retval = Int32(NSFileReadUnsupportedSchemeError) }
-                            }
-                        }
-                        
-                    }
+                    else { retval = kLSApplicationNotFoundErr }
                 }
-                else { retval = Int32(NSFileReadUnsupportedSchemeError) }
-                
+                else { retval = Int32(kURLUnsupportedSchemeError) }
             }
-            else { retval = Int32(NSFileReadUnsupportedSchemeError) }
-            
+            else { retval = Int32(kURLUnsupportedSchemeError) }
             return retval
         }
-        
     }
     
     func copyAllApps () -> Array<String>? {
-        
         var apps: NSMutableArray?
         if (LSCopyAllApplicationURLs(&apps) == 0) {
             if let appURLs = (apps! as NSArray) as? [URL] {
