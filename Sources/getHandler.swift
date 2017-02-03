@@ -14,7 +14,7 @@ class ReadCommand: OptionCommand {
     
     let name = "getHandler"
     let signature = ""
-    let shortDescription = "Returns the default application registered for the protocol or <subtype> you specify."
+    let shortDescription = "Returns the default application registered for the URL scheme or <subtype> you specify."
     
     private var kind: String?
     private var getAll = false;
@@ -22,31 +22,33 @@ class ReadCommand: OptionCommand {
     private var handler: String? = nil
     
     func setupOptions(options: OptionRegistry) {
-        options.add(keys: ["--UTI"], usage: "Return the default application for <subtype>", valueSignature: "subtype") { [unowned self] (value) in
+        options.addGroup(name:"type", required:true, conflicting:true)
+        
+        options.add(keys: ["--UTI"], usage: "Return the default application for <subtype>", valueSignature: "subtype", group:"type") { [unowned self] (value) in
             self.contentType = value
             self.kind = "UTI"
         }
-        options.add(keys: ["--URL"], usage: "Return the default application for <subtype>", valueSignature: "subtype") { [unowned self] (value) in
+        options.add(keys: ["--URL"], usage: "Return the default application for <subtype>", valueSignature: "subtype", group:"type") { [unowned self] (value) in
             self.contentType = value
             self.kind = "URL"
         }
-        options.add(flags: ["--internet", "--browser", "--web"], usage: "Returns the default web browser.") {
+        options.add(flags: ["--internet", "--browser", "--web"], usage: "Returns the default web browser.", group:"type") {
             self.contentType = nil
             self.kind = "http"
         }
-        options.add(flags: ["--mail", "--email", "--e-mail"], usage: "Returns the default e-mail client.") {
+        options.add(flags: ["--mail", "--email", "--e-mail"], usage: "Returns the default e-mail client.", group:"type") {
             self.contentType = nil
             self.kind = "mailto"
         }
-        options.add(flags: ["--ftp"], usage: "Returns the default FTP client.") {
+        options.add(flags: ["--ftp"], usage: "Returns the default FTP client.", group:"type") {
             self.contentType = nil
             self.kind = "ftp"
         }
-        options.add(flags: ["--rss"], usage: "Returns the default RSS client.") {
+        options.add(flags: ["--rss"], usage: "Returns the default RSS client.", group:"type") {
             self.contentType = nil
             self.kind = "RSS"
         }
-        options.add(flags: ["--news"], usage: "Returns the default news client.") {
+        options.add(flags: ["--news"], usage: "Returns the default news client.", group:"type") {
             self.contentType = nil
             self.kind = "news"
         }
