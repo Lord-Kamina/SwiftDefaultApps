@@ -160,4 +160,80 @@ class LSWrappers {
         }
     }
     
+    func getBundleID (_ inParam: String, outBundleID: inout String?) -> OSStatus {
+        outBundleID = nil
+        var errCode = OSStatus()
+        let inURL: URL
+        let filemanager = FileManager.default
+        if (inParam == "None") { // None is a valid value to remove a handler, so we'll allow it.
+            outBundleID = inParam
+            return 0
+        }
+        if let appPath = NSWorkspace.shared().absolutePathForApplication(withBundleIdentifier: inParam)  { // Check whether we have a valid Bundle ID for an application.
+            outBundleID = inParam
+            return 0
+        }
+        else if let appPath = NSWorkspace.shared().fullPath(forApplication: inParam) { // Or an application designed by name
+            if let bundle = Bundle(path:appPath) {
+                if let type = bundle.getType(outError: &errCode) {
+                    if (type == "APPL") {
+                        outBundleID = bundle.bundleIdentifier!
+                        return 0
+                    }
+                    else { return kLSNotAnApplicationErr }
+                }
+                else { return errCode }
+            }
+            if (filemanager.fileExists(atPath: inParam) == true) { return kLSNotAnApplicationErr }
+            else { return kLSApplicationNotFoundErr }
+        }
+            
+        else {
+            if let bundle = Bundle(path: inParam) { // Is it a valid bundle path?
+                if let type = bundle.getType(outError: &errCode) {
+                    if (type == "APPL") {
+                        outBundleID = bundle.bundleIdentifier!
+                        return 0
+                    }
+                    else { return kLSNotAnApplicationErr }
+                }
+                else { return errCode }
+            }
+            else {
+                if (filemanager.fileExists(atPath: inParam) == true) { // Maybe it's a valid file path, but not an app bundle?
+                    return kLSNotAnApplicationErr
+                }
+                if let url = URL(string: inParam) { // Let's fallback to an URL.
+                    if (url.path != "") {
+                        if (url.isFileURL == true) {
+                            if (filemanager.fileExists(atPath: url.path) == true) { //Is it a valid app URL?
+                                if let bundle = Bundle(url: url) {
+                                    if let type = bundle.getType(outError: &errCode) {
+                                        if (type == "APPL") {
+                                            outBundleID = bundle.bundleIdentifier!
+                                            return 0
+                                        }
+                                        else { return kLSNotAnApplicationErr }
+                                    }
+                                    else { return errCode }
+                                }
+                                else { return kLSNotAnApplicationErr } // Maybe it's a valid file URL, but not an app bundle?
+                            }
+                            else {
+                                return kLSApplicationNotFoundErr
+                            } // No application found at this location.
+                        }
+                        else { return kLSNotAnApplicationErr }
+                    }
+                    else {
+                        if (url.isFileURL == false) { return Int32(NSFileReadUnsupportedSchemeError) }
+                    }
+                }
+                else {
+                    return kLSNotAnApplicationErr
+                }
+            }
+        }
+        return kLSUnknownErr
+    }
 }

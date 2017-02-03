@@ -75,3 +75,15 @@ prefix func /(pattern:String) -> NSRegularExpression? {
                                                 options:options) else { return nil }
     return retval
 }
+
+extension Bundle {
+    func getType (outError: inout OSStatus) -> String? {
+        if let info = self.infoDictionary {
+            if let type = info["CFBundlePackageType"] {
+                return String(describing: type)
+            }
+            else { outError = kLSNotAnApplicationErr; return nil }
+        }
+        else { outError = kLSUnknownErr; return nil }
+    }
+}
