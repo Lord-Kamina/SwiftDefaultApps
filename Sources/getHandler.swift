@@ -89,7 +89,9 @@ class ReadCommand: OptionCommand {
             
             break
         }
-        
-        if (nil != handler) { print(handler!) } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(self.contentType!)")) }
+        let arg: String
+        if (self.contentType != nil) { arg = self.contentType! }
+        else { arg = "<subtype>" }
+        if (nil != handler) { print(handler!) } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(arg)")) }
     }
 }
