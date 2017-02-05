@@ -8,12 +8,52 @@
  */
 
 import AppKit
+import SwiftCLI
 
 @_silgen_name("_LSCopySchemesAndHandlerURLs") func LSCopySchemesAndHandlerURLs(_: UnsafeMutablePointer<NSArray?>, _: UnsafeMutablePointer<NSMutableArray?>) -> OSStatus
 @_silgen_name("_LSCopyAllApplicationURLs") func LSCopyAllApplicationURLs(_: UnsafeMutablePointer<NSMutableArray?>) -> OSStatus;
 @_silgen_name("_UTCopyDeclaredTypeIdentifiers") func UTCopyDeclaredTypeIdentifiers() -> NSArray
 
 class LSWrappers {
+    internal enum LSErrors:OSStatus {
+        case appNotFound = -10814
+        case notAnApp = -10811
+        case invalidFileURL = 262
+        case invalidScheme = -30774
+        case deletedApp = -10660
+        case serverErr = -10822
+        case incompatibleSys = -10825
+        case defaultErr = -10810
+        case invalidBundle = -67857
+        
+        init(value: OSStatus) {
+            switch value {
+            case -10814: self = .appNotFound
+            case -30774: self = .invalidScheme
+            case -10811: self = .notAnApp
+            case 262: self = .invalidFileURL
+            case -10660: self = .deletedApp
+            case -10822: self = .serverErr
+            case -10825: self = .incompatibleSys
+            case -67857: self = .invalidBundle
+            default: self = .defaultErr
+            }
+            
+        }
+        func print(argument: (app: String, content: String)) -> String {
+            switch self {
+            case .notAnApp: return "\(argument.app) is not a valid application."
+            case .appNotFound: return "No application found for \(argument.app)"
+            case .invalidScheme: return "\(argument.content) is not a valid URL Scheme."
+            case .invalidFileURL: return "\(argument.app) is not a valid filesystem URL."
+            case .deletedApp: return "\(argument.app) cannot be accessed because it is in the Trash."
+            case .serverErr: return "There was an error trying to communicate with the Launch Services Server."
+            case .incompatibleSys: return "\(argument.app) is not compatible with the currently installed version of macOS."
+            case .invalidBundle: return "\(argument.app) is not a valid Package."
+            case .defaultErr: return "An unknown error has occurred."
+            }
+        }
+    }
     class UTType {
         func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {

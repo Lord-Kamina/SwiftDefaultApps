@@ -11,45 +11,6 @@ import Foundation
 import SwiftCLI
 
 class SetCommand: OptionCommand {
-    
-    private enum LSErrors:OSStatus {
-        case appNotFound = -10814
-        case notAnApp = -10811
-        case invalidFileURL = 262
-        case invalidScheme = -30774
-        case deletedApp = -10660
-        case serverErr = -10822
-        case incompatibleSys = -10825
-        case defaultErr = -10810
-        
-        init(value: OSStatus) {
-            switch value {
-            case -10814: self = .appNotFound
-            case -30774: self = .invalidScheme
-            case -10811: self = .notAnApp
-            case 262: self = .invalidFileURL
-            case -10660: self = .deletedApp
-            case -10822: self = .serverErr
-            case -10825: self = .incompatibleSys
-            default: self = .defaultErr
-            }
-            
-        }
-        
-        func print(argument: (app: String, content: String)) -> String {
-            switch self {
-            case .notAnApp: return "\(argument.app) is not a valid application."
-            case .appNotFound: return "No application found for \(argument.app)"
-            case .invalidScheme: return "\(argument.content) is not a valid URL Scheme."
-            case .invalidFileURL: return "\(argument.app) is not a valid filesystem URL."
-            case .deletedApp: return "\(argument.app) cannot be accessed because it is in the Trash."
-            case .serverErr: return "There was an error trying to communicate with the Launch Services Server."
-            case .incompatibleSys: return "\(argument.app) is not compatible with the currently installed version of macOS."
-            case .defaultErr: return "An unknown error has occurred."
-            }
-        }
-    }
-    
     var failOnUnrecognizedOptions = true
     let name = "setHandler"
     let signature = ""
@@ -107,7 +68,7 @@ class SetCommand: OptionCommand {
     
     func execute(arguments: CommandArguments) throws  {
         statusCode = LSWrappers().getBundleID(self.inApplication, outBundleID: &bundleID)
-        guard (statusCode == 0) else { throw CLIError.error(LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))); exit(statusCode) }
+        guard (statusCode == 0) else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))); exit(statusCode) }
         switch(kind!) {
             
         case "UTI","URL":
@@ -124,6 +85,6 @@ class SetCommand: OptionCommand {
             break
         }
         if (statusCode == 0) { print("Default handler has succesfully changed to \(bundleID!).") }
-        else { throw CLIError.error(LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))) }
+        else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))) }
     }
 }
