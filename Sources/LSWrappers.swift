@@ -300,4 +300,29 @@ class LSWrappers {
         }
         return kLSUnknownErr
     }
+    func copySchemesAndUTIsForApp (_ inApp: String) -> [String:[String]]? {
+        var urlSchemes: [String] = []
+        var handledUTIs: [String] = []
+        var handledTypes: [String:[String]] = [:]
+        if let infoDict = Bundle(path: inApp)?.infoDictionary {
+            guard ((infoDict["CFBundlePackageType"] as? String) == "APPL") else { return nil }
+            if let schemeDicts = (infoDict["CFBundleURLTypes"] as? [[String:AnyObject]]) {
+                for schemeDict in schemeDicts {
+                    if let schemesArray = (schemeDict["CFBundleURLSchemes"] as? [String]) {
+                        urlSchemes.append(contentsOf:(schemesArray))
+                    }
+                }
+            }
+            if let utiDicts = (infoDict["CFBundleDocumentTypes"] as? [[String:AnyObject]]) {
+                for utiDict in utiDicts {
+                    if let utiArray = (utiDict["LSItemContentTypes"] as? [String]) {
+                        handledUTIs.append(contentsOf:(utiArray))
+                    }
+                }
+            }
+        }
+        handledTypes["URLSchemes"] = !urlSchemes.isEmpty ? urlSchemes : []
+        handledTypes["ContentTypes"] = !handledUTIs.isEmpty ? handledUTIs : []
+        return handledTypes
+    }
 }
