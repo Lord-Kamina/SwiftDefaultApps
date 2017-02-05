@@ -80,7 +80,7 @@ extension Bundle {
             if let type = info["CFBundlePackageType"] {
                 return String(describing: type)
             }
-            else { outError = kLSNotAnApplicationErr; return nil }
+            else { outError = errSecInvalidBundleInfo; return nil }
         }
         else { outError = kLSUnknownErr; return nil }
     }
