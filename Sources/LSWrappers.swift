@@ -109,6 +109,30 @@ class LSWrappers {
     
     class Schemes {
         
+        func getNameForScheme (_ inScheme: String) -> String? {
+            var schemeName: String = nil
+            if let handlers = Schemes().copyAllHandlers(inScheme) {
+                
+                for handler in handlers {
+                    
+                    if let schemeDicts = (Bundle(path:handler)?.infoDictionary?["CFBundleURLTypes"] as? [[String:AnyObject]]) {
+                        
+                        for schemeDict in (schemeDicts.filter() { (($0["CFBundleURLSchemes"] as? [String])?.contains() {$0.caseInsensitiveCompare(inScheme) == .orderedSame}) == true } ) {
+                            if let name = (schemeDict["CFBundleURLName"] as? String) {
+                                
+                                schemeName = name
+                                return schemeName
+                                
+                            }
+                            else { schemeName = nil }
+                            
+                        }
+                    }
+                }
+                
+            }
+            return schemeName
+        }
         func copySchemesAndHandlers() -> [(key: String, value: String)]? {
             var schemes_array: NSArray?
             var apps_array: NSMutableArray?
