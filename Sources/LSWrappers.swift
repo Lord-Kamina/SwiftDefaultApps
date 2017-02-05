@@ -180,7 +180,7 @@ class LSWrappers {
          - Returns: A display name, or `nil` if none was found.
  */
         func getNameForScheme (_ inScheme: String) -> String? {
-            var schemeName: String = nil
+            var schemeName: String? = nil
             if let handlers = Schemes().copyAllHandlers(inScheme) {
                 
                 for handler in handlers {
