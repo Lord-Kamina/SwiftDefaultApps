@@ -56,6 +56,15 @@ class LSWrappers {
     }
     class UTType {
         func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
+        func copyExtensionsFor(_ inUTI: String) -> [String]? {
+            if let result = (UTTypeCopyAllTagsWithClass(inUTI as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as? NSArray) {
+                if let extensions = result as? [String] {
+                    return extensions
+                }
+                else { return nil }
+            }
+            return nil
+        }
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {
                 let handlerID = (value.takeRetainedValue() as String)
                 if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
