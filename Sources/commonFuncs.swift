@@ -10,22 +10,20 @@
 import Foundation
 
 func copyDictionaryAsString (_ inDict: [(key:String, value:String)]?) -> String? {
-    
     var output = ""
-    
     if let temp = inDict {
-    
+        
         for (key, value) in temp {
-            output+=("\(key)        \(value)\n")
+            output+=("\(key)\t\t\t\t\(value)\n")
         }
     }
     else { return nil }
     return output
 }
 
-func copyStringArrayAsString (_ inArray: Array<String>?) -> String? {
+func copyStringArrayAsString (_ inArray: Array<String>?, separator: String = "\n") -> String? {
     if let temp = inArray {
-    return temp.joined(separator:"\n")
+        return temp.joined(separator:separator)
     }
     else { return nil }
 }
