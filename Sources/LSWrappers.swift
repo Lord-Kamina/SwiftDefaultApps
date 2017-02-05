@@ -14,7 +14,23 @@ import SwiftCLI
 @_silgen_name("_LSCopyAllApplicationURLs") func LSCopyAllApplicationURLs(_: UnsafeMutablePointer<NSMutableArray?>) -> OSStatus;
 @_silgen_name("_UTCopyDeclaredTypeIdentifiers") func UTCopyDeclaredTypeIdentifiers() -> NSArray
 
+/**
+ Functions wrapping varied Launch Services tasks to be re-used throughout the application.
+ */
 class LSWrappers {
+    
+    /**
+     Wrapper for commonly-used errors associated to Launch Services.
+     - appNotFound: Application not found at given path/URL.
+     - notAnApp: Found item at given path/URL but it is not an application bundle.
+     - invalidFileURL: Trying to locate a file with a scheme different from file://
+     - invalidScheme: Supplied URL Scheme is malformed or contains invalid characters.
+     - deletedApp: An application bundle was found, but it is currently in the Trash.
+     - serverErr: Can't communicate with the Launch Services server.
+     - incompatibleSys: A valid application bundle was found, but it is not compatible with the current version of macOS.
+     - invalidBundle: The specified bundle does not have a valid CFBundlePackageType entry.
+     - defaultErr: Unknown error, for cases not covered above.
+     */
     internal enum LSErrors:OSStatus {
         case appNotFound = -10814
         case notAnApp = -10811
@@ -40,6 +56,15 @@ class LSWrappers {
             }
             
         }
+        /**
+         Print a user-readable error message for each error code.
+         
+         - Parameter argument:
+         app: The application specified by the user, which could conceivably be a URL, a file-path, a bundle identifier or even a display name.
+         content: This is only used in the case the user supplies a malformed URL Scheme.
+         
+         - Returns: Human-readable error message specifying the problem, or unknown error if the problem is something not accounted for here.
+         */
         func print(argument: (app: String, content: String)) -> String {
             switch self {
             case .notAnApp: return "\(argument.app) is not a valid application."
@@ -54,8 +79,15 @@ class LSWrappers {
             }
         }
     }
+    /**
+     Groups functions dealing with UTIs.
+     */
     class UTType {
-        func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
+        /**
+         Copies a list of file-extensions for a given UTI.
+         - Parameter inUTI: A Uniform Type Identifier.
+         - Returns: An array of strings corresponding to file-extensions for that UTI, or nil.
+         */
         func copyExtensionsFor(_ inUTI: String) -> [String]? {
             if let result = (UTTypeCopyAllTagsWithClass(inUTI as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as? NSArray) {
                 if let extensions = result as? [String] {
@@ -65,6 +97,13 @@ class LSWrappers {
             }
             return nil
         }
+        /**
+         Copies the bundle identifier of the application currently registered as the default handler for a given UTI.
+         - Parameter inUTI: A Uniform Type Identifier.
+         - Parameter inRoles: The specified Launch Services Role to query. Can correspond to "Editor", "Viewer", "Shell" or "None". By default, we are only concerned with viewers and editors (in that order).
+         - Returns: The POSIX path of an application, or nil if no valid handler was found.
+         */
+        func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? {
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {
                 let handlerID = (value.takeRetainedValue() as String)
                 if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
@@ -74,8 +113,13 @@ class LSWrappers {
             }
             else { return nil }
         }
-        
-        func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? { // Unless specifically specified, we only care about viewers and editors, in that order, most of the time.
+        /**
+         Creates a list of all currently registered handlers for a given UTI.
+         - Parameter inUTI: A Uniform Type Identifier.
+         - Parameter inRoles: The specified Launch Services Role to query. Can correspond to "Editor", "Viewer", "Shell" or "None". By default, we are only concerned with viewers and editors (in that order).
+         - Returns: An array of strings corresponding to the POSIX paths of all currently registered handlers, or nil of none were found.
+         */
+        func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? {
             var handlers: Array<String> = []
             if let value = LSCopyAllRoleHandlersForContentType(inUTI as CFString, inRoles) {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
@@ -88,7 +132,10 @@ class LSWrappers {
             else { return nil }
             return (handlers.isEmpty ? nil : handlers)
         }
-        
+        /**
+         Creates a keyed dictionary of all currently-registered UTIs and their default handler. Excludes abstract entries like references to physical devices and such things we have no use for.
+         - Returns: A dictionary with UTIs as keys and bundle identifiers as values.
+         */
         func copyAllUTIs () -> [(key: String, value: String)] {
             let UTIs = (UTCopyDeclaredTypeIdentifiers() as! Array<String>).filter() { UTTypeConformsTo($0 as CFString,"public.item" as CFString) || UTTypeConformsTo($0 as CFString,"public.content" as CFString)} // Ignore UTIs belonging to devices and such.
             var handlers:Array<String> = []
@@ -105,7 +152,15 @@ class LSWrappers {
             return tempdict.sorted(by: { $0.0 < $1.0 })
             
         }
-        
+        /**
+         Changes the default handler for a given UTI.
+         - See Also: `enum LSErrors` above.
+         - Parameters:
+         - inContent: A Uniform Type Identifier.
+         - inBundleID: A bundle-identifier referring to a valid application bundle. Specifying "None" will disable the default handler for that UTI.
+         - inRoles: The specified Launch Services Role to modify. Can correspond to "Editor", "Viewer", "Shell" or "None".
+         - Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
+         */
         func setDefaultHandler (_ inContent: String, _ inBundleID: String, _ inRoles: LSRolesMask = LSRolesMask.all) -> OSStatus {
             var retval: OSStatus = 0
             if ((LSWrappers().isAppInstalled(withBundleID: inBundleID) == true) || (inBundleID == "None")) {
@@ -115,9 +170,15 @@ class LSWrappers {
             return retval
         }
     }
-    
+    /**
+     Groups functions dealing with URL Schemes.
+     */
     class Schemes {
-        
+        /**
+         Traverses Info dictionaries of possible handlers for an URL Scheme and gets a display name, if available.
+         - Parameter inScheme: An URL Scheme.
+         - Returns: A display name, or `nil` if none was found.
+ */
         func getNameForScheme (_ inScheme: String) -> String? {
             var schemeName: String = nil
             if let handlers = Schemes().copyAllHandlers(inScheme) {
@@ -142,6 +203,10 @@ class LSWrappers {
             }
             return schemeName
         }
+        /**
+         Creates a list of all currently registered URL Schemes and their default handler.
+         - Returns: A dictionary with URL Schemes as keys and bundle identifiers as values.
+         */
         func copySchemesAndHandlers() -> [(key: String, value: String)]? {
             var schemes_array: NSArray?
             var apps_array: NSMutableArray?
@@ -161,7 +226,11 @@ class LSWrappers {
             }
             else { return nil }
         }
-        
+        /**
+         Copies the bundle identifier of the application currently registered as the default handler for a given URL Scheme.
+         - Parameter inScheme: A valid URL Scheme.
+         - Returns: The POSIX path of an application, or nil if no valid handler was found.
+         */
         func copyDefaultHandler (_ inScheme:String) -> String? {
             
             if let value = LSCopyDefaultHandlerForURLScheme(inScheme as CFString) {
@@ -173,11 +242,14 @@ class LSWrappers {
             }
             else { return nil }
         }
-        
+        /**
+         Creates a list of all currently registered handlers for a given URL Scheme.
+         - Parameter inScheme: A valid URL Scheme.
+         - Returns: An array of strings corresponding to the POSIX paths of all currently registered handlers, or nil of none were found.
+         */
         func copyAllHandlers (_ inScheme:String) -> Array<String>? {
             
             var handlers: Array<String> = []
-            
             if let value = LSCopyAllHandlersForURLScheme(inScheme as CFString) {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
                 for handlerID in handlerIDs {
@@ -189,7 +261,14 @@ class LSWrappers {
             else { return nil }
             return (handlers.isEmpty ? nil : handlers)
         }
-        
+        /**
+         Changes the default handler for a given URL Scheme.
+         - See Also: `enum LSErrors` above.
+         - Parameters:
+         - inScheme: A valid URL Scheme.
+         - inBundleID: A bundle-identifier referring to a valid application bundle. Specifying "None" will disable the default handler for that URL Scheme.
+         - Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
+         */
         func setDefaultHandler (_ inScheme: String, _ inBundleID: String) -> OSStatus {
             var retval: OSStatus = kLSUnknownErr
             if let matches = inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$" {
@@ -206,6 +285,10 @@ class LSWrappers {
         }
     }
     
+    /**
+     Creates a list of all currently registered applications.
+     - Returns: An array of strings corresponding to the paths of all applications currently registered with Launch Services.
+     */
     func copyAllApps () -> Array<String>? {
         var apps: NSMutableArray?
         if (LSCopyAllApplicationURLs(&apps) == 0) {
@@ -221,7 +304,11 @@ class LSWrappers {
         }
         else { return nil }
     }
-    
+    /**
+     Checks whether a given applicatiion is registered with Launch Services.
+     - Parameter withBundleID: A bundle identifier.
+     - Returns: `true` if the bundle identifier is registered with Launch Services as an application, `false` otherwise.
+     */
     func isAppInstalled (withBundleID: String) -> Bool {
         let temp = withBundleID as CFString
         
@@ -232,7 +319,13 @@ class LSWrappers {
             return false
         }
     }
-    
+    /**
+     Performs a myriad of sanity checks on user input corresponding to a possible application. The main purpose of this function is to make sure we're passing a value as sane as possible to the setHandler functions.
+     - See Also: `enum LSErrors` above.
+     - Parameter inParam: The application to locate. It might correspond to a file-system URL, a POSIX path, a display name, a bundle identifier, or "None".
+     - Parameter outBundleID: This parameter is populated with a bundle identifier if a valid application bundle corresponding to the input parameter was found.
+     - Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
+     */
     func getBundleID (_ inParam: String, outBundleID: inout String?) -> OSStatus {
         outBundleID = nil
         var errCode = OSStatus()
@@ -309,6 +402,12 @@ class LSWrappers {
         }
         return kLSUnknownErr
     }
+    /**
+     Creates a list of UTIs and URL Schemes an application claims to be able to handle.
+     - Note: We perform little if any sanity checks in this function because it is not intended to be exposed to user input.
+     - Parameter inApp: A POSIX path corresponding to a valid application bundle.
+     - Returns: A dictionary of arrays containing a list of strings corresponding to URL Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
+     */
     func copySchemesAndUTIsForApp (_ inApp: String) -> [String:[String]]? {
         var urlSchemes: [String] = []
         var handledUTIs: [String] = []
