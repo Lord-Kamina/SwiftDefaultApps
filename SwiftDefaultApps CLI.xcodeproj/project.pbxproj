@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -80,7 +80,7 @@
 		OBJ_28 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_31 /* SwiftCLI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftCLI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_32 /* lsreg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = lsreg; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		OBJ_9 /* ChainableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainableCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +114,7 @@
 				EB7D007A1DFF8DF20080202B /* Foundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_27 /* SwiftDefaultApps */ = {
 			isa = PBXGroup;
@@ -137,7 +137,7 @@
 			children = (
 			);
 			path = Tests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_30 /* Products */ = {
 			isa = PBXGroup;
@@ -146,7 +146,8 @@
 				OBJ_32 /* lsreg */,
 			);
 			name = Products;
-			sourceTree = BUILT_PRODUCTS_DIR;
+			path = "../Library/Developer/Xcode/DerivedData/SwiftDefaultApps-govsimgwntgjfqgrejntsccgqfol/Build/Products/Debug";
+			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_5 = {
 			isa = PBXGroup;
@@ -166,7 +167,7 @@
 				OBJ_27 /* SwiftDefaultApps */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_8 /* SwiftCLI */ = {
 			isa = PBXGroup;
@@ -254,20 +255,21 @@
 					};
 				};
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SwiftDefaultApps" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SwiftDefaultApps CLI" */;
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_30 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				OBJ_33 /* SwiftCLI */,
 				OBJ_57 /* SwiftDefaultApps */,
+				OBJ_33 /* SwiftCLI */,
 			);
 		};
 /* End PBXProject section */
@@ -367,7 +369,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftDefaultApps.xcodeproj/SwiftCLI_Info.plist;
+				INFOPLIST_FILE = SwiftCLI_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -387,7 +389,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftDefaultApps.xcodeproj/SwiftCLI_Info.plist;
+				INFOPLIST_FILE = SwiftCLI_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -481,7 +483,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_2 /* Build configuration list for PBXProject "SwiftDefaultApps" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "SwiftDefaultApps CLI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
