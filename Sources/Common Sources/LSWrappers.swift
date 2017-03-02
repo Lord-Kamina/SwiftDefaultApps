@@ -206,7 +206,7 @@ class LSWrappers : NSObject {
          Creates a list of all currently registered URL Schemes and their default handler.
          - Returns: A dictionary with URL Schemes as keys and bundle identifiers as values.
          */
-        func copySchemesAndHandlers() -> [(key: String, value: String)]? {
+        func copySchemesAndHandlers() -> [String:String]? {
             var schemes_array: NSArray?
             var apps_array: NSMutableArray?
             if (LSCopySchemesAndHandlerURLs(&schemes_array, &apps_array) == 0) {
@@ -214,8 +214,7 @@ class LSWrappers : NSObject {
                     if let pathsArray = convertAppURLsToPaths(URLArray) {
                         
                         let schemesHandlers = Dictionary.init (keys: schemes_array as! [String], values: pathsArray)
-                        let sortedDict = schemesHandlers.sorted(by: { $0.0 < $1.0 })
-                        return sortedDict
+                        return schemesHandlers
                     }
                     else { return nil }
                     
