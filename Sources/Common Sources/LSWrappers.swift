@@ -8,7 +8,6 @@
  */
 
 import AppKit
-import SwiftCLI
 
 @_silgen_name("_LSCopySchemesAndHandlerURLs") func LSCopySchemesAndHandlerURLs(_: UnsafeMutablePointer<NSArray?>, _: UnsafeMutablePointer<NSMutableArray?>) -> OSStatus
 @_silgen_name("_LSCopyAllApplicationURLs") func LSCopyAllApplicationURLs(_: UnsafeMutablePointer<NSMutableArray?>) -> OSStatus;
@@ -17,7 +16,7 @@ import SwiftCLI
 /**
  Functions wrapping varied Launch Services tasks to be re-used throughout the application.
  */
-class LSWrappers {
+class LSWrappers : NSObject {
     
     /**
      Wrapper for commonly-used errors associated to Launch Services.
@@ -95,7 +94,7 @@ class LSWrappers {
                 }
                 else { return nil }
             }
-            return nil
+            else { return nil }
         }
         /**
          Copies the bundle identifier of the application currently registered as the default handler for a given UTI.
