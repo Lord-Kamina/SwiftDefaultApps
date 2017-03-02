@@ -404,26 +404,39 @@ class LSWrappers : NSObject {
      Creates a list of UTIs and URL Schemes an application claims to be able to handle.
      - Note: We perform little if any sanity checks in this function because it is not intended to be exposed to user input.
      - Parameter inApp: A POSIX path corresponding to a valid application bundle.
-     - Returns: A dictionary of arrays containing a list of strings corresponding to URL Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
+     - Returns: A dictionary of sets containing a list of strings corresponding to URL Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
      */
-    func copySchemesAndUTIsForApp (_ inApp: String) -> [String:[String]]? {
-        var urlSchemes: [String] = []
-        var handledUTIs: [String] = []
-        var handledTypes: [String:[String]] = [:]
+    func copySchemesAndUTIsForApp (_ inApp: String) -> [String:Set<String>]? {
+        var urlSchemes: Set<String> = []
+        var handledUTIs: Set<String> = []
+        var handledTypes: [String:Set<String>] = [:]
         if let infoDict = Bundle(path: inApp)?.infoDictionary {
             guard ((infoDict["CFBundlePackageType"] as? String) == "APPL") else { return nil }
             if let schemeDicts = (infoDict["CFBundleURLTypes"] as? [[String:AnyObject]]) {
                 for schemeDict in schemeDicts {
                     if let schemesArray = (schemeDict["CFBundleURLSchemes"] as? [String]) {
-                        urlSchemes.append(contentsOf:(schemesArray))
+                        urlSchemes.formUnion(schemesArray)
                     }
                 }
             }
             if let utiDicts = (infoDict["CFBundleDocumentTypes"] as? [[String:AnyObject]]) {
+                var utiArray: [String] = []
                 for utiDict in utiDicts {
+                    
                     if let utiArray = (utiDict["LSItemContentTypes"] as? [String]) {
-                        handledUTIs.append(contentsOf:(utiArray))
+                        handledUTIs.formUnion(utiArray)
                     }
+                    else if let fileExtArray = (utiDict["CFBundleTypeExtensions"] as? [String]) {
+                        for fileExt in fileExtArray {
+                            if let newUTI = (UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt as CFString, "public.content" as CFString)?.takeRetainedValue() as? String) {
+                                
+                                if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs.index(of:newUTI) == nil)) {
+                                    utiArray.append(newUTI)
+                                }
+                            }
+                        }
+                    }
+                handledUTIs.formUnion(utiArray)
                 }
             }
         }
