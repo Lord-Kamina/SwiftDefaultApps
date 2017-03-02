@@ -7,42 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */; };
+		EB0F5A281E6894DF004BAA85 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5617AA1E625CA300F2F51C /* View.xib */; };
+		EB0F5A291E6894DF004BAA85 /* SWDATitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */; };
+		EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */; };
+		EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */; };
+		EB0F5A2C1E6894DF004BAA85 /* SWDADefaultAppSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */; };
+		EB0F5A2D1E6894DF004BAA85 /* SWDACustomSchemesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */; };
 		EB14B8991E4B614D008AB27B /* DryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6ED4281E4A309C00703063 /* DryView.swift */; };
-		EB14B89A1E4B6189008AB27B /* SWDACustomSchemesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */; };
-		EB14B89B1E4B618E008AB27B /* SWDADefaultAppSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */; };
-		EB14B89C1E4B6192008AB27B /* SWDASchemesUTIsContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */; };
-		EB14B89D1E4B6196008AB27B /* SWDATitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */; };
 		EB14B8A01E4B63E7008AB27B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB14B89F1E4B63E7008AB27B /* Cocoa.framework */; };
-		EBB559BE1E4BCA72006426F2 /* LSWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB559A21E4BCA72006426F2 /* LSWrappers.swift */; };
-		EBB559BF1E4BCA72006426F2 /* commonFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB559A31E4BCA72006426F2 /* commonFuncs.swift */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
 		EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */; };
 		EBD61FE11E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */; };
-		EBD620041E47F43C00549EE8 /* SWDAPrefpaneMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */; };
+		EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE66041E688AA80056E549 /* LSWrappers.swift */; };
+		EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE66051E688AA80056E549 /* commonFuncs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EB14B89F1E4B63E7008AB27B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDASchemesUTIsContent.xib; sourceTree = "<group>"; };
 		EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDATitleView.xib; sourceTree = "<group>"; };
-		EB6ED4281E4A309C00703063 /* DryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DryView.swift; sourceTree = "<group>"; };
+		EB5617AA1E625CA300F2F51C /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		EB6ED4281E4A309C00703063 /* DryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DryView.swift; path = "View Controllers/DryView.swift"; sourceTree = "<group>"; };
 		EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDACustomSchemesEditor.xib; sourceTree = "<group>"; };
 		EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDADefaultAppSelector.xib; sourceTree = "<group>"; };
-		EBB559801E4BC68A006426F2 /* SwiftDefaultApps CLI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "SwiftDefaultApps CLI.xcodeproj"; path = "../SwiftDefaultApps CLI.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		EBB5599C1E4BCA72006426F2 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		EBB5599D1E4BCA72006426F2 /* getSchemes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getSchemes.swift; sourceTree = "<group>"; };
-		EBB5599E1E4BCA72006426F2 /* getUTIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getUTIs.swift; sourceTree = "<group>"; };
-		EBB5599F1E4BCA72006426F2 /* getHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getHandler.swift; sourceTree = "<group>"; };
-		EBB559A01E4BCA72006426F2 /* setHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setHandler.swift; sourceTree = "<group>"; };
-		EBB559A11E4BCA72006426F2 /* getApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getApps.swift; sourceTree = "<group>"; };
-		EBB559A21E4BCA72006426F2 /* LSWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSWrappers.swift; sourceTree = "<group>"; };
-		EBB559A31E4BCA72006426F2 /* commonFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncs.swift; sourceTree = "<group>"; };
 		EBC487A11E49073400A9A125 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAMainPrefPane.swift; sourceTree = "<group>"; };
 		EBD61FD91E47EC3C00549EE8 /* SwiftDefaultApps.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDefaultApps.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SWDAPrefpaneMain.tiff; sourceTree = "<group>"; };
-		EBD61FE51E47EC3C00549EE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SWDAPrefpaneMain.xib; path = ../SWDAPrefpaneMain.xib; sourceTree = "<group>"; };
+		EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = SWDAPrefpaneMain.tiff; path = ../../Resources/SWDAPrefpaneMain.tiff; sourceTree = "<group>"; };
+		EBD61FE51E47EC3C00549EE8 /* Prefpane_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Prefpane_Info.plist; path = ../../Resources/Prefpane_Info.plist; sourceTree = "<group>"; };
+		EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDAPrefpaneMain.xib; sourceTree = "<group>"; };
+		EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDAPrefpaneTabTemplate.xib; sourceTree = "<group>"; };
+		EBFE66041E688AA80056E549 /* LSWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSWrappers.swift; sourceTree = "<group>"; };
+		EBFE66051E688AA80056E549 /* commonFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,28 +55,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EBB559A41E4BCA72006426F2 /* SwiftDefaultApps */ = {
+		EB0E22761E688D7500937CAB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EBB5599C1E4BCA72006426F2 /* main.swift */,
-				EBB5599D1E4BCA72006426F2 /* getSchemes.swift */,
-				EBB5599E1E4BCA72006426F2 /* getUTIs.swift */,
-				EBB5599F1E4BCA72006426F2 /* getHandler.swift */,
-				EBB559A01E4BCA72006426F2 /* setHandler.swift */,
-				EBB559A11E4BCA72006426F2 /* getApps.swift */,
-				EBB559A21E4BCA72006426F2 /* LSWrappers.swift */,
-				EBB559A31E4BCA72006426F2 /* commonFuncs.swift */,
+				EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */,
+				EB5617AA1E625CA300F2F51C /* View.xib */,
+				EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */,
+				EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */,
+				EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */,
+				EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */,
+				EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */,
 			);
-			name = SwiftDefaultApps;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		EBB559A51E4BCA72006426F2 /* Sources */ = {
+		EB0E22771E688DA300937CAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EBB559A41E4BCA72006426F2 /* SwiftDefaultApps */,
+				EB6ED4281E4A309C00703063 /* DryView.swift */,
 			);
-			name = Sources;
-			path = ../../Sources;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		EBC487A01E49073400A9A125 /* Frameworks */ = {
@@ -94,7 +89,7 @@
 		EBD61FCF1E47EC3C00549EE8 = {
 			isa = PBXGroup;
 			children = (
-				EBB559801E4BC68A006426F2 /* SwiftDefaultApps CLI.xcodeproj */,
+				EBFE66031E688A980056E549 /* Common Sources */,
 				EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */,
 				EBD61FDA1E47EC3C00549EE8 /* Products */,
 				EBC487A01E49073400A9A125 /* Frameworks */,
@@ -112,18 +107,24 @@
 		EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EBB559A51E4BCA72006426F2 /* Sources */,
+				EB0E22771E688DA300937CAB /* View Controllers */,
+				EB0E22761E688D7500937CAB /* Views */,
 				EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */,
 				EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */,
-				EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */,
-				EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */,
-				EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */,
-				EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */,
-				EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */,
-				EB6ED4281E4A309C00703063 /* DryView.swift */,
-				EBD61FE51E47EC3C00549EE8 /* Info.plist */,
+				EBD61FE51E47EC3C00549EE8 /* Prefpane_Info.plist */,
 			);
-			path = "Prefpane Sources";
+			name = "Prefpane Sources";
+			path = "Sources/Prefpane Sources";
+			sourceTree = "<group>";
+		};
+		EBFE66031E688A980056E549 /* Common Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EBFE66041E688AA80056E549 /* LSWrappers.swift */,
+				EBFE66051E688AA80056E549 /* commonFuncs.swift */,
+			);
+			name = "Common Sources";
+			path = "Sources/Common Sources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,12 +197,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */,
+				EB0F5A281E6894DF004BAA85 /* View.xib in Resources */,
+				EB0F5A291E6894DF004BAA85 /* SWDATitleView.xib in Resources */,
+				EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */,
+				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
+				EB0F5A2C1E6894DF004BAA85 /* SWDADefaultAppSelector.xib in Resources */,
+				EB0F5A2D1E6894DF004BAA85 /* SWDACustomSchemesEditor.xib in Resources */,
 				EBD61FE11E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff in Resources */,
-				EB14B89B1E4B618E008AB27B /* SWDADefaultAppSelector.xib in Resources */,
-				EB14B89C1E4B6192008AB27B /* SWDASchemesUTIsContent.xib in Resources */,
-				EB14B89A1E4B6189008AB27B /* SWDACustomSchemesEditor.xib in Resources */,
-				EB14B89D1E4B6196008AB27B /* SWDATitleView.xib in Resources */,
-				EBD620041E47F43C00549EE8 /* SWDAPrefpaneMain.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,9 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBB559BF1E4BCA72006426F2 /* commonFuncs.swift in Sources */,
-				EBB559BE1E4BCA72006426F2 /* LSWrappers.swift in Sources */,
 				EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */,
+				EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */,
+				EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */,
 				EB14B8991E4B614D008AB27B /* DryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +322,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftDefaultApps/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.SwiftDefaultApps;
@@ -336,7 +339,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftDefaultApps/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.SwiftDefaultApps;

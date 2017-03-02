@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:/Users/Koji/SwiftDefaultApps/SwiftDefaultApps/SWDA Prefpane.xcodeproj">
+      location = "group:SwiftDefaultApps CLI.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:SWDA Prefpane.xcodeproj">
    </FileRef>
 </Workspace>

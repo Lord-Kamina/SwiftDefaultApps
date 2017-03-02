@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EB1B57371E00158900A28130 /* getHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1B57351E00152000A28130 /* getHandler.swift */; };
-		EB251D291E266BB600EB4058 /* LSWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB251D271E266B4C00EB4058 /* LSWrappers.swift */; };
 		EB310F131E25090600EF24D4 /* getApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB310F121E25090600EF24D4 /* getApps.swift */; };
 		EB4449551E2E427E001EC6A2 /* setHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB852DAD1E2D701700D9E5D6 /* setHandler.swift */; };
 		EB7D00751DFF40ED0080202B /* SwiftCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* SwiftCLI.framework */; };
@@ -16,9 +15,10 @@
 		EB7D007C1DFF8DF20080202B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7D00791DFF8DF20080202B /* CoreServices.framework */; };
 		EB7D007D1DFF8DF20080202B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7D007A1DFF8DF20080202B /* Foundation.framework */; };
 		EB7E13591E4007CB00D28090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* main.swift */; };
+		EB9A7F8E1E688ED600F7E83B /* commonFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9A7F8C1E688ED600F7E83B /* commonFuncs.swift */; };
+		EB9A7F8F1E688ED600F7E83B /* LSWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9A7F8D1E688ED600F7E83B /* LSWrappers.swift */; };
 		EBBCEE781E257BFF00DFC648 /* getSchemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBCEE771E257BFF00DFC648 /* getSchemes.swift */; };
 		EBBCEE7A1E25BDD700DFC648 /* getUTIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBCEE791E25BDD700DFC648 /* getUTIs.swift */; };
-		EBEACA721E27BADD0024CAEE /* commonFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEACA711E27BADD0024CAEE /* commonFuncs.swift */; };
 		OBJ_38 /* ChainableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ChainableCommand.swift */; };
 		OBJ_39 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CLI.swift */; };
 		OBJ_40 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Command.swift */; };
@@ -51,15 +51,15 @@
 
 /* Begin PBXFileReference section */
 		EB1B57351E00152000A28130 /* getHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getHandler.swift; sourceTree = "<group>"; };
-		EB251D271E266B4C00EB4058 /* LSWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSWrappers.swift; sourceTree = "<group>"; };
 		EB310F121E25090600EF24D4 /* getApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getApps.swift; sourceTree = "<group>"; };
 		EB7D00781DFF8DF20080202B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EB7D00791DFF8DF20080202B /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		EB7D007A1DFF8DF20080202B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB852DAD1E2D701700D9E5D6 /* setHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setHandler.swift; sourceTree = "<group>"; };
+		EB9A7F8C1E688ED600F7E83B /* commonFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncs.swift; sourceTree = "<group>"; };
+		EB9A7F8D1E688ED600F7E83B /* LSWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSWrappers.swift; sourceTree = "<group>"; };
 		EBBCEE771E257BFF00DFC648 /* getSchemes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getSchemes.swift; sourceTree = "<group>"; };
 		EBBCEE791E25BDD700DFC648 /* getUTIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getUTIs.swift; sourceTree = "<group>"; };
-		EBEACA711E27BADD0024CAEE /* commonFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncs.swift; sourceTree = "<group>"; };
 		OBJ_10 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		OBJ_12 /* CommandArgumentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandArgumentParser.swift; sourceTree = "<group>"; };
@@ -116,7 +116,24 @@
 			name = Frameworks;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_27 /* SwiftDefaultApps */ = {
+		EB9A7F8A1E688E9F00F7E83B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* SwiftCLI */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		EB9A7F8B1E688ED600F7E83B /* Common Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EB9A7F8C1E688ED600F7E83B /* commonFuncs.swift */,
+				EB9A7F8D1E688ED600F7E83B /* LSWrappers.swift */,
+			);
+			path = "Common Sources";
+			sourceTree = "<group>";
+		};
+		OBJ_27 /* CLI Components */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_28 /* main.swift */,
@@ -125,18 +142,9 @@
 				EB1B57351E00152000A28130 /* getHandler.swift */,
 				EB852DAD1E2D701700D9E5D6 /* setHandler.swift */,
 				EB310F121E25090600EF24D4 /* getApps.swift */,
-				EB251D271E266B4C00EB4058 /* LSWrappers.swift */,
-				EBEACA711E27BADD0024CAEE /* commonFuncs.swift */,
 			);
-			name = SwiftDefaultApps;
-			path = Sources;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_29 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tests;
+			name = "CLI Components";
+			path = "Sources/CLI Components";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_30 /* Products */ = {
@@ -153,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				EB9A7F8A1E688E9F00F7E83B /* Modules */,
 				OBJ_7 /* Sources */,
-				OBJ_29 /* Tests */,
 				OBJ_30 /* Products */,
 				EB7D00771DFF8DF20080202B /* Frameworks */,
 			);
@@ -163,8 +171,8 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* SwiftCLI */,
-				OBJ_27 /* SwiftDefaultApps */,
+				EB9A7F8B1E688ED600F7E83B /* Common Sources */,
+				OBJ_27 /* CLI Components */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -304,13 +312,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				EBEACA721E27BADD0024CAEE /* commonFuncs.swift in Sources */,
+				EB9A7F8E1E688ED600F7E83B /* commonFuncs.swift in Sources */,
 				EB1B57371E00158900A28130 /* getHandler.swift in Sources */,
 				EB7E13591E4007CB00D28090 /* main.swift in Sources */,
 				EB310F131E25090600EF24D4 /* getApps.swift in Sources */,
 				EBBCEE7A1E25BDD700DFC648 /* getUTIs.swift in Sources */,
 				EB4449551E2E427E001EC6A2 /* setHandler.swift in Sources */,
-				EB251D291E266BB600EB4058 /* LSWrappers.swift in Sources */,
+				EB9A7F8F1E688ED600F7E83B /* LSWrappers.swift in Sources */,
 				EBBCEE781E257BFF00DFC648 /* getSchemes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,7 +377,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftCLI_Info.plist;
+				INFOPLIST_FILE = Resources/SwiftCLI_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -389,7 +397,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftCLI_Info.plist;
+				INFOPLIST_FILE = Resources/SwiftCLI_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";

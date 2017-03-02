@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6905E4CA861C743F3E8A8C5447173D531DEA16D7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6905E4CA861C743F3E8A8C5447173D531DEA16D7" : 9223372036854775807,
+    "1FA2FB8C2BC57F03F22E05F4E40A3BD4587C910E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3A4F54B3-D06F-4F29-B1C3-B2AAC23011F4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6905E4CA861C743F3E8A8C5447173D531DEA16D7" : "SwiftDefaultApps\/",
+    "1FA2FB8C2BC57F03F22E05F4E40A3BD4587C910E" : "SwiftDefaultApps\/Packages\/SwiftCLI-2.0.3\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SwiftDefaultApps CLI",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SwiftDefaultApps CLI.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Lord-Kamina\/SwiftCLI.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1FA2FB8C2BC57F03F22E05F4E40A3BD4587C910E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Lord-Kamina\/SwiftDefaultApps.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6905E4CA861C743F3E8A8C5447173D531DEA16D7"
+    }
+  ]
+}

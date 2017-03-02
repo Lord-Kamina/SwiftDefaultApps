@@ -18,8 +18,7 @@ class GetSchemes: Command {
     
     func execute(arguments: CommandArguments) throws  {
         
-        if let output = copyDictionaryAsString(LSWrappers.Schemes().copySchemesAndHandlers()) {
-            
+        if let output = copyDictionaryAsString(LSWrappers.Schemes().copySchemesAndHandlers()?.sorted(by: { $0.0 < $1.0 })) {
             print(output)
         }
         else { throw CLIError.error("There was an error generating the list.") }

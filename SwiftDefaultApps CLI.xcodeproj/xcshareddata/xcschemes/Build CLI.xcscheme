@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0820"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "OBJ_57"
                BuildableName = "lsreg"
                BlueprintName = "SwiftDefaultApps"
-               ReferencedContainer = "container:../SwiftDefaultApps.prefpane.xcodeproj">
+               ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_57"
-            BuildableName = "lsreg"
+            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+            BuildableName = "SwiftDefaultApps.prefPane"
             BlueprintName = "SwiftDefaultApps"
-            ReferencedContainer = "container:../SwiftDefaultApps.prefpane.xcodeproj">
+            ReferencedContainer = "container:SwiftDefaultApps/SwiftDefaultApps.prefpnae.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -51,6 +51,24 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+                     BuildableName = "SwiftDefaultApps.prefPane"
+                     BlueprintName = "SwiftDefaultApps"
+                     ReferencedContainer = "container:SwiftDefaultApps/SwiftDefaultApps.prefpnae.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
@@ -58,7 +76,7 @@
             BlueprintIdentifier = "OBJ_57"
             BuildableName = "lsreg"
             BlueprintName = "SwiftDefaultApps"
-            ReferencedContainer = "container:../SwiftDefaultApps.prefpane.xcodeproj">
+            ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,16 +88,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_57"
-            BuildableName = "lsreg"
-            BlueprintName = "SwiftDefaultApps"
-            ReferencedContainer = "container:../SwiftDefaultApps.prefpane.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
