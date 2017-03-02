@@ -74,6 +74,15 @@
          BundleIdentifier = "com.apple.systempreferences"
          FilePath = "/Applications/System Preferences.app">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+            BuildableName = "SwiftDefaultApps.prefPane"
+            BlueprintName = "SwiftDefaultApps"
+            ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "OBJC_DISABLE_GC"
