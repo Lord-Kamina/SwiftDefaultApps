@@ -92,7 +92,7 @@ prefix func /(pattern:String) -> NSRegularExpression? {
 extension Bundle {
     /**
      Copies a bundle's package type, as specified in its Info.plist.
-     - Parameter outError: Populated with an error-code if the bundle does not correspond to an application.
+     - Parameter outError: Populated with an error-code if the bundle does not correspond to a valid package.
      - Returns: The four-letter code specifying the bundle's package type, or `nil` if an error is encountered.
      */
     func getType (outError: inout OSStatus) -> String? {

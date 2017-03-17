@@ -308,7 +308,7 @@ class LSWrappers {
     static func isAppInstalled (withBundleID: String) -> Bool {
         let temp = withBundleID as CFString
         
-        if let appURL = (LSCopyApplicationURLsForBundleIdentifier(temp,nil)?.takeRetainedValue() as NSArray?) {
+        if (LSCopyApplicationURLsForBundleIdentifier(temp,nil)?.takeRetainedValue() as NSArray?) != nil {
             return true
         }
         else {
@@ -325,13 +325,12 @@ class LSWrappers {
     static func getBundleID (_ inParam: String, outBundleID: inout String?) -> OSStatus {
         outBundleID = nil
         var errCode = OSStatus()
-        let inURL: URL
         let filemanager = FileManager.default
         if (inParam == "None") { // None is a valid value to remove a handler, so we'll allow it.
             outBundleID = inParam
             return 0
         }
-        if let appPath = NSWorkspace.shared().absolutePathForApplication(withBundleIdentifier: inParam)  { // Check whether we have a valid Bundle ID for an application.
+        if NSWorkspace.shared().absolutePathForApplication(withBundleIdentifier: inParam) != nil  { // Check whether we have a valid Bundle ID for an application.
             outBundleID = inParam
             return 0
         }
