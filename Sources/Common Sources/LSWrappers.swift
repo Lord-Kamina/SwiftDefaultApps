@@ -338,8 +338,11 @@ class LSWrappers {
             if let bundle = Bundle(path:appPath) {
                 if let type = bundle.getType(outError: &errCode) {
                     if (type == "APPL") {
-                        outBundleID = bundle.bundleIdentifier!
-                        return 0
+                        if let _ = bundle.bundleIdentifier {
+                            outBundleID = bundle.bundleIdentifier
+                            return 0
+                        }
+                        else { return kLSNotAnApplicationErr }
                     }
                     else { return kLSNotAnApplicationErr }
                 }
@@ -353,8 +356,11 @@ class LSWrappers {
             if let bundle = Bundle(path: inParam) { // Is it a valid bundle path?
                 if let type = bundle.getType(outError: &errCode) {
                     if (type == "APPL") {
-                        outBundleID = bundle.bundleIdentifier!
-                        return 0
+                        if let _ = bundle.bundleIdentifier {
+                            outBundleID = bundle.bundleIdentifier
+                            return 0
+                        }
+                        else { return kLSNotAnApplicationErr }
                     }
                     else { return kLSNotAnApplicationErr }
                 }
