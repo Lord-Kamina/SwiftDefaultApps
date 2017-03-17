@@ -409,42 +409,42 @@ class LSWrappers {
      - Parameter inApp: A POSIX path corresponding to a valid application bundle.
      - Returns: A dictionary of sets containing a list of strings corresponding to URL Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
      */
-        var urlSchemes: Set<String> = []
-        var handledUTIs: Set<String> = []
-        var handledTypes: [String:Set<String>] = [:]
     static func copySchemesAndUTIsForApp (_ inApp: String) -> [String:[String:Set<String>]]? {
+        var handledUrlSchemes: [String:Set<String>] = ["Viewer":[]]
+        var handledUTIs: [String:Set<String>] = ["Editor":[],"Viewer":[],"Shell":[]]
+        var handledTypes: [String:[String:Set<String>]] = [:]
         if let infoDict = Bundle(path: inApp)?.infoDictionary {
             guard ((infoDict["CFBundlePackageType"] as? String) == "APPL") else { return nil }
             if let schemeDicts = (infoDict["CFBundleURLTypes"] as? [[String:AnyObject]]) {
                 for schemeDict in schemeDicts {
                     if let schemesArray = (schemeDict["CFBundleURLSchemes"] as? [String]) {
-                        urlSchemes.formUnion(schemesArray)
+                        handledUrlSchemes["Viewer"]!.formUnion(schemesArray)
                     }
                 }
             }
             if let utiDicts = (infoDict["CFBundleDocumentTypes"] as? [[String:AnyObject]]) {
                 var utiArray: [String] = []
-                for utiDict in utiDicts {
-                    
+                for utiDict in utiDicts.filter({ ($0["CFBundleTypeRole"] as? String == "Editor" || $0["CFBundleTypeRole"] as? String == "Viewer" || $0["CFBundleTypeRole"] as? String == "Shell" || $0["CFBundleTypeRole"] == nil) }) {
+                    let typeRole = utiDict["CFBundleTypeRole"] as? String ?? "Viewer"
                     if let utiArray = (utiDict["LSItemContentTypes"] as? [String]) {
-                        handledUTIs.formUnion(utiArray)
+                        handledUTIs[typeRole]!.formUnion(utiArray)
                     }
                     else if let fileExtArray = (utiDict["CFBundleTypeExtensions"] as? [String]) {
                         for fileExt in fileExtArray {
                             if let newUTI = (UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt as CFString, "public.content" as CFString)?.takeRetainedValue() as? String) {
                                 
-                                if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs.index(of:newUTI) == nil)) {
+                                if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs[typeRole]!.index(of:newUTI) == nil)) {
                                     utiArray.append(newUTI)
                                 }
                             }
                         }
                     }
-                handledUTIs.formUnion(utiArray)
+                    handledUTIs[typeRole]!.formUnion(utiArray)
                 }
             }
         }
-        handledTypes["URLSchemes"] = !urlSchemes.isEmpty ? urlSchemes : []
-        handledTypes["ContentTypes"] = !handledUTIs.isEmpty ? handledUTIs : []
+        handledTypes["URLs"] = !handledUrlSchemes.isEmpty ? handledUrlSchemes : [:]
+        handledTypes["UTIs"] = !handledUTIs.isEmpty ? handledUTIs : [:]
         return handledTypes
     }
 }
