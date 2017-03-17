@@ -19,7 +19,7 @@ class GetApps: Command {
     
     func execute(arguments: CommandArguments) throws  {
         
-        if let output = copyStringArrayAsString(LSWrappers().copyAllApps()) {
+        if let output = copyStringArrayAsString(LSWrappers.copyAllApps()) {
             print(output)
         }
         else { throw CLIError.error("There was an error generating the list of applications.") }

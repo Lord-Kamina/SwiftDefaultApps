@@ -65,7 +65,7 @@ class ReadCommand: OptionCommand {
             
             if let contentString = self.contentType {
                 
-                handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes().copyAllHandlers(contentString) : LSWrappers.UTType().copyAllHandlers(contentString)) )
+                handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes.copyAllHandlers(contentString) : LSWrappers.UTType.copyAllHandlers(contentString)) )
                 
             }
             break
@@ -74,12 +74,12 @@ class ReadCommand: OptionCommand {
             
             if let contentString = self.contentType {
                 
-                handler = ((kind == "URL") ? LSWrappers.Schemes().copyDefaultHandler(contentString) : LSWrappers.UTType().copyDefaultHandler(contentString))
+                handler = ((kind == "URL") ? LSWrappers.Schemes.copyDefaultHandler(contentString) : LSWrappers.UTType.copyDefaultHandler(contentString))
             }
             break
         case ("http",Bool()),("mailto",Bool()),("ftp",Bool()),("rss",Bool()),("news",Bool()):
             
-            handler = LSWrappers.Schemes().copyDefaultHandler(kind!)
+            handler = LSWrappers.Schemes.copyDefaultHandler(kind!)
             
             break
             
