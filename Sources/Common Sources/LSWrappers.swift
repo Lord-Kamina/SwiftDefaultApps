@@ -147,9 +147,7 @@ class LSWrappers {
                 }
             }
             
-            let tempdict = Dictionary.init (keys: UTIs, values: handlers)
-            return tempdict.sorted(by: { $0.0 < $1.0 })
-            
+            return Dictionary.init (keys: UTIs, values: handlers)
         }
         /**
          Changes the default handler for a given UTI.

@@ -18,10 +18,10 @@ class GetUTIs: Command {
     
     func execute(arguments: CommandArguments) throws  {
         
-        let UTIs = LSWrappers.UTType().copyAllUTIs()
-        
-        print(copyDictionaryAsString(UTIs)!)
-        
+        if let output = copyDictionaryAsString(LSWrappers.UTType.copyAllUTIs().sorted(by: { $0.0 < $1.0 })) {
+            print(output)
+        }
+        else { throw CLIError.error("There was an error generating the list.") }
     }
     
 }
