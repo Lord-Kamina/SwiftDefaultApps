@@ -337,7 +337,7 @@ class LSWrappers {
         else if let appPath = NSWorkspace.shared().fullPath(forApplication: inParam) { // Or an application designed by name
             if let bundle = Bundle(path:appPath) {
                 if let type = bundle.getType(outError: &errCode) {
-                    if (type == "APPL") {
+                    if (type == "APPL" || type == "FNDR") {
                         if let _ = bundle.bundleIdentifier {
                             outBundleID = bundle.bundleIdentifier
                             return 0
