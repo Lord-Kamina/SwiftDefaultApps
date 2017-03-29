@@ -100,15 +100,18 @@ class LSWrappers {
          Copies the bundle identifier of the application currently registered as the default handler for a given UTI.
          - Parameter inUTI: A Uniform Type Identifier.
          - Parameter inRoles: The specified Launch Services Role to query. Can correspond to "Editor", "Viewer", "Shell" or "None". By default, we are only concerned with viewers and editors (in that order).
-         - Returns: The POSIX path of an application, or nil if no valid handler was found.
+         - Returns: The Bundle identifier or POSIX path of an application, or nil if no valid handler was found.
          */
-        static func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> String? {
+        static func copyDefaultHandler (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor], asPath: Bool = true) -> String? {
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {
-                let handlerID = (value.takeRetainedValue() as String)
-                if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
-                    return handlerURL.path
+                let handlerID = value.takeRetainedValue() as String
+                if (asPath == true) {
+                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                        return handlerURL.path
+                    }
+                    else { return nil }
                 }
-                else { return nil }
+                else { return handlerID }
             }
             else { return nil }
         }
@@ -116,17 +119,20 @@ class LSWrappers {
          Creates a list of all currently registered handlers for a given UTI.
          - Parameter inUTI: A Uniform Type Identifier.
          - Parameter inRoles: The specified Launch Services Role to query. Can correspond to "Editor", "Viewer", "Shell" or "None". By default, we are only concerned with viewers and editors (in that order).
-         - Returns: An array of strings corresponding to the POSIX paths of all currently registered handlers, or nil of none were found.
+         - Returns: An array of strings corresponding to the Bundle identifiers or POSIX paths of all currently registered handlers, or nil of none were found.
          */
-        static func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor]) -> Array<String>? {
+        static func copyAllHandlers (_ inUTI:String, inRoles: LSRolesMask = [LSRolesMask.viewer,LSRolesMask.editor], asPath: Bool = true) -> Array<String>? {
             var handlers: Array<String> = []
             if let value = LSCopyAllRoleHandlersForContentType(inUTI as CFString, inRoles) {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
-                for handlerID in handlerIDs {
-                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
-                        handlers.append(handlerURL.path)
+                if (asPath == true) {
+                    for handlerID in handlerIDs {
+                        if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                            handlers.append(handlerURL.path)
+                        }
                     }
                 }
+                else { return handlerIDs }
             }
             else { return nil }
             return (handlers.isEmpty ? nil : handlers)
@@ -160,7 +166,7 @@ class LSWrappers {
          */
         static func setDefaultHandler (_ inContent: String, _ inBundleID: String, _ inRoles: LSRolesMask = LSRolesMask.all) -> OSStatus {
             var retval: OSStatus = 0
-            if ((LSWrappers.isAppInstalled(withBundleID: inBundleID) == true) || (inBundleID == "None")) {
+            if (LSWrappers.isAppInstalled(withBundleID: inBundleID) == true) {
                 retval = LSSetDefaultRoleHandlerForContentType(inContent as CFString, inRoles, inBundleID as CFString)
             }
             else { retval = kLSApplicationNotFoundErr }
@@ -225,34 +231,40 @@ class LSWrappers {
         /**
          Copies the bundle identifier of the application currently registered as the default handler for a given URL Scheme.
          - Parameter inScheme: A valid URL Scheme.
-         - Returns: The POSIX path of an application, or nil if no valid handler was found.
+         - Returns: The Bundle identifier or POSIX path of an application, or nil if no valid handler was found.
          */
-        static func copyDefaultHandler (_ inScheme:String) -> String? {
+        static func copyDefaultHandler (_ inScheme:String, asPath: Bool = true) -> String? {
             
             if let value = LSCopyDefaultHandlerForURLScheme(inScheme as CFString) {
-                let handlerID = (value.takeRetainedValue() as String)
-                if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
-                    return handlerURL.path
+                let handlerID = value.takeRetainedValue() as String
+                if (asPath == true) {
+                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                        return handlerURL.path
+                    }
+                    else { return nil }
                 }
-                else { return nil }
+                else { return handlerID }
             }
             else { return nil }
         }
         /**
          Creates a list of all currently registered handlers for a given URL Scheme.
          - Parameter inScheme: A valid URL Scheme.
-         - Returns: An array of strings corresponding to the POSIX paths of all currently registered handlers, or nil of none were found.
+         - Returns: An array of strings corresponding to the Bundle identifiers or POSIX paths of all currently registered handlers, or nil of none were found.
          */
-        static func copyAllHandlers (_ inScheme:String) -> Array<String>? {
+        static func copyAllHandlers (_ inScheme:String, asPath: Bool = true) -> Array<String>? {
             
             var handlers: Array<String> = []
             if let value = LSCopyAllHandlersForURLScheme(inScheme as CFString) {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
-                for handlerID in handlerIDs {
-                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
-                        handlers.append(handlerURL.path)
+                if (asPath == true) {
+                    for handlerID in handlerIDs {
+                        if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                            handlers.append(handlerURL.path)
+                        }
                     }
                 }
+                else { return handlerIDs }
             }
             else { return nil }
             return (handlers.isEmpty ? nil : handlers)
@@ -269,7 +281,7 @@ class LSWrappers {
             var retval: OSStatus = kLSUnknownErr
             if let matches = inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$" {
                 if (matches == true) {
-                    if ((LSWrappers.isAppInstalled(withBundleID:inBundleID)) == true || (inBundleID == "None")) {
+                    if (LSWrappers.isAppInstalled(withBundleID:inBundleID) == true) {
                         retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
                     }
                     else { retval = kLSApplicationNotFoundErr }
@@ -326,8 +338,8 @@ class LSWrappers {
         outBundleID = nil
         var errCode = OSStatus()
         let filemanager = FileManager.default
-        if (inParam == "None") { // None is a valid value to remove a handler, so we'll allow it.
-            outBundleID = inParam
+        if (inParam == "None") { // None is a valid value for our dummy application.
+            outBundleID = "cl.fail.lordkamina.ThisAppDoesNothing"
             return 0
         }
         if NSWorkspace.shared().absolutePathForApplication(withBundleIdentifier: inParam) != nil  { // Check whether we have a valid Bundle ID for an application.
