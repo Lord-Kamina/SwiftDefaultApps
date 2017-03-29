@@ -7,7 +7,6 @@
  * ----------------------------------------------------------------------------
  */
 
-import Foundation
 import SwiftCLI
 
 class ReadCommand: OptionCommand {
@@ -16,7 +15,7 @@ class ReadCommand: OptionCommand {
     let signature = ""
     let shortDescription = "Returns the default application registered for the URL scheme or <subtype> you specify."
     
-    private var kind: String?
+    private var kind: String = ""
     private var getAll = false;
     private var contentType: String? = nil
     private var handler: String? = nil
@@ -59,7 +58,7 @@ class ReadCommand: OptionCommand {
     
     func execute(arguments: CommandArguments) throws  {
         
-        switch(kind!,getAll) {
+        switch(kind,getAll) {
             
         case ("UTI",true),("URL",true):
             
@@ -79,7 +78,7 @@ class ReadCommand: OptionCommand {
             break
         case ("http",Bool()),("mailto",Bool()),("ftp",Bool()),("rss",Bool()),("news",Bool()):
             
-            handler = LSWrappers.Schemes.copyDefaultHandler(kind!)
+            handler = LSWrappers.Schemes.copyDefaultHandler(kind)
             
             break
             
@@ -92,6 +91,9 @@ class ReadCommand: OptionCommand {
         let arg: String
         if (self.contentType != nil) { arg = self.contentType! }
         else { arg = "<subtype>" }
-        if (nil != handler) { print(handler!) } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(arg)")) }
+        
+        if (nil != handler) {
+            print(handler!)
+        } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(arg)")) }
     }
 }

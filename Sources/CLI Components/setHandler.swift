@@ -15,7 +15,7 @@ class SetCommand: OptionCommand {
     let name = "setHandler"
     let signature = ""
     let shortDescription = "Sets <application> as the default handler for a given <type>/<subtype> combination."
-    private var kind: String?
+    private var kind: String = ""
     private var contentType: String? = nil
     private var inApplication: String = "None"
     private var bundleID: String? = nil
@@ -69,15 +69,14 @@ class SetCommand: OptionCommand {
     func execute(arguments: CommandArguments) throws  {
         statusCode = LSWrappers.getBundleID(self.inApplication, outBundleID: &bundleID)
         guard (statusCode == 0) else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))) }
-        switch(kind!) {
-            
+        switch(kind) {
         case "UTI","URL":
             if let contentString = self.contentType {
                 statusCode = ((kind == "URL") ? LSWrappers.Schemes.setDefaultHandler(contentString, bundleID!) : LSWrappers.UTType.setDefaultHandler(contentString, bundleID!, self.role))
             }
             break
         case "http","mailto","ftp","rss","news":
-            statusCode = LSWrappers.Schemes.setDefaultHandler(kind!, bundleID!)
+            statusCode = LSWrappers.Schemes.setDefaultHandler(kind, bundleID!)
             break
             
         default:
