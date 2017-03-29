@@ -313,7 +313,7 @@ class LSWrappers {
         else { return nil }
     }
     /**
-     Checks whether a given applicatiion is registered with Launch Services.
+     Checks whether a given application is registered with Launch Services.
      - Parameter withBundleID: A bundle identifier.
      - Returns: `true` if the bundle identifier is registered with Launch Services as an application, `false` otherwise.
      */
