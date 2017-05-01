@@ -13,6 +13,11 @@
 		EB14B8991E4B614D008AB27B /* DryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6ED4281E4A309C00703063 /* DryView.swift */; };
 		EB14B8A01E4B63E7008AB27B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB14B89F1E4B63E7008AB27B /* Cocoa.framework */; };
 		EB5BFC661E946ED600253EC3 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */; };
+		EBA6B0981EB6E5EB0080A783 /* ThisAppDoesNothing.app in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */; };
+		EBA6B0A51EB6EB300080A783 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
+		EBA6B0A61EB6EB300080A783 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
+		EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
+		EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
 		EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */; };
 		EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0981EB409F800BD157C /* Main Assets.xcassets */; };
@@ -28,6 +33,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EBA6B0951EB6E5B10080A783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EBA7F0911E856279009EE061;
+			remoteInfo = ThisAppDoesNothing;
+		};
+		EBA6B09E1EB6E6150080A783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBA6B0991EB6E6140080A783 /* SwiftDefaultApps CLI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_32;
+			remoteInfo = SwiftDefaultApps;
+		};
+		EBA6B0A01EB6E6150080A783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBA6B0991EB6E6140080A783 /* SwiftDefaultApps CLI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_31;
+			remoteInfo = SwiftCLI;
+		};
 		EBE2B09F1EB4155000BD157C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */;
@@ -37,11 +63,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EBA6B0A21EB6EB000080A783 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */,
+				EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EB14B89F1E4B63E7008AB27B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDASchemesUTIsContent.xib; sourceTree = "<group>"; };
 		EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		EB6ED4281E4A309C00703063 /* DryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DryView.swift; path = "View Controllers/DryView.swift"; sourceTree = "<group>"; };
+		EBA6B0991EB6E6140080A783 /* SwiftDefaultApps CLI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "SwiftDefaultApps CLI.xcodeproj"; sourceTree = "<group>"; };
+		EBA6B0A31EB6EB300080A783 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EBA6B0A41EB6EB300080A783 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AppDoesNothing.xcodeproj; sourceTree = "<group>"; };
 		EBC487A11E49073400A9A125 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAMainPrefPane.swift; sourceTree = "<group>"; };
@@ -107,6 +150,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EBA6B09A1EB6E6140080A783 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBA6B09F1EB6E6150080A783 /* lsreg */,
+				EBA6B0A11EB6E6150080A783 /* SwiftCLI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EBC487A01E49073400A9A125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +171,10 @@
 		EBD61FCF1E47EC3C00549EE8 = {
 			isa = PBXGroup;
 			children = (
+				EBA6B0A31EB6EB300080A783 /* LICENSE */,
+				EBA6B0A41EB6EB300080A783 /* README.md */,
 				EBE2B0981EB409F800BD157C /* Main Assets.xcassets */,
+				EBA6B0991EB6E6140080A783 /* SwiftDefaultApps CLI.xcodeproj */,
 				EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */,
 				EBFE66031E688A980056E549 /* Common Sources */,
 				EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */,
@@ -189,10 +244,12 @@
 				EBD61FD61E47EC3C00549EE8 /* Headers */,
 				EBD61FD71E47EC3C00549EE8 /* Resources */,
 				EBF28D7D1EB50E030027935E /* ShellScript */,
+				EBA6B0A21EB6EB000080A783 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EBA6B0961EB6E5B10080A783 /* PBXTargetDependency */,
 			);
 			name = SwiftDefaultApps;
 			productName = SwiftDefaultApps;
@@ -234,6 +291,10 @@
 					ProductGroup = EBE2B09C1EB4155000BD157C /* Products */;
 					ProjectRef = EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */;
 				},
+				{
+					ProductGroup = EBA6B09A1EB6E6140080A783 /* Products */;
+					ProjectRef = EBA6B0991EB6E6140080A783 /* SwiftDefaultApps CLI.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -243,6 +304,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		EBA6B09F1EB6E6150080A783 /* lsreg */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = lsreg;
+			remoteRef = EBA6B09E1EB6E6150080A783 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EBA6B0A11EB6E6150080A783 /* SwiftCLI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftCLI.framework;
+			remoteRef = EBA6B0A01EB6E6150080A783 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -257,9 +332,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBA6B0A51EB6EB300080A783 /* LICENSE in Resources */,
 				EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */,
 				EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */,
 				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
+				EBA6B0981EB6E5EB0080A783 /* ThisAppDoesNothing.app in Resources */,
 				EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +368,7 @@
 				EBF334371E9BDB5500520B7B /* SWDAContentProtocol.swift in Sources */,
 				EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */,
 				EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */,
+				EBA6B0A61EB6EB300080A783 /* README.md in Sources */,
 				EBF334311E9BD99B00520B7B /* Subclasses.swift in Sources */,
 				EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */,
 				EBF3342D1E9BD68A00520B7B /* SWDAHandlersModel.swift in Sources */,
@@ -303,6 +381,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EBA6B0961EB6E5B10080A783 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ThisAppDoesNothing;
+			targetProxy = EBA6B0951EB6E5B10080A783 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EBD61FE61E47EC3C00549EE8 /* Debug */ = {
@@ -406,6 +492,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -413,6 +500,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
@@ -423,12 +511,14 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.0;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.SwiftDefaultApps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;

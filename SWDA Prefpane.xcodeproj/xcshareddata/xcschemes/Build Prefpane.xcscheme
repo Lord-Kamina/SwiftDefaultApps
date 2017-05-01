@@ -27,6 +27,24 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10; cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/&#10; [ -d &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot; ] &amp;&amp; rm -Rv &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+                     BuildableName = "SwiftDefaultApps.prefPane"
+                     BlueprintName = "SwiftDefaultApps"
+                     ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <Testables>
       </Testables>
       <MacroExpansion>
@@ -42,9 +60,9 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      buildConfiguration = "Release"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -87,11 +105,6 @@
          <EnvironmentVariable
             key = "OBJC_DISABLE_GC"
             value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "CA_DEBUG_TRANSACTIONS"
-            value = "1"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

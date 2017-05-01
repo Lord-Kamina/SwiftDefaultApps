@@ -218,7 +218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppDoesNothing/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/DummyApp_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.ThisAppDoesNothing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -230,7 +230,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppDoesNothing/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/DummyApp_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.ThisAppDoesNothing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
