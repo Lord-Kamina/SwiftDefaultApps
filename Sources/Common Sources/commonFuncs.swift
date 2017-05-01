@@ -7,7 +7,24 @@
  * ----------------------------------------------------------------------------
  */
 
-import Foundation
+import AppKit
+
+/**
+ Converts an array of Application URLs to an array of Application Paths.
+ - Parameter inArray: An array of file-system URLs corresponding to applications.
+ - Returns: An array of strings corresponding to the POSIX paths of the supplied applications.
+ */
+func convertAppURLsToPaths (_ inArray:Array<URL>?) -> Array<String>? {
+    if let URLArray = inArray {
+        var outputArray: Array<String> = []
+        for (i, app) in URLArray.enumerated() {
+            let temp = app.path
+            outputArray.insert(temp, at:i)
+        }
+        return outputArray
+    }
+    else { return nil }
+}
 
 /**
  Creates a String representation of a Dictionary of Strings.
@@ -39,36 +56,7 @@ func copyStringArrayAsString (_ inArray: Array<String>?, separator: String = "\n
     else { return nil }
 }
 
-extension Dictionary
-{
-    public init(keys: [Key], values: [Value])
-    {
-        precondition(keys.count == values.count)
-        
-        self.init()
-        
-        for (index, key) in keys.enumerated()
-        {
-            self[key] = values[index]
-        }
-    }
-}
-/**
- Converts an array of Application URLs to an array of Application Paths.
- - Parameter inArray: An array of file-system URLs corresponding to applications.
- - Returns: An array of strings corresponding to the POSIX paths of the supplied applications.
- */
-func convertAppURLsToPaths (_ inArray:Array<URL>?) -> Array<String>? {
-    if let URLArray = inArray {
-        var outputArray: Array<String> = []
-        for (i, app) in URLArray.enumerated() {
-            let temp = app.path
-            outputArray.insert(temp, at:i)
-        }
-        return outputArray
-    }
-    else { return nil }
-}
+//// REGEX MATCHING CONVENIENCE OPERATORS.
 
 infix operator =~
 prefix operator /
@@ -89,6 +77,9 @@ prefix func /(pattern:String) -> NSRegularExpression? {
     return retval
 }
 
+
+//// EXTENSIONS
+
 extension Bundle {
     /**
      Copies a bundle's package type, as specified in its Info.plist.
@@ -103,5 +94,99 @@ extension Bundle {
             else { outError = errSecInvalidBundleInfo; return nil }
         }
         else { outError = kLSUnknownErr; return nil }
+    }
+}
+
+extension Dictionary
+{
+    /**
+     Create a Dictionary by Merging two Arrays.
+     - Parameter keys: An Array to be used as dictionary keys.
+     - Parameter values: An Array to be used as values.
+     */
+    public init(keys: [Key], values: [Value])
+    {
+        precondition(keys.count == values.count)
+        
+        self.init()
+        
+        for (index, key) in keys.enumerated()
+        {
+            self[key] = values[index]
+        }
+    }
+}
+
+#if Prefpane
+    extension LSRolesMask {
+        /**
+         Bridge our custom type to the actual values used in LaunchServices methods.
+         */
+        init (from value: SourceListRoleTypes) {
+            switch value {
+            case .Viewer: self = .viewer
+            case .Editor: self = .editor
+            case .Shell: self = .shell
+            case .All: self = .all
+            }
+        }
+    }
+    
+    extension NSControl {
+        /** Shrinks a text label until it fits in a single line in its container. */
+        func fitWidth() {
+            var absoluteMaxWidth: CGFloat = 0.0
+            if let tempWidth = (self.superview?.frame.width) {
+                absoluteMaxWidth = tempWidth
+                absoluteMaxWidth -= (self.alignmentRectInsets.left + self.alignmentRectInsets.right)
+            }
+            
+            let text = self.stringValue
+            guard self.font != nil else { return }
+            var font = self.font!
+            
+            if ControllersRef.sharedInstance.originalFonts[self] == nil {
+                ControllersRef.sharedInstance.originalFonts[self] = font
+            }
+            else { font = ControllersRef.sharedInstance.originalFonts[self]! }
+            
+            let richText = NSTextFieldCell(textCell:text)
+            richText.font = font
+            var neededWidth: CGFloat = richText.cellSize.width
+            var fontSize = font.pointSize
+            var newFont = font
+            guard absoluteMaxWidth > 0.0 else { return }
+            while (neededWidth >= absoluteMaxWidth) {
+                guard fontSize > 0.0 else { return }
+                fontSize -= 0.5
+                newFont = NSFont(descriptor:font.fontDescriptor, size: fontSize)!
+                richText.font = newFont
+                neededWidth = richText.cellSize.width
+            }
+            self.setValue(newFont, forKey:"font")
+        }
+    }
+#endif
+
+/** NSFont extensions to style the different kinds of row in the NSTreeView. */
+extension NSFont {
+    /** Returns a SmallCaps version of the font it is invoked on. */
+    func smallCaps() -> NSFont? {
+        let settings = [[NSFontFeatureTypeIdentifierKey: kLowerCaseType, NSFontFeatureSelectorIdentifierKey: kLowerCaseSmallCapsSelector]]
+        let attributes: [String: AnyObject] = [NSFontFeatureSettingsAttribute: settings as AnyObject, NSFontNameAttribute: fontName as AnyObject]
+        return NSFont(descriptor: NSFontDescriptor(fontAttributes: attributes), size: pointSize)
+    }
+    /** Returns a **Bold** version of the font it is invoked on. */
+    func bold() -> NSFont? {
+        let fontManager = NSFontManager.shared()
+        return fontManager.convert(self, toHaveTrait: .boldFontMask)
+    }
+    /**
+     Returns an _Italic_ version of the font it is invoked on.
+     - Note: Not currently used.
+     */
+    func italic() -> NSFont? {
+        let fontManager = NSFontManager.shared()
+        return fontManager.convert(self, toHaveTrait: .italicFontMask)
     }
 }
