@@ -6,7 +6,7 @@
  * this stuff is worth it, you can buy me a beer in return., Gregorio Litenstein.
  * ----------------------------------------------------------------------------
  */
-
+import Foundation
 import SwiftCLI
 
 class ReadCommand: OptionCommand {
@@ -19,6 +19,8 @@ class ReadCommand: OptionCommand {
     private var getAll = false;
     private var contentType: String? = nil
     private var handler: String? = nil
+    private var roles: Dictionary = ["editor":LSRolesMask.editor,"viewer":LSRolesMask.viewer,"shell":LSRolesMask.shell,"all":LSRolesMask.all]
+    private var role: LSRolesMask = LSRolesMask.all
     
     func setupOptions(options: OptionRegistry) {
         options.addGroup(name:"type", required:true, conflicting:true)
@@ -54,6 +56,12 @@ class ReadCommand: OptionCommand {
         options.add(flags: ["--all"], usage: "When this flag is added, a list of all applications registered for that content will printed.") {
             self.getAll = true
         }
+        options.add(keys: ["--role"], usage: "--role <Viewer|Editor|Shell|All>, specifies the role with which to register the handler. Default is All.", valueSignature: "role") { [unowned self] (value) in
+            if let temp = self.roles[value.lowercased()] {
+                self.role = temp
+            }
+            else { self.role = [LSRolesMask.viewer,LSRolesMask.editor] }
+        }
     }
     
     func execute(arguments: CommandArguments) throws  {
@@ -64,7 +72,7 @@ class ReadCommand: OptionCommand {
             
             if let contentString = self.contentType {
                 
-                handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes.copyAllHandlers(contentString) : LSWrappers.UTType.copyAllHandlers(contentString)) )
+                handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes.copyAllHandlers(contentString) : LSWrappers.UTType.copyAllHandlers(contentString, inRoles: role)) )
                 
             }
             break
@@ -73,7 +81,7 @@ class ReadCommand: OptionCommand {
             
             if let contentString = self.contentType {
                 
-                handler = ((kind == "URL") ? LSWrappers.Schemes.copyDefaultHandler(contentString) : LSWrappers.UTType.copyDefaultHandler(contentString))
+                handler = ((kind == "URL") ? LSWrappers.Schemes.copyDefaultHandler(contentString) : LSWrappers.UTType.copyDefaultHandler(contentString, inRoles: role))
             }
             break
         case ("http",Bool()),("mailto",Bool()),("ftp",Bool()),("rss",Bool()),("news",Bool()):

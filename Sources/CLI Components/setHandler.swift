@@ -20,7 +20,7 @@ class SetCommand: OptionCommand {
     private var inApplication: String = "None"
     private var bundleID: String? = nil
     private var statusCode: OSStatus = kLSUnknownErr
-    private var roles: Dictionary = ["Editor":LSRolesMask.editor,"Viewer":LSRolesMask.viewer,"Shell":LSRolesMask.shell,"All":LSRolesMask.all]
+    private var roles: Dictionary = ["editor":LSRolesMask.editor,"viewer":LSRolesMask.viewer,"shell":LSRolesMask.shell,"all":LSRolesMask.all]
     private var role: LSRolesMask = LSRolesMask.all
     
     func setupOptions(options: OptionRegistry) {
@@ -59,7 +59,7 @@ class SetCommand: OptionCommand {
             self.inApplication = value
         }
         options.add(keys: ["--role"], usage: "--role <Viewer|Editor|Shell|All>, specifies the role with which to register the handler. Default is All.", valueSignature: "role") { [unowned self] (value) in
-            if let temp = self.roles[value] {
+            if let temp = self.roles[value.lowercased()] {
                 self.role = temp
             }
             else { self.role = LSRolesMask.all }
