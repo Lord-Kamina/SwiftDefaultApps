@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SWDAMainPrefPane" customModule="SwiftDefaultApps">
+            <connections>
+                <outlet property="_window" destination="Ccv-RB-9A5" id="duk-bY-vse"/>
+                <outlet property="mainCustomView" destination="Xgs-6A-j8H" id="eNk-43-KrL"/>
+                <outlet property="tabViewController" destination="y3N-Ov-SVh" id="FeF-kZ-bHe"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="≪ do not localize ≫" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ccv-RB-9A5" userLabel="PrefPane">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="176" y="715" width="668" height="400"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" wantsLayer="YES" id="Xgs-6A-j8H">
+                <rect key="frame" x="0.0" y="0.0" width="668" height="400"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mt8-MI-lLE">
+                        <rect key="frame" x="634" y="371" width="24" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="NN8-PJ-RRV"/>
+                        </constraints>
+                        <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSInfo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="ckP-Zr-l9X">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="systemBold" size="12"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="showAboutDialog:" target="-2" id="AXN-5b-HKu"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mt8-MI-lLE" firstAttribute="top" secondItem="Xgs-6A-j8H" secondAttribute="top" constant="10" id="Uqn-mk-cjS"/>
+                    <constraint firstAttribute="trailing" secondItem="mt8-MI-lLE" secondAttribute="trailing" constant="10" id="rjt-Ow-G5B"/>
+                </constraints>
+            </view>
+        </window>
+        <viewController id="y3N-Ov-SVh" customClass="SWDATabViewController" customModule="SwiftDefaultApps" customModuleProvider="target"/>
+    </objects>
+    <resources>
+        <image name="NSInfo" width="32" height="32"/>
+    </resources>
+</document>

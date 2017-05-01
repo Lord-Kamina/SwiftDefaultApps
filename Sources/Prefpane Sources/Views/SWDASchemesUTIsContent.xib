@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="DRYView" customModule="SwiftDefaultApps" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionControl" destination="PjV-b2-GuI" id="XxQ-cA-hmH"/>
+                <outlet property="titleControl" destination="QVZ-Ft-yaX" id="LVq-vZ-CA0"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="326"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aA-Rc-r0a">
+                    <rect key="frame" x="0.0" y="0.0" width="330" height="309"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="b0F-rL-jHW" userLabel="Title">
+                            <rect key="frame" x="0.0" y="213" width="330" height="96"/>
+                            <subviews>
+                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rU1-jd-k9o">
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="96"/>
+                                    <subviews>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Tk1-7D-2Vp" userLabel="View">
+                                            <rect key="frame" x="0.0" y="0.0" width="234" height="96"/>
+                                            <subviews>
+                                                <textField identifier="TitleField" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QVZ-Ft-yaX">
+                                                    <rect key="frame" x="-2" y="75" width="41" height="22"/>
+                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Title" allowsEditingTextAttributes="YES" usesSingleLineMode="YES" id="Wuh-5u-vlS">
+                                                        <font key="font" size="18" name=".AppleSystemUIFontMedium"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="1GN-iZ-MWe" name="value" keyPath="selection.displayName" id="d49-5g-lQP">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsHidden" value="YES"/>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                                <textField identifier="DescriptionField" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PjV-b2-GuI">
+                                                    <rect key="frame" x="-2" y="57" width="79" height="18"/>
+                                                    <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="left" title="Description" allowsEditingTextAttributes="YES" usesSingleLineMode="YES" id="AWq-ln-dQ3">
+                                                        <font key="font" metaFont="system" size="14"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="1GN-iZ-MWe" name="value" keyPath="selection.contentDescription" id="jKz-s7-g5e"/>
+                                                        <binding destination="-2" name="hidden" keyPath="showDescriptionBool" id="Fba-s9-e43">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zxw-bZ-Xog">
+                                                    <rect key="frame" x="-2" y="0.0" width="234" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" identifier="Multiline label height" id="1aW-M9-pNM"/>
+                                                        <constraint firstAttribute="width" constant="230" identifier="Multiline label with" id="pB0-lx-Bvf"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Multiline Label" id="H31-x8-kLu">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="1GN-iZ-MWe" name="value" keyPath="selection.getExtensions" id="2Mi-AP-sx3"/>
+                                                        <binding destination="-2" name="hidden" keyPath="showFileExtensionsBool" id="tt9-pz-gPP">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QVZ-Ft-yaX" firstAttribute="top" secondItem="Tk1-7D-2Vp" secondAttribute="top" constant="-1" identifier="Title text Top" id="0SW-qh-Kcs"/>
+                                                <constraint firstItem="PjV-b2-GuI" firstAttribute="top" secondItem="QVZ-Ft-yaX" secondAttribute="bottom" identifier="Description text vertical align" id="2JU-sQ-IT0"/>
+                                                <constraint firstItem="QVZ-Ft-yaX" firstAttribute="leading" secondItem="Tk1-7D-2Vp" secondAttribute="leading" identifier="Title text leading" id="bFj-nD-DmS"/>
+                                                <constraint firstItem="PjV-b2-GuI" firstAttribute="leading" secondItem="QVZ-Ft-yaX" secondAttribute="leading" identifier="Align description and title lead" id="dC6-on-MTh"/>
+                                                <constraint firstItem="zxw-bZ-Xog" firstAttribute="bottom" secondItem="Tk1-7D-2Vp" secondAttribute="bottom" identifier="Multiline label bottom" id="ham-ql-0sP"/>
+                                                <constraint firstItem="zxw-bZ-Xog" firstAttribute="leading" secondItem="PjV-b2-GuI" secondAttribute="leading" identifier="Align multiline label lead" id="irh-TX-XgX"/>
+                                            </constraints>
+                                        </customView>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hLO-kA-2VF">
+                                            <rect key="frame" x="234" y="0.0" width="96" height="96"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="96" identifier="App Icon Height" id="QbZ-fQ-FYT"/>
+                                                <constraint firstAttribute="width" constant="96" identifier="App Icon Width" id="UdZ-PZ-0IG"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="mUD-RD-o52"/>
+                                            <connections>
+                                                <binding destination="1GN-iZ-MWe" name="value" keyPath="selection.appIcon" id="ov1-5x-lT7"/>
+                                                <binding destination="-2" name="hidden" keyPath="showPathBool" id="bpj-bD-zxC">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </imageView>
+                                    </subviews>
+                                    <visibilityPriorities>
+                                        <integer value="1000"/>
+                                        <integer value="1000"/>
+                                    </visibilityPriorities>
+                                    <customSpacing>
+                                        <real value="3.4028234663852886e+38"/>
+                                        <real value="3.4028234663852886e+38"/>
+                                    </customSpacing>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="96" identifier="Detail Title View Height" id="0Nt-NX-av1"/>
+                                <constraint firstItem="rU1-jd-k9o" firstAttribute="top" secondItem="b0F-rL-jHW" secondAttribute="top" id="4D0-eP-2Di"/>
+                                <constraint firstItem="rU1-jd-k9o" firstAttribute="trailing" secondItem="b0F-rL-jHW" secondAttribute="trailing" id="hlX-wv-v3J"/>
+                                <constraint firstItem="rU1-jd-k9o" firstAttribute="bottom" secondItem="b0F-rL-jHW" secondAttribute="bottom" id="iHc-am-hhE"/>
+                                <constraint firstItem="rU1-jd-k9o" firstAttribute="leading" secondItem="b0F-rL-jHW" secondAttribute="leading" id="iNl-Eo-94t"/>
+                            </constraints>
+                        </customView>
+                        <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Esg-s8-Xex" userLabel="Outline">
+                            <rect key="frame" x="0.0" y="33" width="330" height="172"/>
+                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="r4l-jT-vx4">
+                                <rect key="frame" x="1" y="1" width="328" height="170"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="26" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" autosaveExpandedItems="YES" autoresizesOutlineColumn="YES" outlineTableColumn="ioF-oY-2Xm" id="78g-Go-oCg">
+                                        <rect key="frame" x="0.0" y="0.0" width="330" height="170"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <size key="intercellSpacing" width="2" height="0.0"/>
+                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                        <tableColumns>
+                                            <tableColumn width="328" minWidth="280" maxWidth="328" id="ioF-oY-2Xm" userLabel="Ítems">
+                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified">
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                </tableHeaderCell>
+                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" drawsBackground="YES" id="hi0-f8-ejv">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                <prototypeCellViews>
+                                                    <tableCellView id="nN9-c3-jCf" userLabel="Handlers">
+                                                        <rect key="frame" x="1" y="0.0" width="328" height="26"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQU-aU-SOG">
+                                                                <rect key="frame" x="5" y="-2" width="318" height="30"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-ky-AV6">
+                                                                        <rect key="frame" x="0.0" y="11" width="8" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="7t1-t1-nmi"/>
+                                                                            <constraint firstAttribute="width" constant="8" id="pB5-D0-8pr"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyUpOrDown" id="qjI-OD-yMl"/>
+                                                                        <connections>
+                                                                            <binding destination="nN9-c3-jCf" name="hidden" keyPath="objectValue.shouldFauxIndent" id="8sz-CO-XST">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </imageView>
+                                                                    <button canDrawConcurrently="YES" horizontalCompressionResistancePriority="250" tag="69" translatesAutoresizingMaskIntoConstraints="NO" id="e4h-an-DRA">
+                                                                        <rect key="frame" x="12" y="2" width="27" height="26"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" id="vwx-cN-qFT"/>
+                                                                            <constraint firstAttribute="width" constant="24" id="waO-G8-DG7"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="radio" title="Radio" bezelStyle="regularSquare" imagePosition="only" alignment="center" identifier="DefaultHandlerCell" tag="69" inset="2" id="08Y-Ue-Maw">
+                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <binding destination="nN9-c3-jCf" name="value" keyPath="objectValue.isDefaultHandler" id="T9Y-wS-rhC"/>
+                                                                            <binding destination="nN9-c3-jCf" name="hidden" keyPath="objectValue.isLeaf" id="naj-P7-FMl">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="pRj-4v-QHd" name="hidden2" keyPath="self.showPathBool" previousBinding="naj-P7-FMl" id="hE7-oe-Aco">
+                                                                                <dictionary key="options">
+                                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button canDrawConcurrently="YES" horizontalCompressionResistancePriority="250" tag="69" translatesAutoresizingMaskIntoConstraints="NO" id="h4E-KC-pyI">
+                                                                        <rect key="frame" x="11" y="1" width="28" height="28"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" id="ElI-2a-qOd"/>
+                                                                            <constraint firstAttribute="width" constant="24" id="rL9-ve-9y7"/>
+                                                                        </constraints>
+                                                                        <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="only" alignment="left" identifier="DefaultHandlerCell" tag="69" inset="2" id="Du1-Cn-Ncj">
+                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="system"/>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <binding destination="nN9-c3-jCf" name="enabled2" keyPath="objectValue.isHandlingContent" previousBinding="and-M6-DA8" id="9oq-0b-E8o">
+                                                                                <dictionary key="options">
+                                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="nN9-c3-jCf" name="value" keyPath="objectValue.isHandlingContent" id="CxX-2h-h5y"/>
+                                                                            <binding destination="nN9-c3-jCf" name="hidden" keyPath="objectValue.isLeaf" previousBinding="9oq-0b-E8o" id="fdZ-zG-Sfh">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="pRj-4v-QHd" name="hidden2" keyPath="self.showPathBool" previousBinding="fdZ-zG-Sfh" id="KiE-hg-bGW">
+                                                                                <dictionary key="options">
+                                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="pRj-4v-QHd" name="enabled" keyPath="self.showPathBool" id="and-M6-DA8"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <imageView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3rb-b8-8E3">
+                                                                        <rect key="frame" x="42" y="3" width="24" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="24" id="bJ0-Fh-Uyw"/>
+                                                                            <constraint firstAttribute="height" constant="24" id="sDm-02-YiK"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="IgI-zw-sin"/>
+                                                                        <connections>
+                                                                            <binding destination="nN9-c3-jCf" name="value" keyPath="objectValue.appIcon" id="AKX-hp-lMn"/>
+                                                                            <binding destination="nN9-c3-jCf" name="hidden" keyPath="objectValue.isLeaf" id="dFO-T2-GMT">
+                                                                                <dictionary key="options">
+                                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                            <binding destination="pRj-4v-QHd" name="hidden2" keyPath="self.showPathBool" previousBinding="dFO-T2-GMT" id="B70-2c-8bA">
+                                                                                <dictionary key="options">
+                                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </imageView>
+                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j29-4e-QMy" userLabel="Item">
+                                                                        <rect key="frame" x="69" y="0.0" width="251" height="24"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="24" identifier="Row Text Height" id="R9p-C9-Iy2"/>
+                                                                        </constraints>
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingHead" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Table View Cell" id="fgw-UJ-j5d">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <connections>
+                                                                            <binding destination="nN9-c3-jCf" name="font" keyPath="objectValue.rowFont" id="sMR-UC-wbf"/>
+                                                                            <binding destination="nN9-c3-jCf" name="value" keyPath="objectValue.rowTitle" id="W23-VC-JvW"/>
+                                                                            <binding destination="nN9-c3-jCf" name="textColor" keyPath="objectValue.textColor" id="cgi-av-FgE"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="h4E-KC-pyI" firstAttribute="centerY" secondItem="e4h-an-DRA" secondAttribute="centerY" id="KHv-88-GwM"/>
+                                                                    <constraint firstItem="3rb-b8-8E3" firstAttribute="centerY" secondItem="jQU-aU-SOG" secondAttribute="centerY" id="RW9-BA-oZP"/>
+                                                                    <constraint firstItem="j29-4e-QMy" firstAttribute="baseline" secondItem="3rb-b8-8E3" secondAttribute="baseline" id="TeF-gv-WHT"/>
+                                                                    <constraint firstItem="h4E-KC-pyI" firstAttribute="height" secondItem="e4h-an-DRA" secondAttribute="height" id="cKB-Hl-vqT"/>
+                                                                    <constraint firstItem="e4h-an-DRA" firstAttribute="centerY" secondItem="jQU-aU-SOG" secondAttribute="centerY" id="ecq-1c-Dzc"/>
+                                                                    <constraint firstItem="3rb-b8-8E3" firstAttribute="centerY" secondItem="jQU-aU-SOG" secondAttribute="centerY" id="tLW-dy-e7a"/>
+                                                                    <constraint firstItem="h4E-KC-pyI" firstAttribute="centerX" secondItem="e4h-an-DRA" secondAttribute="centerX" id="vKD-dk-vmA"/>
+                                                                    <constraint firstItem="h4E-KC-pyI" firstAttribute="width" secondItem="e4h-an-DRA" secondAttribute="width" id="wqi-G2-69L"/>
+                                                                </constraints>
+                                                                <visibilityPriorities>
+                                                                    <integer value="1000"/>
+                                                                    <real value="250"/>
+                                                                    <integer value="1000"/>
+                                                                    <real value="250"/>
+                                                                    <integer value="1000"/>
+                                                                </visibilityPriorities>
+                                                                <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                    <real value="3.4028234663852886e+38"/>
+                                                                </customSpacing>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="jQU-aU-SOG" firstAttribute="centerX" secondItem="nN9-c3-jCf" secondAttribute="centerX" identifier="Tree Row CenterX" id="8Ap-6g-hdv"/>
+                                                            <constraint firstItem="jQU-aU-SOG" firstAttribute="leading" secondItem="nN9-c3-jCf" secondAttribute="leading" constant="5" identifier="Tree Row Leading" id="NNq-VB-sl5"/>
+                                                            <constraint firstItem="jQU-aU-SOG" firstAttribute="centerY" secondItem="nN9-c3-jCf" secondAttribute="centerY" identifier="Tree Row CenterY" id="ZD9-Rj-4zZ"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <outlet property="imageView" destination="3rb-b8-8E3" id="SqB-ss-Uoq"/>
+                                                            <outlet property="textField" destination="j29-4e-QMy" id="bmx-5D-TL6"/>
+                                                        </connections>
+                                                    </tableCellView>
+                                                </prototypeCellViews>
+                                            </tableColumn>
+                                        </tableColumns>
+                                        <connections>
+                                            <binding destination="pRj-4v-QHd" name="content" keyPath="arrangedObjects" id="m0N-oY-s5D"/>
+                                            <outlet property="delegate" destination="pRj-4v-QHd" id="Xl4-nk-wWD"/>
+                                        </connections>
+                                    </outlineView>
+                                </subviews>
+                                <nil key="backgroundColor"/>
+                            </clipView>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="172" identifier="Detail Outline Height" id="2Oz-bq-b7j"/>
+                            </constraints>
+                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="tQ1-sf-3EU">
+                                <rect key="frame" x="-100" y="-100" width="223" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="xh5-lR-sh8">
+                                <rect key="frame" x="-14" y="1" width="15" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="bs0-Xw-bkK" userLabel="Default Selector">
+                            <rect key="frame" x="0.0" y="0.0" width="330" height="25"/>
+                            <subviews>
+                                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hVr-Z7-0oe" userLabel="Reveal In Finder Button">
+                                    <rect key="frame" x="0.0" y="4" width="330" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" identifier="Reveal button cell height" id="7XV-cp-LtJ"/>
+                                        <constraint firstAttribute="width" constant="330" identifier="Reveal Button cell width" id="zdB-fN-Zk2"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRevealFreestandingTemplate" imagePosition="right" alignment="center" lineBreakMode="truncatingMiddle" imageScaling="proportionallyDown" inset="2" id="Hyi-jV-Uxv">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <string key="keyEquivalent">r</string>
+                                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="revealAppInFinder:" target="-2" id="xFj-Ky-Vrr"/>
+                                        <binding destination="1GN-iZ-MWe" name="title" keyPath="selection.appPath" id="2EQ-hO-Gnc"/>
+                                        <binding destination="-2" name="hidden" keyPath="showPathBool" id="05h-Gh-JHz">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" identifier="Reveal Button Height" id="CQu-JO-rhb"/>
+                                <constraint firstItem="hVr-Z7-0oe" firstAttribute="firstBaseline" secondItem="bs0-Xw-bkK" secondAttribute="centerY" identifier="Reveal Button Align CenterY" id="GB3-om-hUW"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Esg-s8-Xex" firstAttribute="width" secondItem="b0F-rL-jHW" secondAttribute="width" identifier="Detail Outline Width" id="Qle-EP-ZyI"/>
+                        <constraint firstItem="bs0-Xw-bkK" firstAttribute="width" secondItem="b0F-rL-jHW" secondAttribute="width" identifier="Detail Reveal App Width" id="hTm-7j-kZ8"/>
+                        <constraint firstItem="hVr-Z7-0oe" firstAttribute="leading" secondItem="8aA-Rc-r0a" secondAttribute="leading" id="yUM-58-4gq"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="8aA-Rc-r0a" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="17" identifier="Detail View Top" id="9eG-Kf-fnD"/>
+                <constraint firstItem="8aA-Rc-r0a" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" identifier="Detail View Leading" id="MP4-3r-N7U"/>
+                <constraint firstItem="8aA-Rc-r0a" firstAttribute="bottom" secondItem="c22-O7-iKe" secondAttribute="bottom" identifier="Detail View Bottom" id="ifS-Y7-EqD"/>
+                <constraint firstItem="8aA-Rc-r0a" firstAttribute="trailing" secondItem="c22-O7-iKe" secondAttribute="trailing" id="mXR-Hc-s6y"/>
+            </constraints>
+            <point key="canvasLocation" x="-88" y="213"/>
+        </customView>
+        <objectController id="1GN-iZ-MWe">
+            <connections>
+                <binding destination="-2" name="contentObject" keyPath="self.inspectedObject" id="yPq-bx-VDX"/>
+            </connections>
+        </objectController>
+        <treeController objectClassName="SWDATreeRow" editable="NO" childrenKeyPath="children" countKeyPath="count" leafKeyPath="isLeaf" id="pRj-4v-QHd" customClass="SWDATreeController" customModule="SwiftDefaultApps" customModuleProvider="target">
+            <connections>
+                <binding destination="1GN-iZ-MWe" name="contentArray" keyPath="selection.contentHandlers" id="auE-x4-qt6"/>
+                <outlet property="dryView" destination="-2" id="M9l-Z4-IKh"/>
+                <outlet property="outlineView" destination="78g-Go-oCg" id="PXr-vH-r1l"/>
+            </connections>
+        </treeController>
+    </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="128" height="128"/>
+        <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
+    </resources>
+</document>
