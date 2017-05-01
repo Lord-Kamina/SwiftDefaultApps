@@ -15,15 +15,15 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>156</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 Gregorio Litenstein Goldzweig. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>SWDAPrefpaneMain</string>
 	<key>NSPrefPaneIconFile</key>
-	<string>SWDAPrefpaneMain.tiff</string>
+	<string></string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>SwiftDefaultApps</string>
 	<key>NSPrincipalClass</key>

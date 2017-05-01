@@ -8,17 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		EBA7F0961E856279009EE061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA7F0951E856279009EE061 /* AppDelegate.swift */; };
-		EBA7F09B1E856279009EE061 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA7F0991E856279009EE061 /* MainMenu.xib */; };
 		EBB1976E1E85C5CC0072AF70 /* Unsupported.icns in Resources */ = {isa = PBXBuildFile; fileRef = EBB1976D1E85C5CC0072AF70 /* Unsupported.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EBA7F0921E856279009EE061 /* ThisAppDoesNothing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThisAppDoesNothing.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBA7F0951E856279009EE061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EBA7F0971E856279009EE061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EBA7F09A1E856279009EE061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		EBA7F09C1E856279009EE061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBB1976D1E85C5CC0072AF70 /* Unsupported.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Unsupported.icns; path = ../Resources/Unsupported.icns; sourceTree = "<group>"; };
+		EBA7F0951E856279009EE061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/DummyApp/AppDelegate.swift; sourceTree = "<group>"; };
+		EBA7F09C1E856279009EE061 /* DummyApp_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DummyApp_Info.plist; path = Resources/DummyApp_Info.plist; sourceTree = "<group>"; };
+		EBB1976D1E85C5CC0072AF70 /* Unsupported.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Unsupported.icns; path = Resources/Unsupported.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +33,8 @@
 			isa = PBXGroup;
 			children = (
 				EBB1976D1E85C5CC0072AF70 /* Unsupported.icns */,
-				EBA7F0941E856279009EE061 /* AppDoesNothing */,
+				EBA7F0951E856279009EE061 /* AppDelegate.swift */,
+				EBA7F09C1E856279009EE061 /* DummyApp_Info.plist */,
 				EBA7F0931E856279009EE061 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,17 +45,6 @@
 				EBA7F0921E856279009EE061 /* ThisAppDoesNothing.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		EBA7F0941E856279009EE061 /* AppDoesNothing */ = {
-			isa = PBXGroup;
-			children = (
-				EBA7F0951E856279009EE061 /* AppDelegate.swift */,
-				EBA7F0971E856279009EE061 /* Assets.xcassets */,
-				EBA7F0991E856279009EE061 /* MainMenu.xib */,
-				EBA7F09C1E856279009EE061 /* Info.plist */,
-			);
-			path = AppDoesNothing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB1976E1E85C5CC0072AF70 /* Unsupported.icns in Resources */,
-				EBA7F09B1E856279009EE061 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,17 +122,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		EBA7F0991E856279009EE061 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBA7F09A1E856279009EE061 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EBA7F09D1E856279009EE061 /* Debug */ = {

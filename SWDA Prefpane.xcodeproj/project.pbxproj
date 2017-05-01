@@ -8,36 +8,55 @@
 
 /* Begin PBXBuildFile section */
 		EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */; };
-		EB0F5A281E6894DF004BAA85 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5617AA1E625CA300F2F51C /* View.xib */; };
-		EB0F5A291E6894DF004BAA85 /* SWDATitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */; };
 		EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */; };
 		EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */; };
-		EB0F5A2C1E6894DF004BAA85 /* SWDADefaultAppSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */; };
-		EB0F5A2D1E6894DF004BAA85 /* SWDACustomSchemesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */; };
 		EB14B8991E4B614D008AB27B /* DryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6ED4281E4A309C00703063 /* DryView.swift */; };
 		EB14B8A01E4B63E7008AB27B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB14B89F1E4B63E7008AB27B /* Cocoa.framework */; };
+		EB5BFC661E946ED600253EC3 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
 		EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */; };
-		EBD61FE11E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */; };
+		EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0981EB409F800BD157C /* Main Assets.xcassets */; };
+		EBF3342D1E9BD68A00520B7B /* SWDAHandlersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3342C1E9BD68A00520B7B /* SWDAHandlersModel.swift */; };
+		EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3342E1E9BD91C00520B7B /* ControllersRef.swift */; };
+		EBF334311E9BD99B00520B7B /* Subclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF334301E9BD99B00520B7B /* Subclasses.swift */; };
+		EBF334331E9BDAAA00520B7B /* SWDAApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF334321E9BDAAA00520B7B /* SWDAApplicationInfo.swift */; };
+		EBF334351E9BDB0A00520B7B /* SWDATreeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF334341E9BDB0A00520B7B /* SWDATreeRow.swift */; };
+		EBF334371E9BDB5500520B7B /* SWDAContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF334361E9BDB5500520B7B /* SWDAContentProtocol.swift */; };
+		EBF334391E9BDB9600520B7B /* ProgressAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF334381E9BDB9600520B7B /* ProgressAlert.swift */; };
 		EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE66041E688AA80056E549 /* LSWrappers.swift */; };
 		EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE66051E688AA80056E549 /* commonFuncs.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EBE2B09F1EB4155000BD157C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBA7F0921E856279009EE061;
+			remoteInfo = ThisAppDoesNothing;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		EB14B89F1E4B63E7008AB27B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDASchemesUTIsContent.xib; sourceTree = "<group>"; };
-		EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDATitleView.xib; sourceTree = "<group>"; };
-		EB5617AA1E625CA300F2F51C /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		EB6ED4281E4A309C00703063 /* DryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DryView.swift; path = "View Controllers/DryView.swift"; sourceTree = "<group>"; };
-		EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDACustomSchemesEditor.xib; sourceTree = "<group>"; };
-		EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDADefaultAppSelector.xib; sourceTree = "<group>"; };
+		EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AppDoesNothing.xcodeproj; sourceTree = "<group>"; };
 		EBC487A11E49073400A9A125 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAMainPrefPane.swift; sourceTree = "<group>"; };
 		EBD61FD91E47EC3C00549EE8 /* SwiftDefaultApps.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDefaultApps.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = SWDAPrefpaneMain.tiff; path = ../../Resources/SWDAPrefpaneMain.tiff; sourceTree = "<group>"; };
 		EBD61FE51E47EC3C00549EE8 /* Prefpane_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Prefpane_Info.plist; path = ../../Resources/Prefpane_Info.plist; sourceTree = "<group>"; };
 		EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDAPrefpaneMain.xib; sourceTree = "<group>"; };
+		EBE2B0981EB409F800BD157C /* Main Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Main Assets.xcassets"; sourceTree = "<group>"; };
 		EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDAPrefpaneTabTemplate.xib; sourceTree = "<group>"; };
+		EBF3342C1E9BD68A00520B7B /* SWDAHandlersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAHandlersModel.swift; sourceTree = "<group>"; };
+		EBF3342E1E9BD91C00520B7B /* ControllersRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllersRef.swift; path = "View Controllers/ControllersRef.swift"; sourceTree = "<group>"; };
+		EBF334301E9BD99B00520B7B /* Subclasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Subclasses.swift; path = "View Controllers/Subclasses.swift"; sourceTree = "<group>"; };
+		EBF334321E9BDAAA00520B7B /* SWDAApplicationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAApplicationInfo.swift; sourceTree = "<group>"; };
+		EBF334341E9BDB0A00520B7B /* SWDATreeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SWDATreeRow.swift; path = "View Controllers/SWDATreeRow.swift"; sourceTree = "<group>"; };
+		EBF334361E9BDB5500520B7B /* SWDAContentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAContentProtocol.swift; sourceTree = "<group>"; };
+		EBF334381E9BDB9600520B7B /* ProgressAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressAlert.swift; path = "View Controllers/ProgressAlert.swift"; sourceTree = "<group>"; };
 		EBFE66041E688AA80056E549 /* LSWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSWrappers.swift; sourceTree = "<group>"; };
 		EBFE66051E688AA80056E549 /* commonFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,12 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */,
-				EB5617AA1E625CA300F2F51C /* View.xib */,
-				EB3003641E4ABB27000CC6E0 /* SWDATitleView.xib */,
-				EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */,
 				EBEB69811E5F55D600350D0E /* SWDAPrefpaneTabTemplate.xib */,
-				EBA41F681E4A51C0002B5E3A /* SWDADefaultAppSelector.xib */,
-				EB6ED42A1E4A350200703063 /* SWDACustomSchemesEditor.xib */,
+				EB164E011E4B3B73005CF473 /* SWDASchemesUTIsContent.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -72,9 +87,24 @@
 		EB0E22771E688DA300937CAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EBF334301E9BD99B00520B7B /* Subclasses.swift */,
 				EB6ED4281E4A309C00703063 /* DryView.swift */,
+				EBF3342E1E9BD91C00520B7B /* ControllersRef.swift */,
+				EBF334341E9BDB0A00520B7B /* SWDATreeRow.swift */,
+				EBF334381E9BDB9600520B7B /* ProgressAlert.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EB5BFC641E946ED600253EC3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */,
+				EBF3342C1E9BD68A00520B7B /* SWDAHandlersModel.swift */,
+				EBF334321E9BDAAA00520B7B /* SWDAApplicationInfo.swift */,
+				EBF334361E9BDB5500520B7B /* SWDAContentProtocol.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EBC487A01E49073400A9A125 /* Frameworks */ = {
@@ -89,6 +119,8 @@
 		EBD61FCF1E47EC3C00549EE8 = {
 			isa = PBXGroup;
 			children = (
+				EBE2B0981EB409F800BD157C /* Main Assets.xcassets */,
+				EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */,
 				EBFE66031E688A980056E549 /* Common Sources */,
 				EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */,
 				EBD61FDA1E47EC3C00549EE8 /* Products */,
@@ -107,14 +139,22 @@
 		EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */ = {
 			isa = PBXGroup;
 			children = (
+				EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */,
+				EB5BFC641E946ED600253EC3 /* Model */,
 				EB0E22771E688DA300937CAB /* View Controllers */,
 				EB0E22761E688D7500937CAB /* Views */,
-				EBD61FE01E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff */,
-				EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */,
 				EBD61FE51E47EC3C00549EE8 /* Prefpane_Info.plist */,
 			);
 			name = "Prefpane Sources";
 			path = "Sources/Prefpane Sources";
+			sourceTree = "<group>";
+		};
+		EBE2B09C1EB4155000BD157C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EBFE66031E688A980056E549 /* Common Sources */ = {
@@ -148,6 +188,7 @@
 				EBD61FD51E47EC3C00549EE8 /* Frameworks */,
 				EBD61FD61E47EC3C00549EE8 /* Headers */,
 				EBD61FD71E47EC3C00549EE8 /* Resources */,
+				EBF28D7D1EB50E030027935E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -164,6 +205,9 @@
 		EBD61FD01E47EC3C00549EE8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					Icon,
+				);
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Gregorio Litenstein Goldzweig";
 				TargetAttributes = {
@@ -185,6 +229,12 @@
 			mainGroup = EBD61FCF1E47EC3C00549EE8;
 			productRefGroup = EBD61FDA1E47EC3C00549EE8 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EBE2B09C1EB4155000BD157C /* Products */;
+					ProjectRef = EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				EBD61FD81E47EC3C00549EE8 /* SwiftDefaultApps */,
@@ -192,23 +242,45 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ThisAppDoesNothing.app;
+			remoteRef = EBE2B09F1EB4155000BD157C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		EBD61FD71E47EC3C00549EE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */,
-				EB0F5A281E6894DF004BAA85 /* View.xib in Resources */,
-				EB0F5A291E6894DF004BAA85 /* SWDATitleView.xib in Resources */,
 				EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */,
 				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
-				EB0F5A2C1E6894DF004BAA85 /* SWDADefaultAppSelector.xib in Resources */,
-				EB0F5A2D1E6894DF004BAA85 /* SWDACustomSchemesEditor.xib in Resources */,
-				EBD61FE11E47EC3C00549EE8 /* SWDAPrefpaneMain.tiff in Resources */,
+				EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EBF28D7D1EB50E030027935E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EBD61FD41E47EC3C00549EE8 /* Sources */ = {
@@ -216,9 +288,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */,
+				EBF334371E9BDB5500520B7B /* SWDAContentProtocol.swift in Sources */,
+				EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */,
 				EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */,
+				EBF334311E9BD99B00520B7B /* Subclasses.swift in Sources */,
 				EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */,
+				EBF3342D1E9BD68A00520B7B /* SWDAHandlersModel.swift in Sources */,
 				EB14B8991E4B614D008AB27B /* DryView.swift in Sources */,
+				EB5BFC661E946ED600253EC3 /* SynchronizedArray.swift in Sources */,
+				EBF334331E9BDAAA00520B7B /* SWDAApplicationInfo.swift in Sources */,
+				EBF334351E9BDB0A00520B7B /* SWDATreeRow.swift in Sources */,
+				EBF334391E9BDB9600520B7B /* ProgressAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +310,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -270,6 +351,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D Prefpane";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -279,6 +361,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -312,6 +395,7 @@
 				IBC_FLATTEN_NIBS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-D Prefpane";
 				SDKROOT = macosx;
 			};
 			name = Release;
