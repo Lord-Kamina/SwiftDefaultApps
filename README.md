@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: No releases yet.
-    - Date: 2017-MM-DD
+    - Version: 1.0.0
+    - Date: 2017-05-01
 
 ## Known Issues
 - 
