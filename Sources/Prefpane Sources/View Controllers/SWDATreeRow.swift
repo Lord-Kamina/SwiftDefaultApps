@@ -108,7 +108,7 @@ internal class SWDATreeRow:NSObject {
                 if let bundleID = self.rowContent?.application?.appBundleID {
                     status = (type == .URL) ? LSWrappers.Schemes.setDefaultHandler(contentName, bundleID) : LSWrappers.UTType.setDefaultHandler(contentName, bundleID, LSRolesMask(from:self.roleMask!))
                     let alert = NSAlert()
-                    alert.informativeText = (status == 0) ? "Succesfully changed default handler for \(self.rowTitle) to \(self.rowContent?.application?.displayName)" : LSWrappers.LSErrors(value: status).print(argument: (app: (self.rowContent?.application?.displayName)!, content: self.rowTitle))
+                    alert.informativeText = (status == 0) ? "Succesfully changed default handler for \(self.rowTitle) to \(self.rowContent?.application?.displayName ?? "Invalid App")" : LSWrappers.LSErrors(value: status).print(argument: (app: (self.rowContent?.application?.displayName)!, content: self.rowTitle))
                     alert.icon = ControllersRef.appIcon
                     alert.messageText = (status == 0) ? "Success" : "Error"
                     alert.alertStyle = (status == 0) ? .informational : .critical
