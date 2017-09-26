@@ -15,7 +15,6 @@
 		EB5BFC661E946ED600253EC3 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */; };
 		EBA6B0981EB6E5EB0080A783 /* ThisAppDoesNothing.app in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */; };
 		EBA6B0A51EB6EB300080A783 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
-		EBA6B0A61EB6EB300080A783 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
 		EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
 		EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
@@ -368,7 +367,6 @@
 				EBF334371E9BDB5500520B7B /* SWDAContentProtocol.swift in Sources */,
 				EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */,
 				EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */,
-				EBA6B0A61EB6EB300080A783 /* README.md in Sources */,
 				EBF334311E9BD99B00520B7B /* Subclasses.swift in Sources */,
 				EBFE66061E688AA80056E549 /* LSWrappers.swift in Sources */,
 				EBF3342D1E9BD68A00520B7B /* SWDAHandlersModel.swift in Sources */,
