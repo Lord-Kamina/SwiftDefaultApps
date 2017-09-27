@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0900"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+               BuildableName = "SwiftDefaultApps.prefPane"
+               BlueprintName = "SwiftDefaultApps"
+               ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10; cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/&#10; [ -d &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot; ] &amp;&amp; rm -Rv &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+                     BuildableName = "SwiftDefaultApps.prefPane"
+                     BlueprintName = "SwiftDefaultApps"
+                     ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <Testables>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+            BuildableName = "SwiftDefaultApps.prefPane"
+            BlueprintName = "SwiftDefaultApps"
+            ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10;cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/&#10;[ -d &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot; ] &amp;&amp; rm -Rv &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+                     BuildableName = "SwiftDefaultApps.prefPane"
+                     BlueprintName = "SwiftDefaultApps"
+                     ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.systempreferences"
+         FilePath = "/Applications/System Preferences.app">
+      </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+            BuildableName = "SwiftDefaultApps.prefPane"
+            BlueprintName = "SwiftDefaultApps"
+            ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OBJC_DISABLE_GC"
+            value = "YES"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Debug"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10;cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+                     BuildableName = "SwiftDefaultApps.prefPane"
+                     BlueprintName = "SwiftDefaultApps"
+                     ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.systempreferences"
+         FilePath = "/Applications/System Preferences.app">
+      </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
+            BuildableName = "SwiftDefaultApps.prefPane"
+            BlueprintName = "SwiftDefaultApps"
+            ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      customArchiveName = "SwiftDefaultApps"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

@@ -14,7 +14,6 @@
 		EB14B8A01E4B63E7008AB27B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB14B89F1E4B63E7008AB27B /* Cocoa.framework */; };
 		EB5BFC661E946ED600253EC3 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BFC651E946ED600253EC3 /* SynchronizedArray.swift */; };
 		EBA6B0981EB6E5EB0080A783 /* ThisAppDoesNothing.app in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0A01EB4155000BD157C /* ThisAppDoesNothing.app */; };
-		EBA6B0A51EB6EB300080A783 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
 		EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
 		EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
@@ -65,14 +64,14 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		EBA6B0A21EB6EB000080A783 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 1;
 			files = (
 				EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */,
 				EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -241,9 +240,9 @@
 				EBD61FD41E47EC3C00549EE8 /* Sources */,
 				EBD61FD51E47EC3C00549EE8 /* Frameworks */,
 				EBD61FD61E47EC3C00549EE8 /* Headers */,
+				EBA6B0A21EB6EB000080A783 /* CopyFiles */,
 				EBD61FD71E47EC3C00549EE8 /* Resources */,
 				EBF28D7D1EB50E030027935E /* ShellScript */,
-				EBA6B0A21EB6EB000080A783 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -331,7 +330,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBA6B0A51EB6EB300080A783 /* LICENSE in Resources */,
 				EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */,
 				EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */,
 				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
@@ -345,14 +343,14 @@
 /* Begin PBXShellScriptBuildPhase section */
 		EBF28D7D1EB50E030027935E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
@@ -438,7 +436,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_FLATTEN_NIBS = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D Prefpane";
@@ -491,7 +489,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_FLATTEN_NIBS = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D Prefpane";
 				SDKROOT = macosx;
@@ -507,7 +505,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1.0;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -517,6 +515,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
@@ -527,7 +526,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1.0;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -536,6 +535,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;
