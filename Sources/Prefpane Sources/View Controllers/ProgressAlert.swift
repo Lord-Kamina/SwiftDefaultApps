@@ -14,7 +14,7 @@ class ProgressAlert: NSAlert {
     var progressBar = NSProgressIndicator()
     override init() {
         progressBar.isIndeterminate = false
-        progressBar.style = .barStyle
+        progressBar.style = .bar
         super.init()
         
         self.messageText = ""

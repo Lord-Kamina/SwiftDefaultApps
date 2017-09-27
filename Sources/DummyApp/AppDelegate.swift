@@ -14,14 +14,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-    func handleGetURLEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
+    @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
         let urlPassed = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!
         NSLog("Dummy application launched in response to URL: \(urlPassed), will now exit.")
     }
     
-    func handleOpenEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
+    @objc func handleOpenEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
         let documentPassed = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))!.stringValue!
-        guard let documentType =  try? NSWorkspace.shared().type(ofFile: URL(string:documentPassed)!.path) else {
+        guard let documentType =  try? NSWorkspace.shared.type(ofFile: URL(string:documentPassed)!.path) else {
             NSLog("Dummy application launched in response to file with unknown type, will now exit.")
             return
         }
@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

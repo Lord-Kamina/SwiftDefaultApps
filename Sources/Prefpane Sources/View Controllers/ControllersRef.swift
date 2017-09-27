@@ -20,7 +20,7 @@ final internal class ControllersRef: NSObject {
     var originalFonts: [NSControl:NSFont] = [:]
     
     /** Store a reference to the main icon, since we cannot use mainBundle on a preference pane. */
-    static let appIcon: NSImage = NSWorkspace.shared().icon(forFile: Bundle(identifier: "cl.fail.lordkamina.SwiftDefaultApps")!.bundlePath)
+    static let appIcon: NSImage = NSWorkspace.shared.icon(forFile: Bundle(identifier: "cl.fail.lordkamina.SwiftDefaultApps")!.bundlePath)
     
     /** Information relevant to the different tabs, such as labels, Keypaths for their content arrays, and such. */
     enum TabData {

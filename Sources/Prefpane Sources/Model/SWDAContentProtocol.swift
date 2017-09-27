@@ -25,7 +25,7 @@ internal protocol SWDAContentProtocol: class {
 class SWDAContentItem: NSObject, SWDAContentProtocol {
     
     /** Generates the NSTreeView displaying all the handlers associated to this content type. Results are sorted alphabetically, with the exception of the special "Other..." and "Do Nothing" entries. */
-    lazy var contentHandlers: [SWDATreeRow] = {
+    @objc lazy var contentHandlers: [SWDATreeRow] = {
         var roles: [SWDATreeRow] = []
         var rolesArray: [SourceListRoleTypes] = []
         switch self.contentType {
@@ -67,8 +67,8 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
         }
         return roles
     }()
-    var contentDescription: String = ""
-    var contentName: String = ""
+    @objc var contentDescription: String = ""
+    @objc var contentName: String = ""
     var contentType: SWDAContentType
     
     /** Initializer. contentDescription is only really used for the "Internet" Tab. */
@@ -84,10 +84,10 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
         }
     }
     
-    lazy var displayName: String = {
+    @objc lazy var displayName: String = {
         return self.value(forKey:ControllersRef.TabData.displayNameKeyPath) as! String
     }()
-    lazy var getExtensions: String = {
+    @objc lazy var getExtensions: String = {
         guard self.contentType == .UTI else { return "" }
         if let extensions = copyStringArrayAsString(LSWrappers.UTType.copyExtensionsFor(self.contentName), separator:", ") {
             return "Extensions: \(extensions)"
@@ -103,20 +103,20 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
                 return self.contentDescription
             }
             else { return "" }
-        case .UTI: if let desc = (UTTypeCopyDescription(self.contentName as CFString)?.takeRetainedValue() as? String) {
+        case .UTI: if let desc = (UTTypeCopyDescription(self.contentName as CFString)?.takeRetainedValue() as String?) {
             return desc
         }
         else { return "" }
         case .Application: return ""
         }
     }
-    lazy var appPath: String = { return "" }()
-    var appIcon: NSImage? = nil
+    @objc lazy var appPath: String = { return "" }()
+    @objc var appIcon: NSImage? = nil
 }
 
 /** Our other NSObject subclass adopting the SWDAContentProtocol, represents an Application and all of its associated URL Schemes and UTIs. If an application declares no UTIs, it looks for File Extensions and displays the UTI preferred to represent that extension. */
 class SWDAApplicationItem: NSObject, SWDAContentProtocol {
-    lazy var contentHandlers: [SWDATreeRow] = {
+    @objc lazy var contentHandlers: [SWDATreeRow] = {
         var allHandlers: [SWDATreeRow] = []
         if let bundle = self.appBundleInfo {
             let handledContent = bundle.handledContent
@@ -153,10 +153,10 @@ class SWDAApplicationItem: NSObject, SWDAContentProtocol {
         }
         return allHandlers
     }()
-    var contentDescription: String = ""
-    var contentName: String = ""
+    @objc var contentDescription: String = ""
+    @objc var contentName: String = ""
     var contentType: SWDAContentType
-    var appBundleInfo: SWDAApplicationInfo?
+    @objc var appBundleInfo: SWDAApplicationInfo?
     
     /** Determine a hashValue from the Bundle ID to prevent duplicate Applications, since in practice Launch Services will not allow us to choose a specific version of an Application but rather choose the best according to its own set of criteria outlined in the Launch Services Programming Guide. */
     override var hashValue: Int { return (self.appBundleInfo?.appBundleID)?.hashValue ?? -1 }
@@ -172,24 +172,24 @@ class SWDAApplicationItem: NSObject, SWDAContentProtocol {
         self.setValue(self.appBundleInfo?.displayName, forKey: "contentName")
         self.setValue(self.getDescription(), forKey: "contentDescription")
     }
-    lazy var displayName: String = {
+    @objc lazy var displayName: String = {
         return self.value(forKey:"contentName") as! String
     }()
     
-    lazy var appPath: String = {
+    @objc lazy var appPath: String = {
         if let path = self.appBundleInfo?.appPath {
             return path
         }
         else { return "" }
     }()
     
-    lazy var appIcon: NSImage? = {
+    @objc lazy var appIcon: NSImage? = {
         if let icon = self.appBundleInfo?.appIcon {
             return icon
         }
         else { return nil }
     }()
-    var getExtensions: String = ""
+    @objc var getExtensions: String = ""
     func getDescription () -> String {
         if let version = self.appBundleInfo?.appVersion {
             return "Version: \(version)"

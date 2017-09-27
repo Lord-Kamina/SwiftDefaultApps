@@ -172,13 +172,13 @@ extension Dictionary
 extension NSFont {
     /** Returns a SmallCaps version of the font it is invoked on. */
     func smallCaps() -> NSFont? {
-        let settings = [[NSFontFeatureTypeIdentifierKey: kLowerCaseType, NSFontFeatureSelectorIdentifierKey: kLowerCaseSmallCapsSelector]]
-        let attributes: [String: AnyObject] = [NSFontFeatureSettingsAttribute: settings as AnyObject, NSFontNameAttribute: fontName as AnyObject]
+        let settings = [[NSFontDescriptor.FeatureKey.typeIdentifier: kLowerCaseType, NSFontDescriptor.FeatureKey.selectorIdentifier: kLowerCaseSmallCapsSelector]]
+        let attributes: [NSFontDescriptor.AttributeName: AnyObject] = [NSFontDescriptor.AttributeName.featureSettings: settings as AnyObject, NSFontDescriptor.AttributeName.name: fontName as AnyObject]
         return NSFont(descriptor: NSFontDescriptor(fontAttributes: attributes), size: pointSize)
     }
     /** Returns a **Bold** version of the font it is invoked on. */
     func bold() -> NSFont? {
-        let fontManager = NSFontManager.shared()
+        let fontManager = NSFontManager.shared
         return fontManager.convert(self, toHaveTrait: .boldFontMask)
     }
     /**
@@ -186,7 +186,7 @@ extension NSFont {
      - Note: Not currently used.
      */
     func italic() -> NSFont? {
-        let fontManager = NSFontManager.shared()
+        let fontManager = NSFontManager.shared
         return fontManager.convert(self, toHaveTrait: .italicFontMask)
     }
 }

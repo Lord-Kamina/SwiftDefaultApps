@@ -88,7 +88,7 @@ class LSWrappers {
          - Returns: An array of strings corresponding to file-extensions for that UTI, or nil.
          */
         static func copyExtensionsFor(_ inUTI: String) -> [String]? {
-            if let result = (UTTypeCopyAllTagsWithClass(inUTI as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as? NSArray) {
+            if let result = (UTTypeCopyAllTagsWithClass(inUTI as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue()) {
                 if let extensions = result as? [String] {
                     return extensions
                 }
@@ -106,7 +106,7 @@ class LSWrappers {
             if let value = LSCopyDefaultRoleHandlerForContentType(inUTI as CFString, inRoles) {
                 let handlerID = value.takeRetainedValue() as String
                 if (asPath == true) {
-                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                    if let handlerURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: handlerID) {
                         return handlerURL.path
                     }
                     else { return nil }
@@ -127,7 +127,7 @@ class LSWrappers {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
                 if (asPath == true) {
                     for handlerID in handlerIDs {
-                        if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                        if let handlerURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: handlerID) {
                             handlers.append(handlerURL.path)
                         }
                     }
@@ -238,7 +238,7 @@ class LSWrappers {
             if let value = LSCopyDefaultHandlerForURLScheme(inScheme as CFString) {
                 let handlerID = value.takeRetainedValue() as String
                 if (asPath == true) {
-                    if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                    if let handlerURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: handlerID) {
                         return handlerURL.path
                     }
                     else { return nil }
@@ -259,7 +259,7 @@ class LSWrappers {
                 let handlerIDs = (value.takeRetainedValue() as! Array<String>)
                 if (asPath == true) {
                     for handlerID in handlerIDs {
-                        if let handlerURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: handlerID) {
+                        if let handlerURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: handlerID) {
                             handlers.append(handlerURL.path)
                         }
                     }
@@ -342,11 +342,11 @@ class LSWrappers {
             outBundleID = "cl.fail.lordkamina.ThisAppDoesNothing"
             return 0
         }
-        if NSWorkspace.shared().absolutePathForApplication(withBundleIdentifier: inParam) != nil  { // Check whether we have a valid Bundle ID for an application.
+        if NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: inParam) != nil  { // Check whether we have a valid Bundle ID for an application.
             outBundleID = inParam
             return 0
         }
-        else if let appPath = NSWorkspace.shared().fullPath(forApplication: inParam) { // Or an application designed by name
+        else if let appPath = NSWorkspace.shared.fullPath(forApplication: inParam) { // Or an application designed by name
             if let bundle = Bundle(path:appPath) {
                 if let type = bundle.getType(outError: &errCode) {
                     if (type == "APPL" || type == "FNDR") {
@@ -443,7 +443,7 @@ class LSWrappers {
                     }
                     else if let fileExtArray = (utiDict["CFBundleTypeExtensions"] as? [String]) {
                         for fileExt in fileExtArray {
-                            if let newUTI = (UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt as CFString, "public.content" as CFString)?.takeRetainedValue() as? String) {
+                            if let newUTI = (UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt as CFString, "public.content" as CFString)?.takeRetainedValue() as String?) {
                                 
                                 if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs[typeRole]!.index(of:newUTI) == nil)) {
                                     utiArray.append(newUTI)

@@ -85,7 +85,7 @@ class SWDAApplicationInfo: NSObject {
         default:
             let result = LSWrappers.getBundleID(inParam, outBundleID: &bundleID)
             if (result == 0) {
-                let appURL = NSWorkspace.shared().urlForApplication(withBundleIdentifier: bundleID!)
+                let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID!)
                 guard appURL != nil else { return nil }
                 if let bundle = Bundle(url: appURL!) {
                     self.appBundleID = bundle.bundleIdentifier!
@@ -112,7 +112,7 @@ class SWDAApplicationInfo: NSObject {
                     }
                     else { self.appVersion = nil }
                     self.appPath = bundle.bundlePath
-                    self.appIcon = NSWorkspace.shared().icon(forFile: bundle.bundlePath)
+                    self.appIcon = NSWorkspace.shared.icon(forFile: bundle.bundlePath)
                 }
                 else {
                     NSLog(LSWrappers.LSErrors.init(value:result).print(argument: (app: inParam, content:"")))

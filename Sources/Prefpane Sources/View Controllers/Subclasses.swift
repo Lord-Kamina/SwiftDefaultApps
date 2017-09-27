@@ -14,7 +14,7 @@ extension DRYView {
     weak var tabViewController: SWDATabViewController? { return ControllersRef.sharedInstance.tabViewController }
     
     /** Reference to the currently selected TabViewItem */
-    dynamic var currentTab: String? {
+    @objc dynamic var currentTab: String? {
         if let selectedTab = ControllersRef.sharedInstance.tabViewController?.currentTab {
             return selectedTab.label
         }
@@ -23,7 +23,7 @@ extension DRYView {
     
     /** Open Finder and Reveal the currently selected Application. */
     @IBAction func revealAppInFinder(_ sender: NSButton) {
-        NSWorkspace.shared().activateFileViewerSelecting([URL(fileURLWithPath:sender.title)])
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath:sender.title)])
     }
     
     /** Determines whether to show a Description in the Detail View */
@@ -77,7 +77,7 @@ class SWDATableView: NSView {
     override func awakeFromNib() {
         if let ac = arrayController {
             if let tableView = tableView {
-                ac.bind("sortDescriptors", to:tableView, withKeyPath: "sortDescriptors", options:nil)
+                ac.bind(NSBindingName(rawValue: "sortDescriptors"), to:tableView, withKeyPath: "sortDescriptors", options:nil)
                 tableView.sortDescriptors = defaultSortDescriptors
                 tableView.selectRowIndexes(NSIndexSet(index: 0) as IndexSet, byExtendingSelection: false)
                 self.tableView?.becomeFirstResponder()
@@ -96,7 +96,7 @@ class SWDATabTemplate: DRYView {
     @IBOutlet var tableView: NSTableView!
     
     /** Let's save selected item for each tab, update selectionIndex with the current value of our selection when our selection would be replaced with an empty or invalid one. */
-    var tableIndexes = NSIndexSet(index: 0)
+    @objc var tableIndexes = NSIndexSet(index: 0)
         {
         willSet {
             if (newValue.count < 1) { self.selectionIndex = self.tableIndexes.firstIndex }
@@ -132,10 +132,10 @@ class SWDATabTemplate: DRYView {
     var selectionIndex: Int? = nil
     
     /** Backing Store for the list of items on each tab. */
-    var contentArrayStore: Array<AnyObject>?
+    @objc var contentArrayStore: Array<AnyObject>?
     
     /** Check whether contentArrayStore holds anything; return that if it does or populate it asynchronously if it doesn't. */
-    var contentArray: Array<AnyObject>? {
+    @objc var contentArray: Array<AnyObject>? {
         guard self.nibName == "SWDAPrefpaneTabTemplate" else { return [] }
         if (self.tabIndex == ControllersRef.sharedInstance.tabViewController?.selectedTabViewItemIndex) {
             if (self.contentArrayStore == nil) {
@@ -155,11 +155,11 @@ class SWDATabTemplate: DRYView {
         }
     }
     
-    class func keyPathsForValuesAffectingContentArray() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingContentArray() -> Set<String> {
         return Set([#keyPath(currentTab), #keyPath(contentArrayStore)])
     }
     
-    class func keyPathsForValuesAffectingContentArrayStore() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingContentArrayStore() -> Set<String> {
         return Set([#keyPath(currentTab)])
     }
 }
@@ -259,7 +259,7 @@ class SWDATreeController: NSTreeController, NSOutlineViewDelegate {
     /**
      Return true if "Applications" is the currently selected tab.
      */
-    var showPathBool: NSNumber {
+    @objc var showPathBool: NSNumber {
         if let view = dryView {
             return view.value(forKey:"showPathBool") as! NSNumber
         }
@@ -301,16 +301,16 @@ class HyperlinkTextField: NSTextField {
     @IBInspectable var href: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
-        let attributes: [String: AnyObject] = [
-            NSForegroundColorAttributeName: NSColor.blue,
-            NSBackgroundColorAttributeName: NSColor.clear,
-            NSUnderlineStyleAttributeName: 1 as AnyObject
+        let attributes: [NSAttributedStringKey:AnyObject] = [
+            NSAttributedStringKey.foregroundColor: NSColor.blue,
+            NSAttributedStringKey.backgroundColor: NSColor.clear,
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue as AnyObject
         ]
         self.attributedStringValue = NSAttributedString(string: self.stringValue, attributes: attributes)
     }
     
     override func mouseDown(with event: NSEvent) {
-        NSWorkspace.shared().open(URL(string: self.href)!)
+        NSWorkspace.shared.open(URL(string: self.href)!)
     }
     convenience init (frame: NSRect, url: String, text: String? = nil) {
         self.init(frame:frame)

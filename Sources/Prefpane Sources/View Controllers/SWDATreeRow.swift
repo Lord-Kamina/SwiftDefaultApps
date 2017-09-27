@@ -41,13 +41,13 @@ internal class SWDATreeRow:NSObject {
     
     /** Required functionality for our NSTreeView. */
     weak var parentNode: SWDATreeRow?
-    var children: [SWDATreeRow] = []
-    var count: Int { return children.count }
-    var isLeaf: Bool { return children.count < 1}
+    @objc var children: [SWDATreeRow] = []
+    @objc var count: Int { return children.count }
+    @objc var isLeaf: Bool { return children.count < 1}
     
     
     /** Dirty trick to avoid subclassing NSOutlineView. */
-    var shouldFauxIndent: Bool {
+    @objc var shouldFauxIndent: Bool {
         return self.rowLevel == .handler
     }
     
@@ -64,7 +64,7 @@ internal class SWDATreeRow:NSObject {
     var baseFont: NSFont = NSFont.systemFont(ofSize:0)
     
     /** Bindings-compatible determination of the font to use. */
-    var rowFont: NSFont? {
+    @objc var rowFont: NSFont? {
         switch self.rowLevel {
         case .header: return self.baseFont.smallCaps()
         case .role: return self.baseFont.bold()
@@ -72,7 +72,7 @@ internal class SWDATreeRow:NSObject {
         }
     }
     /** Show header rows in a different color. */
-    var textColor: NSColor? {
+    @objc var textColor: NSColor? {
         switch self.rowLevel {
         case .header: return NSColor.headerColor
         default: return NSColor.controlTextColor
@@ -80,16 +80,16 @@ internal class SWDATreeRow:NSObject {
     }
     
     /** What the Tree Row will actually display as a label. */
-    var rowTitle: String
+    @objc var rowTitle: String
     
     /** Content and associated application. Optional to account for dummy rows like Headers. */
     var rowContent: SWDAContentHandler?
     var roleMask: SourceListRoleTypes?
     
-    lazy var appIcon: NSImage? = { return self.rowContent?.application?.appIcon }()
+    @objc lazy var appIcon: NSImage? = { return self.rowContent?.application?.appIcon }()
     
     /** Binding-compatible determination used exclusively for SWDATreeRows in the Applications tab. Returns true if the currently selected application is the default handler for the content represented by this row. It's only enabled when its state is off, since in practice it's not actually possible to remove handlers from LaunchServices. Rather, the service takes care of its own clean-up if it detects an UTI or URL Scheme does not have any valid handlers. */
-    var isHandlingContent: Bool {
+    @objc var isHandlingContent: Bool {
         get {
             guard (ControllersRef.sharedInstance.tabViewController!.currentTab?.label == "Applications") else { return false }
             guard (self.rowContent != nil) else { return false }
@@ -130,7 +130,7 @@ internal class SWDATreeRow:NSObject {
     }
     
     /** Binding-compatible determination used in every tab except for Applications. Returns true if the application represented by the current row is the default handler for the selected content type. Allows "Other" to specify apps that aren't detected as valid handlers for whatever reason. Note that setting something to be handled by "Other" will not _actually_ work unless the application's Info.plist adequately declares association with that content. */
-    var isDefaultHandler: Bool {
+    @objc var isDefaultHandler: Bool {
         get {
             if let content = (self.rowContent?.content as? SWDAContentItem) {
                 var handler: String?

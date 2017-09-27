@@ -22,10 +22,10 @@ internal enum SWDAContentType: String {
 
 /** Our main model class, tasked with getting and populating the content arrays associated with each tab. */
 class SWDAHandlersModel: NSObject {
-    static var allUTIs: [SWDAContentItem]?
-    static var allSchemes: [SWDAContentItem]?
-    static var internetSchemes: [SWDAContentItem]?
-    static var allApps: [SWDAApplicationItem]?
+    @objc static var allUTIs: [SWDAContentItem]?
+    @objc static var allSchemes: [SWDAContentItem]?
+    @objc static var internetSchemes: [SWDAContentItem]?
+    @objc static var allApps: [SWDAApplicationItem]?
     
     /**
      This function is indirectly called by the contentArray variable in each SWDATabTemplate instance, it's responsible for asynchronously populating each model array with the appropriate content and sending messages for the ProgressAlert to update itself.
@@ -44,7 +44,6 @@ class SWDAHandlersModel: NSObject {
         var codeBlock: (_ : Int) -> Void = { index in }
         var sourceItems: [String] = []
         var sourceDescriptions: [String:String] = [:]
-        var apps: [SWDAApplicationItem] = []
         var outputItems: Any // By using the SynchronizedArray class, we can concurrently create the larger Content Arrays across multiple threads, in a safe manner.
         if (type == "Applications") {
             outputItems = SynchronizedArray<SWDAApplicationItem>()

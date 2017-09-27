@@ -45,7 +45,6 @@ class SWDAMainPrefPane: NSPreferencePane {
     alert.informativeText = "by Gregorio Litenstein."
     alert.icon = ControllersRef.appIcon
     alert.accessoryView = HyperlinkTextField(frame: NSRect(x: 0, y:10, width:330, height:18), url: "http://www.github.com/Lord-Kamina/SwiftDefaultApps")
-//    Swift.print("Frame minX: \(alert.accessoryView?.frame.minX), Frame minY: \(alert.accessoryView?.frame.minY), Frame midX: \(alert.accessoryView?.frame.midX), Frame midY: \(alert.accessoryView?.frame.midY), Frame maxX: \(alert.accessoryView?.frame.maxX), Frame maxY: \(alert.accessoryView?.frame.maxY)")
 
     alert.alertStyle = .informational
     alert.addButton(withTitle: "OK")
