@@ -154,8 +154,7 @@
 				OBJ_32 /* lsreg */,
 			);
 			name = Products;
-			path = "../Library/Developer/Xcode/DerivedData/SwiftDefaultApps-govsimgwntgjfqgrejntsccgqfol/Build/Products/Debug";
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		OBJ_5 = {
 			isa = PBXGroup;
