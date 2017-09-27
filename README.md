@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 1.0.0
-    - Date: 2017-05-01
+    - Version: 1.1.0
+    - Date: 2017-09-27
 
 ## Known Issues
 - 
@@ -45,7 +45,15 @@ The user-interface should be pretty self-explanatory; but, there are some things
 
 # Release Notes
 
-## [1.0.0] - 2017-MM-DD
+## [1.1.0] - 2017-09-27
+  + ### Changed
+  	+ Migrated code to Swift 4.
+  + ### Fixed
+  	+ Fixed an unwrapped Optional when changing associations in the "Applications" tab.
+  	+ Fixed CLI tool.
+  	+ Some other cleanups.
+
+## [1.0.0] - 2017-05-01
   + ### Added
     + Initial release!
   + ### Changed
