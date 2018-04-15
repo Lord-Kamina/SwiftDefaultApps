@@ -45,6 +45,10 @@ The user-interface should be pretty self-explanatory; but, there are some things
 
 # Release Notes
 
+## [1.1.1] - 2018-04-15
+  + ### Changed
+  	+ Small changes for Swift 4.1.
+
 ## [1.1.0] - 2017-09-27
   + ### Changed
   	+ Migrated code to Swift 4.
