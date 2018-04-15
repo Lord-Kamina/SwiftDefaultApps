@@ -64,7 +64,7 @@ prefix operator /
 func =~ (string: String, regex: NSRegularExpression?) -> Bool? {
     guard let matches = regex?.numberOfMatches(in:string,
                                                options: [],
-                                               range: NSMakeRange(0, string.characters.count))
+                                               range: NSMakeRange(0, string.count))
         else { return nil }
     return matches > 0
 }

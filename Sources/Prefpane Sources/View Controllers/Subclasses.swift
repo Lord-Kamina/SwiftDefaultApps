@@ -11,7 +11,7 @@ import AppKit
 
 extension DRYView {
     /** Bridge required to make currentTab really dependent on the selectedTabViewItemIndex */
-    weak var tabViewController: SWDATabViewController? { return ControllersRef.sharedInstance.tabViewController }
+    @objc weak var tabViewController: SWDATabViewController? { return ControllersRef.sharedInstance.tabViewController }
     
     /** Reference to the currently selected TabViewItem */
     @objc dynamic var currentTab: String? {
@@ -27,42 +27,42 @@ extension DRYView {
     }
     
     /** Determines whether to show a Description in the Detail View */
-    var showDescriptionBool: NSNumber {
+    @objc var showDescriptionBool: NSNumber {
         guard (self.currentTab != nil) else { return NSNumber(booleanLiteral:true) }
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowDescription)
     }
     
     /** Determines whether to show a path and Reveal In Finder button */
-    var showPathBool: NSNumber {
+    @objc var showPathBool: NSNumber {
         guard (self.currentTab != nil) else { return NSNumber(booleanLiteral:false) }
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowAppPath)
     }
     
     /** The only tab where an "Add" button is at all meaningful is the URL Schemes. */
-    var showAddRemoveBool: NSNumber {
+    @objc var showAddRemoveBool: NSNumber {
         guard (self.currentTab != nil) else { return NSNumber(booleanLiteral:false) }
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowAddRemove)
     }
     
     /** Determines whether to ahow a list of file extensions associated with a given UTI. */
-    var showFileExtensionsBool: NSNumber {
+    @objc var showFileExtensionsBool: NSNumber {
         guard (self.currentTab != nil) else { return NSNumber(booleanLiteral:false) }
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowFileExts)
     }
     
-    class func keyPathsForValuesAffectingShowDescriptionBool() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingShowDescriptionBool() -> Set<String> {
         return Set([#keyPath(currentTab), #keyPath(inspectedObject)])
     }
-    class func keyPathsForValuesAffectingShowPathBool() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingShowPathBool() -> Set<String> {
         return Set([#keyPath(currentTab), #keyPath(inspectedObject)])
     }
-    class func keyPathsForValuesAffectingShowAddRemoveBool() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingShowAddRemoveBool() -> Set<String> {
         return Set([#keyPath(currentTab), #keyPath(inspectedObject)])
     }
-    class func keyPathsForValuesAffectingShowFileExtensionsBool() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingShowFileExtensionsBool() -> Set<String> {
         return Set([#keyPath(currentTab), #keyPath(inspectedObject)])
     }
-    class func keyPathsForValuesAffectingCurrentTab() -> Set<String> {
+    @objc class func keyPathsForValuesAffectingCurrentTab() -> Set<String> {
         return Set(["tabViewController.selectedTabViewItemIndex"])
     }
 }
