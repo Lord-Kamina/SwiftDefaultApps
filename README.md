@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 1.1.0
-    - Date: 2017-09-27
+    - Version: 1.1.2
+    - Date: 2018-10-07
 
 ## Known Issues
 - 
@@ -44,6 +44,11 @@ The user-interface should be pretty self-explanatory; but, there are some things
 - Localizations
 
 # Release Notes
+
+## [1.1.2] - 2018-10-07
+  + ### Changed
+  	+ Migrated to Swift 4.2
+  	+ Force Static linking of standard library, which should fix issues running on Mojave.
 
 ## [1.1.1] - 2018-04-15
   + ### Changed
