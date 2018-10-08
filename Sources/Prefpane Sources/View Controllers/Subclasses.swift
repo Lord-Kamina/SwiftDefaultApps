@@ -188,8 +188,8 @@ class SWDATabViewController: NSTabViewController {
         }
         if (tabViewKVOContext == context) {
             guard (change![.oldKey]! as! Int != -1) else { return }
-            let oldTab = self.childViewControllers[change![.oldKey]! as! Int].view as! SWDATabTemplate
-            let newTab = self.childViewControllers[change![.newKey]! as! Int].view as! SWDATabTemplate
+            let oldTab = self.children[change![.oldKey]! as! Int].view as! SWDATabTemplate
+            let newTab = self.children[change![.newKey]! as! Int].view as! SWDATabTemplate
             
             if (newTab.selectionIndex != 0) {
                 newTab.setValue(NSIndexSet(index: newTab.selectionIndex!), forKey: "tableIndexes")
@@ -227,7 +227,7 @@ class SWDATabViewController: NSTabViewController {
             (newTabVC.view as! SWDATabTemplate).tabIndex = (index != nil) ? index!  : nil
             (newTabVC.view as! SWDATabTemplate).nibName = "SWDAPrefpaneTabTemplate"
             
-            tabViewController.addChildViewController(newTabVC)
+            tabViewController.addChild(newTabVC)
             
             let newTab = tabViewController.tabViewItem(for: newTabVC)!
             newTab.label = tab
@@ -301,10 +301,10 @@ class HyperlinkTextField: NSTextField {
     @IBInspectable var href: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
-        let attributes: [NSAttributedStringKey:AnyObject] = [
-            NSAttributedStringKey.foregroundColor: NSColor.blue,
-            NSAttributedStringKey.backgroundColor: NSColor.clear,
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue as AnyObject
+        let attributes: [NSAttributedString.Key:AnyObject] = [
+            NSAttributedString.Key.foregroundColor: NSColor.blue,
+            NSAttributedString.Key.backgroundColor: NSColor.clear,
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue as AnyObject
         ]
         self.attributedStringValue = NSAttributedString(string: self.stringValue, attributes: attributes)
     }

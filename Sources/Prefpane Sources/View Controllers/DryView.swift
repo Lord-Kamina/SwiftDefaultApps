@@ -30,7 +30,7 @@ import Cocoa
                 else { return }
             
             var objects: NSArray? = NSArray()
-            self.bundle?.loadNibNamed(NSNib.Name(rawValue: theNibName), owner: self, topLevelObjects: &objects)
+            self.bundle?.loadNibNamed(theNibName, owner: self, topLevelObjects: &objects)
             if let theObjects = objects
             {
                 for view in theObjects
@@ -53,7 +53,7 @@ import Cocoa
                 else {return nil}
             
             var objects: NSArray? = NSArray()
-            var isLoaded = Bundle.main.loadNibNamed(NSNib.Name(rawValue: theNibName), owner: self, topLevelObjects: &objects)
+            var isLoaded = Bundle.main.loadNibNamed(theNibName, owner: self, topLevelObjects: &objects)
             if isLoaded
             {
                 return Bundle.main

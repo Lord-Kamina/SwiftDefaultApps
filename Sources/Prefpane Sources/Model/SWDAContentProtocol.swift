@@ -159,7 +159,7 @@ class SWDAApplicationItem: NSObject, SWDAContentProtocol {
     @objc var appBundleInfo: SWDAApplicationInfo?
     
     /** Determine a hashValue from the Bundle ID to prevent duplicate Applications, since in practice Launch Services will not allow us to choose a specific version of an Application but rather choose the best according to its own set of criteria outlined in the Launch Services Programming Guide. */
-    override var hashValue: Int { return (self.appBundleInfo?.appBundleID)?.hashValue ?? -1 }
+    override var hash: Int { return (self.appBundleInfo?.appBundleID)?.hash ?? -1 }
     
     init? (_ app: String) {
         self.contentType = .Application
