@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 1.1.2
-    - Date: 2018-10-07
+    - Version: 1.1.3
+    - Date: 2018-11-15
 
 ## Known Issues
 - 
@@ -44,6 +44,10 @@ The user-interface should be pretty self-explanatory; but, there are some things
 - Localizations
 
 # Release Notes
+
+## [1.1.3] - 2018-11-15
+  + ### Fixed
+  	+ Bug causing crash on related to force-unwrapping bundleIdentifier.
 
 ## [1.1.2] - 2018-10-07
   + ### Changed
