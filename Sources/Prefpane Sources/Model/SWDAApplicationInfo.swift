@@ -88,7 +88,11 @@ class SWDAApplicationInfo: NSObject {
                 let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID!)
                 guard appURL != nil else { return nil }
                 if let bundle = Bundle(url: appURL!) {
-                    self.appBundleID = bundle.bundleIdentifier!
+					guard bundle.bundleIdentifier != nil else {
+						NSLog(LSWrappers.LSErrors.invalidBundle.print(argument: (app: inParam, content:"")))
+						return nil;
+					}
+					self.appBundleID = bundle.bundleIdentifier!
                     let name = (bundle.object(forInfoDictionaryKey: "CFBundleName") as? String)
                     let displayName = (bundle.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)
                     var tempName: String?
