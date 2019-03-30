@@ -211,7 +211,7 @@ internal class SWDATreeRow:NSObject {
      - Parameter child: An instance of SWDATreeRow to be added as a child.
      */
     func addChild (_ child: SWDATreeRow) {
-        guard (self.children.index(of: child) == nil) else { return }
+        guard (self.children.firstIndex(of: child) == nil) else { return }
         child.parentNode = self
         self.children.append(child)
     }
@@ -223,7 +223,7 @@ internal class SWDATreeRow:NSObject {
      */
     func addChildren (of row: SWDATreeRow) {
         for child in row.children {
-            guard (self.children.index(of: child) == nil) else { return }
+            guard (self.children.firstIndex(of: child) == nil) else { return }
             child.parentNode = self
             self.children.append(child)
         }

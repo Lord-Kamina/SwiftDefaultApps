@@ -85,7 +85,7 @@
 		EBA6B0A41EB6EB300080A783 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EBB1976F1E85D26E0072AF70 /* AppDoesNothing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AppDoesNothing.xcodeproj; sourceTree = "<group>"; };
 		EBC487A11E49073400A9A125 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
-		EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDAMainPrefPane.swift; sourceTree = "<group>"; };
+		EBC487BF1E490FDE00A9A125 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EBD61FD91E47EC3C00549EE8 /* SwiftDefaultApps.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDefaultApps.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD61FE51E47EC3C00549EE8 /* Prefpane_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Prefpane_Info.plist; path = ../../Resources/Prefpane_Info.plist; sourceTree = "<group>"; };
 		EBD620021E47F43C00549EE8 /* SWDAPrefpaneMain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SWDAPrefpaneMain.xib; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		EBD61FDB1E47EC3C00549EE8 /* Prefpane Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */,
+				EBC487BF1E490FDE00A9A125 /* main.swift */,
 				EB5BFC641E946ED600253EC3 /* Model */,
 				EB0E22771E688DA300937CAB /* View Controllers */,
 				EB0E22761E688D7500937CAB /* Views */,
@@ -263,19 +263,19 @@
 				KnownAssetTags = (
 					Icon,
 				);
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Gregorio Litenstein Goldzweig";
 				TargetAttributes = {
 					EBD61FD81E47EC3C00549EE8 = {
 						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = EBD61FD31E47EC3C00549EE8 /* Build configuration list for PBXProject "SWDA Prefpane" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -332,8 +332,8 @@
 			files = (
 				EB0F5A271E6894DF004BAA85 /* SWDAPrefpaneMain.xib in Resources */,
 				EB0F5A2A1E6894DF004BAA85 /* SWDASchemesUTIsContent.xib in Resources */,
-				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
 				EBA6B0981EB6E5EB0080A783 /* ThisAppDoesNothing.app in Resources */,
+				EB0F5A2B1E6894DF004BAA85 /* SWDAPrefpaneTabTemplate.xib in Resources */,
 				EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */,
+				EBC487C01E490FDE00A9A125 /* main.swift in Sources */,
 				EBF334371E9BDB5500520B7B /* SWDAContentProtocol.swift in Sources */,
 				EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */,
 				EBFE66071E688AA80056E549 /* commonFuncs.swift in Sources */,
@@ -390,8 +390,6 @@
 		EBD61FE61E47EC3C00549EE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -423,6 +421,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -435,20 +434,21 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_FLATTEN_NIBS = NO;
+				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D Prefpane";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.2;
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = NO;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		EBD61FE71E47EC3C00549EE8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -479,6 +479,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -486,18 +487,22 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IBC_FLATTEN_NIBS = NO;
+				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D Prefpane";
 				SDKROOT = macosx;
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = NO;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		EBD61FE91E47EC3C00549EE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.1.0;
@@ -505,12 +510,12 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.SwiftDefaultApps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = NO;
 				SWIFT_FORCE_STATIC_LINK_STDLIB = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_EXPORT_DECL = "";
 				WRAPPER_EXTENSION = prefPane;
@@ -520,6 +525,7 @@
 		EBD61FEA1E47EC3C00549EE8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1.1.0;
@@ -527,11 +533,11 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Prefpane_Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.SwiftDefaultApps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = NO;
 				SWIFT_FORCE_STATIC_LINK_STDLIB = YES;
-				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_EXPORT_DECL = "";
 				WRAPPER_EXTENSION = prefPane;

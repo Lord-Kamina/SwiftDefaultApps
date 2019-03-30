@@ -223,7 +223,7 @@ class SWDATabViewController: NSTabViewController {
         for tab in tabs {
             let newTabVC = NSViewController.init()
             newTabVC.view = SWDATabTemplate.init()
-            let index = tabs.index(of: tab)
+            let index = tabs.firstIndex(of: tab)
             (newTabVC.view as! SWDATabTemplate).tabIndex = (index != nil) ? index!  : nil
             (newTabVC.view as! SWDATabTemplate).nibName = "SWDAPrefpaneTabTemplate"
             

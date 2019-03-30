@@ -445,7 +445,7 @@ class LSWrappers {
                         for fileExt in fileExtArray {
                             if let newUTI = (UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt as CFString, "public.content" as CFString)?.takeRetainedValue() as String?) {
                                 
-                                if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs[typeRole]!.index(of:newUTI) == nil)) {
+                                if ((!UTTypeIsDynamic(newUTI as CFString)) && (handledUTIs[typeRole]!.firstIndex(of:newUTI) == nil)) {
                                     utiArray.append(newUTI)
                                 }
                             }
