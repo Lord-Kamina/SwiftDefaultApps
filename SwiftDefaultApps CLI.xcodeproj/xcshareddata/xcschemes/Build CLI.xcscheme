@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "OBJ_57"
-               BuildableName = "lsreg"
+               BuildableName = "swda"
                BlueprintName = "SwiftDefaultApps"
                ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
             </BuildableReference>
@@ -74,7 +74,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "OBJ_57"
-            BuildableName = "lsreg"
+            BuildableName = "swda"
             BlueprintName = "SwiftDefaultApps"
             ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
          </BuildableReference>

@@ -17,7 +17,7 @@
 		EBA6B0A71EB6EB470080A783 /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A31EB6EB300080A783 /* LICENSE */; };
 		EBA6B0A81EB6EB4A0080A783 /* README.md in CopyFiles */ = {isa = PBXBuildFile; fileRef = EBA6B0A41EB6EB300080A783 /* README.md */; };
 		EBC487A21E49073400A9A125 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC487A11E49073400A9A125 /* PreferencePanes.framework */; };
-		EBC487C01E490FDE00A9A125 /* SWDAMainPrefPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC487BF1E490FDE00A9A125 /* SWDAMainPrefPane.swift */; };
+		EBC487C01E490FDE00A9A125 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC487BF1E490FDE00A9A125 /* main.swift */; };
 		EBE2B0991EB409F800BD157C /* Main Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE2B0981EB409F800BD157C /* Main Assets.xcassets */; };
 		EBF3342D1E9BD68A00520B7B /* SWDAHandlersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3342C1E9BD68A00520B7B /* SWDAHandlersModel.swift */; };
 		EBF3342F1E9BD91C00520B7B /* ControllersRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3342E1E9BD91C00520B7B /* ControllersRef.swift */; };
@@ -151,7 +151,7 @@
 		EBA6B09A1EB6E6140080A783 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EBA6B09F1EB6E6150080A783 /* lsreg */,
+				EBA6B09F1EB6E6150080A783 /* swda */,
 				EBA6B0A11EB6E6150080A783 /* SwiftCLI.framework */,
 			);
 			name = Products;
@@ -302,10 +302,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EBA6B09F1EB6E6150080A783 /* lsreg */ = {
+		EBA6B09F1EB6E6150080A783 /* swda */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
-			path = lsreg;
+			path = swda;
 			remoteRef = EBA6B09E1EB6E6150080A783 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -390,7 +390,7 @@
 		EBD61FE61E47EC3C00549EE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SwiftDefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -449,7 +449,7 @@
 		EBD61FE71E47EC3C00549EE8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = SWDADefaultApps;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SwiftDefaultApps;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

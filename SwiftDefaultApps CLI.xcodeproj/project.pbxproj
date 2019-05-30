@@ -79,7 +79,7 @@
 		OBJ_26 /* VersionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCommand.swift; sourceTree = "<group>"; };
 		OBJ_28 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_31 /* SwiftCLI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftCLI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_32 /* lsreg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = lsreg; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_32 /* swda */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = swda; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		OBJ_9 /* ChainableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainableCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_31 /* SwiftCLI.framework */,
-				OBJ_32 /* lsreg */,
+				OBJ_32 /* swda */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 			);
 			name = SwiftDefaultApps;
 			productName = SwDefaultApps;
-			productReference = OBJ_32 /* lsreg */;
+			productReference = OBJ_32 /* swda */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -491,7 +491,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = lsreg;
+				PRODUCT_NAME = swda;
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
 				SWIFT_COMPILATION_MODE = singlefile;
@@ -516,7 +516,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = lsreg;
+				PRODUCT_NAME = swda;
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;

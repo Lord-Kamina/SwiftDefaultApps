@@ -9,7 +9,7 @@
 
 import Foundation
 import SwiftCLI
-CLI.setup(name:"lsreg", version:"1.0", description:"Utility to retrieve and manipulate default applications in macOS.")
+CLI.setup(name:"swda", version:"1.0", description:"Utility to retrieve and manipulate default applications in macOS.")
 CLI.register(commands: [ ReadCommand(), GetApps(), GetSchemes(), GetUTIs(), SetCommand() ])
 
 exit(CLI.go())
