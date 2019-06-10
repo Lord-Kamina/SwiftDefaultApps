@@ -20,38 +20,44 @@ class LSWrappers {
     
     /**
      Wrapper for commonly-used errors associated to Launch Services.
-     - appNotFound: Application not found at given path/URL.
-     - notAnApp: Found item at given path/URL but it is not an application bundle.
-     - invalidFileURL: Trying to locate a file with a scheme different from file://
-     - deletedApp: An application bundle was found, but it is currently in the Trash.
-     - serverErr: Can't communicate with the Launch Services server.
-     - incompatibleSys: A valid application bundle was found, but it is not compatible with the current version of macOS.
-     - invalidBundle: The specified bundle does not have a valid CFBundlePackageType entry.
-     - defaultErr: Unknown error, for cases not covered above.
+	- invalidBundle: The specified bundle does not have a valid CFBundlePackageType entry.
 	- invalidScheme: Supplied URI Scheme is malformed or contains invalid characters.
+	- incompatibleSys: A valid application bundle was found, but it is not compatible with the current version of macOS.
+	- serverErr: Can't communicate with the Launch Services server.
+	- appNotFound: Application not found at given path/URL.
+	- notAnApp: Found item at given path/URL but it is not an application bundle.
+	- deletedApp: An application bundle was found, but it is currently in the Trash.
+	- defaultErr: Unknown error, for cases not covered above. 
+	- invalidFileURL: Trying to locate a file with a scheme different from file://
+	- noError: No error occured. 
      */
     internal enum LSErrors:OSStatus {
+		case invalidBundle = -67857
+		case invalidScheme = -30774
+		case incompatibleSys = -10825
+		case serverErr = -10822
         case appNotFound = -10814
         case notAnApp = -10811
-        case invalidFileURL = 262
-        case invalidScheme = -30774
-        case deletedApp = -10660
-        case serverErr = -10822
-        case incompatibleSys = -10825
         case defaultErr = -10810
-        case invalidBundle = -67857
-        
+		case deletedApp = -10660
+		case invalidFileURL = 262
+		
+		case noError = 0
+		
         init(value: OSStatus) {
             switch value {
-            case -10814: self = .appNotFound
-            case -30774: self = .invalidScheme
-            case -10811: self = .notAnApp
-            case 262: self = .invalidFileURL
-            case -10660: self = .deletedApp
-            case -10822: self = .serverErr
-            case -10825: self = .incompatibleSys
             case -67857: self = .invalidBundle
-            default: self = .defaultErr
+			case -30774: self = .invalidScheme
+			case -10825: self = .incompatibleSys
+			case -10822: self = .serverErr
+			case -10814: self = .appNotFound
+            case -10811: self = .notAnApp
+			case -10660: self = .deletedApp
+			case -10810: self = .defaultErr
+            case 262: self = .invalidFileURL
+            
+			case 0: self = .noError
+			default: self = .defaultErr
             }
             
         }
@@ -64,18 +70,22 @@ class LSWrappers {
          
          - Returns: Human-readable error message specifying the problem, or unknown error if the problem is something not accounted for here.
          */
-        func print(argument: (app: String, content: String)) -> String {
+        func print(argument: (app: String?, content: String?) = (String(),String())) -> String {
+			var retValue = (self == .noError ? "SwiftDefaultApps SUCCESS: " : "SwiftDefaultApps ERROR \(self.rawValue): ")
             switch self {
-            case .notAnApp: return "\(argument.app) is not a valid application."
-            case .appNotFound: return "No application found for \(argument.app)"
-            case .invalidFileURL: return "\(argument.app) is not a valid filesystem URL."
-            case .deletedApp: return "\(argument.app) cannot be accessed because it is in the Trash."
-            case .serverErr: return "There was an error trying to communicate with the Launch Services Server."
-            case .incompatibleSys: return "\(argument.app) is not compatible with the currently installed version of macOS."
-            case .invalidBundle: return "\(argument.app) is not a valid Package."
-            case .defaultErr: return "An unknown error has occurred."
+			case .notAnApp: retValue += "\(argument.app!) is not a valid application."
+			case .appNotFound: retValue += "No application found for \(argument.app!)"
 			case .invalidScheme: retValue += "\(argument.content!) is not a valid URI Scheme."
+			case .invalidFileURL: retValue += "\(argument.app!) is not a valid filesystem URL."
+			case .deletedApp: retValue += "\(argument.app!) cannot be accessed because it is in the Trash."
+            case .serverErr: retValue += "There was an error trying to communicate with the Launch Services Server."
+			case .incompatibleSys: retValue += "\(argument.app!) is not compatible with the currently installed version of macOS."
+			case .invalidBundle: retValue += "\(argument.app!) is not a valid Package."
+			case .noError: retValue += "Default handler has succesfully changed to \(argument.app!)"
+            case .defaultErr: retValue += "An unknown error has occurred."
             }
+			if ((self == .appNotFound || self == .deletedApp) && (argument.app == "None" || argument.app == "Do Nothing" || argument.app == "cl.fail.lordkamina.ThisAppDoesNothing")) { retValue += " (This error occurs when ThisAppDoesNothing.app is not found.)" }
+			return retValue
         }
     }
     /**
@@ -279,15 +289,12 @@ class LSWrappers {
          */
         static func setDefaultHandler (_ inScheme: String, _ inBundleID: String) -> OSStatus {
             var retval: OSStatus = kLSUnknownErr
-            if let matches = inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$" {
-                if (matches == true) {
+                if ((inScheme =~ /"\\A[a-zA-Z][a-zA-Z0-9.+-]+$") == true) {
                     if (LSWrappers.isAppInstalled(withBundleID:inBundleID) == true) {
                         retval = LSSetDefaultHandlerForURLScheme((inScheme as CFString), (inBundleID as CFString))
                     }
                     else { retval = kLSApplicationNotFoundErr }
-                }
-                else { retval = Int32(kURLUnsupportedSchemeError) }
-            }
+            	}
             else { retval = Int32(kURLUnsupportedSchemeError) }
             return retval
         }
@@ -302,9 +309,7 @@ class LSWrappers {
         if (LSCopyAllApplicationURLs(&apps) == 0) {
             if let appURLs = (apps! as NSArray) as? [URL] {
                 if let pathsArray = convertAppURLsToPaths(appURLs) {
-                    
                     return pathsArray
-                    
                 }
                 else { return nil }
             }
@@ -334,8 +339,7 @@ class LSWrappers {
      - Parameter outBundleID: This parameter is populated with a bundle identifier if a valid application bundle corresponding to the input parameter was found.
      - Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
      */
-    static func getBundleID (_ inParam: String, outBundleID: inout String?) -> OSStatus {
-        outBundleID = nil
+    static func getBundleID (_ inParam: String, outBundleID: inout String? = nil) -> OSStatus {
         var errCode = OSStatus()
         let filemanager = FileManager.default
         if (inParam == "None") { // None is a valid value for our dummy application.
