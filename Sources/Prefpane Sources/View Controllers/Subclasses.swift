@@ -206,15 +206,15 @@ class SWDATabViewController: NSTabViewController {
         addObserver(self, forKeyPath: #keyPath(selectedTabViewItemIndex), options: [.old, .new], context: tabViewKVOContext)
         let tabViewController = self
         self.tabView.translatesAutoresizingMaskIntoConstraints = false
-        let leading = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView, attribute: .leading    , relatedBy: .equal, toItem: self.tabView, attribute: .leading  , multiplier: 1, constant: -20)
+		let leading = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .leading    , relatedBy: .equal, toItem: self.tabView, attribute: .leading  , multiplier: 1, constant: -20)
         leading.identifier = "TabView Leading"
-        let trailing = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView, attribute: .trailing    , relatedBy: .equal, toItem: self.tabView, attribute: .trailing  , multiplier: 1, constant: 20)
+		let trailing = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .trailing    , relatedBy: .equal, toItem: self.tabView, attribute: .trailing  , multiplier: 1, constant: 20)
         trailing.identifier = "TabView Trailng"
-        let centerX = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView, attribute: .centerX    , relatedBy: .equal, toItem: self.tabView, attribute: .centerX  , multiplier: 1, constant: 0)
+		let centerX = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .centerX    , relatedBy: .equal, toItem: self.tabView, attribute: .centerX  , multiplier: 1, constant: 0)
         centerX.identifier = "TabView CenterX"
-        let top = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView, attribute: .top    , relatedBy: .equal, toItem: self.tabView, attribute: .top  , multiplier: 1, constant: -20)
+		let top = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .top    , relatedBy: .equal, toItem: self.tabView, attribute: .top  , multiplier: 1, constant: -20)
         top.identifier = "TabView Top"
-        let bottom = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView, attribute: .bottom    , relatedBy: .equal, toItem: self.tabView, attribute: .bottom  , multiplier: 1, constant: 10)
+		let bottom = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .bottom    , relatedBy: .equal, toItem: self.tabView, attribute: .bottom  , multiplier: 1, constant: 10)
         bottom.identifier = "TabView Bottom"
         let tabs = ["Internet", "URL Schemes", "Uniform Type Identifiers", "Applications"]
         
