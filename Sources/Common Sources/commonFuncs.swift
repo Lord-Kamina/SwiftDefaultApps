@@ -80,6 +80,70 @@ prefix func /(pattern:String) -> NSRegularExpression? {
 
 //// EXTENSIONS
 
+extension DispatchQueue {
+	static let labelPrefix = "io.zamzam.ZamzamKit"
+	static let database = DispatchQueue(label: "\(DispatchQueue.labelPrefix).database", qos: .utility)
+}
+
+public extension Collection {
+	
+	/// Element at the given index if it exists.
+	///
+	/// - Parameter index: index of element.
+	subscript(safe index: Index) -> Element? {
+		// http://www.vadimbulavin.com/handling-out-of-bounds-exception/
+		return indices.contains(index) ? self[index] : nil
+	}
+}
+
+public extension Collection where Iterator.Element == (String, Any) {
+	
+	/// Converts collection of objects to JSON string
+	var jsonString: String? {
+		guard JSONSerialization.isValidJSONObject(self),
+			let stringData = try? JSONSerialization.data(withJSONObject: self, options: []) else {
+				return nil
+		}
+		
+		return String(data: stringData, encoding: .utf8)
+	}
+}
+
+public extension Array where Element: Equatable {
+	
+	/// Array with all duplicates removed from it.
+	///
+	///     [1, 3, 3, 5, 7, 9].distinct // [1, 3, 5, 7, 9]
+	var distinct: [Element] {
+		// https://github.com/SwifterSwift/SwifterSwift
+		return reduce(into: [Element]()) {
+			guard !$0.contains($1) else { return }
+			$0.append($1)
+		}
+	}
+	
+	/// Remove all duplicates from array.
+	///
+	///     var array = [1, 3, 3, 5, 7, 9]
+	///     array.removeDuplicates()
+	///     array // [1, 3, 5, 7, 9]
+	mutating func removeDuplicates() {
+		self = distinct
+	}
+	
+	/// Removes the first occurance of the matched element.
+	///
+	///     var array = ["a", "b", "c", "d", "e", "a"]
+	///     array.remove("a")
+	///     array // ["b", "c", "d", "e", "a"]
+	///
+	/// - Parameter element: The element to remove from the array.
+	mutating func remove(_ element: Element) {
+		guard let index = firstIndex(of: element) else { return }
+		remove(at: index)
+	}
+}
+
 extension Bundle {
     /**
      Copies a bundle's package type, as specified in its Info.plist.

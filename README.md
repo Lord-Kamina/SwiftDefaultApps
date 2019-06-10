@@ -26,7 +26,7 @@ The user-interface should be pretty self-explanatory; but, there are some things
 
 - Using jakeheis' SwiftCLI 2.0 as a base for the CLI version located inside the bundle. (https://github.com/jakeheis/SwiftCLI)
 - Using AMTourky's DRYView canned views system (https://github.com/AMTourky/CocoaBindingDryView-ReusableViews/)
-- Using Basem Emara's SynchronizedArray (https://basememara.com/creating-thread-safe-arrays-in-swift/)
+- Using ZamzamKit's SynchronizedArray (https://github.com/ZamzamInc/ZamzamKit)
 - Icon made using the following resources:
 	- Brush, Ruler and Pencil designed by Freepik. (http://www.freepik.com/free-vector/background-of-back-to-school_769298.htm)
 	- Magnifying glass frame designed by Balintseby / Freepik (http://www.freepik.com/free-vector/realistic-magnifying-glass_789215.htm)
