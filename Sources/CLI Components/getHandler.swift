@@ -102,6 +102,6 @@ class ReadCommand: OptionCommand {
         
         if (nil != handler) {
             print(handler!)
-        } else { throw CLIError.error(("An incompatible combination was used, or no application is registered to handle \(arg)")) }
+		} else { throw CLIError.error(("SwiftDefaultApps ERROR: An incompatible combination was used, or no application is registered to handle \(arg)")) }
     }
 }

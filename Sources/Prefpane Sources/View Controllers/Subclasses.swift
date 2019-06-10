@@ -111,19 +111,9 @@ class SWDATabTemplate: DRYView {
             SWDAHandlersModel.setValue(nil, forKey: "allSchemes")
             self.setValue(nil, forKey: "contentArrayStore")
         }
-        else {
-            let alert = NSAlert()
-            alert.informativeText = LSWrappers.LSErrors(value: result).print(argument: (app: "Do Nothing", content: customNewScheme!.stringValue))
-            alert.messageText = "Error"
-            alert.icon = ControllersRef.appIcon
-            alert.alertStyle = .critical
-            alert.addButton(withTitle: "OK")
-            DispatchQueue.main.async {
-                alert.runModal()
-            }
+			try! displayAlert(error: result, arg1: "Do Nothing", arg2: customNewScheme!.stringValue)
             return
         }
-    }
     
     /** Identifies which tab the current instance belongs to. */
     var tabIndex: Int? = -1

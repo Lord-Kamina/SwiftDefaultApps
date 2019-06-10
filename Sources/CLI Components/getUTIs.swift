@@ -21,7 +21,7 @@ class GetUTIs: Command {
         if let output = copyDictionaryAsString(LSWrappers.UTType.copyAllUTIs().sorted(by: { $0.0 < $1.0 })) {
             print(output)
         }
-        else { throw CLIError.error("There was an error generating the list.") }
+        else { throw CLIError.error("SwiftDefaultApps ERROR: Couldn't generate list of UTIs") }
     }
     
 }

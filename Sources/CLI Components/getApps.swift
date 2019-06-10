@@ -22,6 +22,6 @@ class GetApps: Command {
         if let output = copyStringArrayAsString(LSWrappers.copyAllApps()) {
             print(output)
         }
-        else { throw CLIError.error("There was an error generating the list of applications.") }
+        else { throw CLIError.error("SwiftDefaultApps ERROR: Couldn't generate the list of installed applications.") }
     }
 }

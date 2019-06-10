@@ -105,26 +105,17 @@ internal class SWDATreeRow:NSObject {
                 let type = content.contentType
                 var status = OSStatus()
                 
-                if let bundleID = self.rowContent?.application?.appBundleID {
-                    status = (type == .URL) ? LSWrappers.Schemes.setDefaultHandler(contentName, bundleID) : LSWrappers.UTType.setDefaultHandler(contentName, bundleID, LSRolesMask(from:self.roleMask!))
-                    let alert = NSAlert()
-                    alert.informativeText = (status == 0) ? "Succesfully changed default handler for \(self.rowTitle) to \(self.rowContent?.application?.displayName ?? "Invalid App")" : LSWrappers.LSErrors(value: status).print(argument: (app: (self.rowContent?.application?.displayName)!, content: self.rowTitle))
-                    alert.icon = ControllersRef.appIcon
-                    alert.messageText = (status == 0) ? "Success" : "Error"
-                    alert.alertStyle = (status == 0) ? .informational : .critical
-                    alert.addButton(withTitle: "OK")
-                    DispatchQueue.main.async {
-                        if let parent = self.parentNode {
-                            for node in parent.children {
-                                node.willChangeValue(forKey: "isDefaultHandler")
-                                node.didChangeValue(forKey: "isDefaultHandler")
-                            }
-                        }
-                        DispatchQueue.main.async {
-                            alert.runModal()
-                        }
-                    }
-                }
+				if let bundleID = self.rowContent?.application?.appBundleID {
+					
+					status = (type == .URI) ? LSWrappers.Schemes.setDefaultHandler(contentName, bundleID) : LSWrappers.UTType.setDefaultHandler(contentName, bundleID, LSRolesMask(from:self.roleMask!))
+					try! displayAlert(error: status, arg1: (self.rowContent?.application?.displayName), arg2: self.rowTitle)
+					if let parent = self.parentNode {
+						for node in parent.children {
+							node.willChangeValue(forKey: "isDefaultHandler")
+							node.didChangeValue(forKey: "isDefaultHandler")
+						}
+					}
+				}
             }
         }
     }
@@ -149,27 +140,16 @@ internal class SWDATreeRow:NSObject {
                 let contentName = content.contentName
                 let type = content.contentType
                 var status = OSStatus()
-                if let bundleID = self.rowContent?.application?.appBundleID {
-                    
-                    status = (type == .URL) ? LSWrappers.Schemes.setDefaultHandler(contentName, bundleID) : LSWrappers.UTType.setDefaultHandler(contentName, bundleID, LSRolesMask(from:self.roleMask!))
-                    let alert = NSAlert()
-                    alert.informativeText = (status == 0) ? "Succesfully changed default handler for \(content.displayName) to \(self.rowTitle)" : LSWrappers.LSErrors(value: status).print(argument: (app: self.rowTitle, content: contentName))
-                    alert.icon = ControllersRef.appIcon
-                    alert.messageText = (status == 0) ? "Success" : "Error"
-                    alert.alertStyle = (status == 0) ? .informational : .critical
-                    alert.addButton(withTitle: "OK")
-                    DispatchQueue.main.async {
-                        if let parent = self.parentNode {
-                            for node in parent.children {
-                                node.willChangeValue(forKey: "isDefaultHandler")
-                                node.didChangeValue(forKey: "isDefaultHandler")
-                            }
-                        }
-                        DispatchQueue.main.async {
-                            alert.runModal()
-                        }
-                    }
-                }
+				if let bundleID = self.rowContent?.application?.appBundleID {
+					status = (type == .URI) ? LSWrappers.Schemes.setDefaultHandler(contentName, bundleID) : LSWrappers.UTType.setDefaultHandler(contentName, bundleID, LSRolesMask(from:self.roleMask!))
+					try! displayAlert(error: status, arg1: (self.rowContent?.application?.displayName), arg2: self.rowTitle)
+					if let parent = self.parentNode {
+						for node in parent.children {
+							node.willChangeValue(forKey: "isDefaultHandler")
+							node.didChangeValue(forKey: "isDefaultHandler")
+						}
+					}
+				}
                 else if (self.rowTitle == "Other...") {
                     let openpanel = NSOpenPanel()
                     openpanel.treatsFilePackagesAsDirectories = false

@@ -83,7 +83,8 @@ class SetCommand: OptionCommand {
             statusCode = kLSUnknownErr
             break
         }
-        if (statusCode == 0) { print("Default handler has succesfully changed to \(bundleID!).") }
-        else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))) }
+		do {
+		try displayAlert(error: statusCode, arg1: (bundleID != nil ? bundleID : inApplication), arg2: self.contentType!)
+		} catch { print(error) }
     }
 }

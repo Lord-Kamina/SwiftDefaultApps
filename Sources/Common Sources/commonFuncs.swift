@@ -80,6 +80,8 @@ prefix func /(pattern:String) -> NSRegularExpression? {
 
 //// EXTENSIONS
 
+extension String: Error {}
+
 extension DispatchQueue {
 	static let labelPrefix = "io.zamzam.ZamzamKit"
 	static let database = DispatchQueue(label: "\(DispatchQueue.labelPrefix).database", qos: .utility)
@@ -231,6 +233,75 @@ extension Dictionary
         }
     }
 #endif
+
+/** Determines whether the app is running in Prefpane or CLI form by checking the Main Bundle Identifier. */
+func areWeCLI() -> Bool {
+	return (Bundle.main.bundleIdentifier == nil)
+}
+
+/** Determines the URL for the location of the SwiftDefaultApps prefpane, is any. */
+func prefPaneLocation() -> URL? {
+	if let bundle = Bundle(identifier:"cl.fail.lordkamina.SwiftDefaultApps") {
+		return bundle.bundleURL	
+	}
+	let prefpaneSearchPaths: [URL] = FileManager.default.urls(for: FileManager.SearchPathDirectory.preferencePanesDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask)
+	for path in prefpaneSearchPaths {
+		if (FileManager.default.isExecutableFile(atPath: path.appendingPathComponent("SwiftDefaultApps.prefpane").absoluteURL.path) == true) {
+			return path.appendingPathComponent("SwiftDefaultApps.prefpane").absoluteURL
+		}
+	}	
+	return nil
+} 
+
+/** 
+	Display a modal alert
+	- Parameter error: A numeric value indicating the error code as per LSWrappers.LSErrors.
+	- Parameter arg1: String containing info pertaining to the error.
+	- Parameter arg2: String containing info pertaining to the error. 
+*/
+func displayAlert(error: OSStatus = Int32.min, arg1: String?, arg2: String?) throws {
+	if (error != 0 && (arg1 == nil || arg2 == nil)) { throw ("Arguments cannot be nil when displaying an error.") }
+	if (!areWeCLI()) {
+		let alert = NSAlert()
+		alert.icon = NSWorkspace.shared.icon(forFile: Bundle(identifier: "cl.fail.lordkamina.SwiftDefaultApps")!.bundlePath)
+		alert.addButton(withTitle: "OK")
+		if (error != Int32.min) {
+			alert.informativeText = LSWrappers.LSErrors(value: error).print(argument: (app: arg1, content: arg2))
+			
+			switch (Int(error)) {
+			case Int(errSecInvalidBundleInfo)..<0:
+				alert.messageText = "Error"
+				alert.alertStyle = .critical
+			case 0:
+				alert.messageText = "Success"
+				alert.alertStyle = .informational
+			case 1...:alert.messageText = "Success"
+			alert.alertStyle = .informational 
+			default:
+				alert.messageText = "Warning"
+				alert.alertStyle = .warning
+			}
+		}
+		else {
+			alert.informativeText = "SwiftDefaultApps ERROR: Called displayAlert() with an undefined error code."
+		}
+		DispatchQueue.main.async {
+			alert.runModal()
+		}
+	}
+	else {
+		if (error < 0) {
+			throw(LSWrappers.LSErrors.init(value: error).print(argument: (app: arg1, content: arg2)))
+		}
+		else if (error == 0) {
+			print(LSWrappers.LSErrors.init(value: error).print(argument: (app: arg1, content: arg2)))
+		}
+		else if (error == Int32.min) {
+			guard (arg1 != nil) else { throw("SwiftDefaultApps ERROR: Called displayAlert() with an undefined error code and message.") }
+			print(arg1!)
+		}
+	}
+}
 
 /** NSFont extensions to style the different kinds of row in the NSTreeView. */
 extension NSFont {

@@ -323,14 +323,34 @@ class LSWrappers {
      - Returns: `true` if the bundle identifier is registered with Launch Services as an application, `false` otherwise.
      */
     static func isAppInstalled (withBundleID: String) -> Bool {
-        let temp = withBundleID as CFString
-        
-        if (LSCopyApplicationURLsForBundleIdentifier(temp,nil)?.takeRetainedValue() as NSArray?) != nil {
-            return true
-        }
-        else {
-            return false
-        }
+		if (withBundleID == "cl.fail.lordkamina.ThisAppDoesNothing" && NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "cl.fail.lordkamina.ThisAppDoesNothing") == nil) {
+			if (!areWeCLI() && prefPaneLocation() == nil) { return false }
+			let appSearchPaths: [URL] = [ areWeCLI() ? Bundle.main.bundleURL : Bundle(url: prefPaneLocation()!)!.resourceURL! ] +
+				FileManager.default.urls(for: FileManager.SearchPathDirectory.applicationDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask)
+			var appPath: URL?
+			for path in appSearchPaths {
+				let appURL = path.appendingPathComponent("ThisAppDoesNothing.app").absoluteURL
+				if (FileManager.default.isExecutableFile(atPath: appURL.path) == true) {
+					appPath = appURL
+					break
+				}
+			}
+			guard appPath != nil else {
+				return false
+			}
+			do {
+				let ranApp = try NSWorkspace.shared.launchApplication(at: appPath!, options: [NSWorkspace.LaunchOptions.withoutAddingToRecents], configuration: [:])
+				if (ranApp.processIdentifier == -1) {
+					return false
+				}
+				else { return true }
+			}
+			catch {
+				return false
+			}
+		}
+		let retval: Bool = ((LSCopyApplicationURLsForBundleIdentifier(withBundleID as CFString,nil)?.takeRetainedValue() as NSArray?) != nil)
+		return retval
     }
     /**
      Performs a myriad of sanity checks on user input corresponding to a possible application. The main purpose of this function is to make sure we're passing a value as sane as possible to the setHandler functions.
