@@ -24,15 +24,14 @@ class SWDAMainPrefPane: NSPreferencePane {
     }
 /** Add the TabView Controller to the Main View and load content for the default tab. */
     override func mainViewDidLoad() {
-        super.mainViewDidLoad()
-        self.tabViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        ControllersRef.sharedInstance.theMainView.addSubview(self.tabViewController!.tabView)
-        defer {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-                ControllersRef.TabData.getContentArray(for: (ControllersRef.sharedInstance.tabViewController?.tabViewItems[0].view as! SWDATabTemplate), initialSetup: true)
-            }
-        }
-    }
+        	super.mainViewDidLoad()
+			self.tabViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+			ControllersRef.sharedInstance.theMainView.addSubview(self.tabViewController!.tabView)
+		}
+/** Initialize the content array when the pane is first opened. */
+	override func didSelect() {
+		ControllersRef.TabData.getContentArray(for: (ControllersRef.sharedInstance.tabViewController?.tabViewItems[0].view as! SWDATabTemplate), initialSetup: true)
+	}
     
 @IBAction func showAboutDialog(_ sender: NSButton) {
     let mainBundle = Bundle(identifier: "cl.fail.lordkamina.SwiftDefaultApps")
