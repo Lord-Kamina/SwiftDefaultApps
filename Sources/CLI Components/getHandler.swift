@@ -13,7 +13,7 @@ class ReadCommand: OptionCommand {
     
     let name = "getHandler"
     let signature = ""
-    let shortDescription = "Returns the default application registered for the URL scheme or <subtype> you specify."
+    let shortDescription = "Returns the default application registered for the URI Scheme or <subtype> you specify."
     
     private var kind: String = ""
     private var getAll = false;

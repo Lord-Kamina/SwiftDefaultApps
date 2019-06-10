@@ -21,7 +21,7 @@ internal protocol SWDAContentProtocol: class {
     var getExtensions: String { get }
 }
 
-/** The main class adopting SWDAContentProtocol, represents either a UTI or an URL; it's name, associated handlers, description in the case of URL Schemes and associated file-extensions in the case of UTIs.*/
+/** The main class adopting SWDAContentProtocol, represents either a UTI or an URL; it's name, associated handlers, description in the case of URI Schemes and associated file-extensions in the case of UTIs.*/
 class SWDAContentItem: NSObject, SWDAContentProtocol {
     
     /** Generates the NSTreeView displaying all the handlers associated to this content type. Results are sorted alphabetically, with the exception of the special "Other..." and "Do Nothing" entries. */
@@ -31,14 +31,14 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
         switch self.contentType {
         case .UTI:
             rolesArray = [.Viewer, .Editor, .Shell]
-        case .URL:
+        case .URI:
             rolesArray = [.Viewer]
         case .Application: return []
         }
         for role in rolesArray {
             var tempChildren: [SWDATreeRow] = []
             let category = SWDATreeRow(role.rawValue)
-            if let handlerAppNames = (self.contentType == .URL) ? LSWrappers.Schemes.copyAllHandlers(self.contentName, asPath:true) : LSWrappers.UTType.copyAllHandlers(self.contentName, inRoles: LSRolesMask(from: role), asPath:true) {
+            if let handlerAppNames = (self.contentType == .URI) ? LSWrappers.Schemes.copyAllHandlers(self.contentName, asPath:true) : LSWrappers.UTType.copyAllHandlers(self.contentName, inRoles: LSRolesMask(from: role), asPath:true) {
                 for app in handlerAppNames {
                     let handler = SWDAContentHandler(self, appName:app, role:role)
                     if let tempName = handler.application?.displayName {
@@ -97,7 +97,7 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
     
     func getDescription () -> String {
         switch self.contentType {
-        case .URL:
+        case .URI:
             if let contentDescription = LSWrappers.Schemes.getNameForScheme(self.contentName as String) {
                 self.setValue(contentDescription, forKey: "contentDescription")
                 return self.contentDescription
@@ -114,26 +114,26 @@ class SWDAContentItem: NSObject, SWDAContentProtocol {
     @objc var appIcon: NSImage? = nil
 }
 
-/** Our other NSObject subclass adopting the SWDAContentProtocol, represents an Application and all of its associated URL Schemes and UTIs. If an application declares no UTIs, it looks for File Extensions and displays the UTI preferred to represent that extension. */
+/** Our other NSObject subclass adopting the SWDAContentProtocol, represents an Application and all of its associated URI Schemes and UTIs. If an application declares no UTIs, it looks for File Extensions and displays the UTI preferred to represent that extension. */
 class SWDAApplicationItem: NSObject, SWDAContentProtocol {
     @objc lazy var contentHandlers: [SWDATreeRow] = {
         var allHandlers: [SWDATreeRow] = []
         if let bundle = self.appBundleInfo {
             let handledContent = bundle.handledContent
-            if (bundle.handlesURLs == true) {
-                let URLs = SWDATreeRow("URL Schemes")
+            if (bundle.handlesURIs == true) {
+                let URIs = SWDATreeRow("URI Schemes")
                 let roles = ["Viewer"]
                 for role in roles {
                     let row = SWDATreeRow(role)
-                    for handler in ((handledContent["URLs"]![role]!)!) {
+                    for handler in ((handledContent["URIs"]![role]!)!) {
                         let content = handler.content as! SWDAContentItem
                         let rowName = content.contentName
                         let child = SWDATreeRow(rowName, content: handler)
                         row.addChild(child)
                     }
-                    if (row.children.count > 0) { URLs.addChildren(of: row) }
+                    if (row.children.count > 0) { URIs.addChildren(of: row) }
                 }
-                allHandlers.append(URLs)
+                allHandlers.append(URIs)
             }
             if (bundle.handlesUTIs == true) {
                 let UTIs = SWDATreeRow("Uniform Type Identifiers")
@@ -165,7 +165,7 @@ class SWDAApplicationItem: NSObject, SWDAContentProtocol {
         self.contentType = .Application
         if let appInfo = SWDAApplicationInfo(app) {
             self.appBundleInfo = appInfo
-            guard (appInfo.handlesURLs == true || appInfo.handlesUTIs == true) else { return nil }
+            guard (appInfo.handlesURIs == true || appInfo.handlesUTIs == true) else { return nil }
         }
         else { return nil }
         super.init()

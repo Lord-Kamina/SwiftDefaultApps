@@ -95,7 +95,7 @@ internal class SWDATreeRow:NSObject {
             guard (self.rowContent != nil) else { return false }
             let contentType = self.rowContent?.content.contentType
             guard (contentType != .Application) else { return false }
-            let defaultHandler = (contentType == .URL) ? LSWrappers.Schemes.copyDefaultHandler(self.rowTitle, asPath: false) : LSWrappers.UTType.copyDefaultHandler(self.rowTitle, inRoles: LSRolesMask(from:self.roleMask!), asPath: false)
+            let defaultHandler = (contentType == .URI) ? LSWrappers.Schemes.copyDefaultHandler(self.rowTitle, asPath: false) : LSWrappers.UTType.copyDefaultHandler(self.rowTitle, inRoles: LSRolesMask(from:self.roleMask!), asPath: false)
             return self.rowContent?.application?.appBundleID?.lowercased() == defaultHandler?.lowercased()
         }
         set {
@@ -137,7 +137,7 @@ internal class SWDATreeRow:NSObject {
                 switch content.contentType {
                 case .Application: return false
                 case .UTI: handler = LSWrappers.UTType.copyDefaultHandler(content.contentName, inRoles:LSRolesMask(from:self.roleMask!), asPath: false)
-                case .URL: handler = LSWrappers.Schemes.copyDefaultHandler(content.contentName, asPath: false)
+                case .URI: handler = LSWrappers.Schemes.copyDefaultHandler(content.contentName, asPath: false)
                 }
                 guard (handler != nil) else { return false }
                 return (handler?.lowercased() == rowContent?.application?.appBundleID?.lowercased())

@@ -10,7 +10,7 @@
 import AppKit
 
 
-/** Represents information about an application and its associated URL Schemes and UTIs as an object. */
+/** Represents information about an application and its associated URI Schemes and UTIs as an object. */
 class SWDAApplicationInfo: NSObject {
     var displayName: String?
     var appPath: String?
@@ -25,7 +25,7 @@ class SWDAApplicationInfo: NSObject {
         var wrappedHandlers: [String: [String:[SWDAContentHandler]?]] = [:]
         if let handlers = LSWrappers.copySchemesAndUTIsForApp(self.appPath!) {
             
-            var wrappedURLHandlers: [String:[SWDAContentHandler]] = ["Viewer":[]]
+            var wrappedURIHandlers: [String:[SWDAContentHandler]] = ["Viewer":[]]
             var wrappedUTIHandlers: [String:[SWDAContentHandler]] = ["Viewer":[],"Editor":[],"Shell":[]]
             
             for handlerRole in handlers["UTIs"]! {
@@ -41,28 +41,28 @@ class SWDAApplicationInfo: NSObject {
                 }
             }
             
-            for handlerRole in handlers["URLs"]! {
+            for handlerRole in handlers["URIs"]! {
                 let role = String(describing:handlerRole.key)
                 var handler: SWDAContentHandler?
                 
                 for urlHandler in handlerRole.value {
                     
-                    handler = SWDAContentHandler(SWDAContentItem(type:SWDAContentType(rawValue:"URL")!, urlHandler), appName: self.appBundleID!, role: SourceListRoleTypes(rawValue:role)!)
+                    handler = SWDAContentHandler(SWDAContentItem(type:SWDAContentType(rawValue:"URI")!, urlHandler), appName: self.appBundleID!, role: SourceListRoleTypes(rawValue:role)!)
                     if let handler = handler {
-                        wrappedURLHandlers[role]!.append(handler)
+                        wrappedURIHandlers[role]!.append(handler)
                     }
                 }
             }
             wrappedHandlers["UTIs"] = wrappedUTIHandlers
-            wrappedHandlers["URLs"] = wrappedURLHandlers
+            wrappedHandlers["URIs"] = wrappedURIHandlers
             return wrappedHandlers
         }
-        else { return ["URLs":["Viewer":[]],"UTIs":["Editor":[], "Viewer":[], "Shell":[]]] }
+        else { return ["URIs":["Viewer":[]],"UTIs":["Editor":[], "Viewer":[], "Shell":[]]] }
     }()
     
-    /**  Only applications that handle at least one URL Scheme or UTI will show up in the "Applications" tab. */
-    lazy var handlesURLs: Bool = {
-        for role in (self.handledContent["URLs"]!).values {
+    /**  Only applications that handle at least one URI Scheme or UTI will show up in the "Applications" tab. */
+    lazy var handlesURIs: Bool = {
+        for role in (self.handledContent["URIs"]!).values {
             if !(role!.isEmpty) { return true }
         }
         return false

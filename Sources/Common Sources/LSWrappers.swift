@@ -23,12 +23,12 @@ class LSWrappers {
      - appNotFound: Application not found at given path/URL.
      - notAnApp: Found item at given path/URL but it is not an application bundle.
      - invalidFileURL: Trying to locate a file with a scheme different from file://
-     - invalidScheme: Supplied URL Scheme is malformed or contains invalid characters.
      - deletedApp: An application bundle was found, but it is currently in the Trash.
      - serverErr: Can't communicate with the Launch Services server.
      - incompatibleSys: A valid application bundle was found, but it is not compatible with the current version of macOS.
      - invalidBundle: The specified bundle does not have a valid CFBundlePackageType entry.
      - defaultErr: Unknown error, for cases not covered above.
+	- invalidScheme: Supplied URI Scheme is malformed or contains invalid characters.
      */
     internal enum LSErrors:OSStatus {
         case appNotFound = -10814
@@ -60,7 +60,7 @@ class LSWrappers {
          
          - Parameter argument:
          app: The application specified by the user, which could conceivably be a URL, a file-path, a bundle identifier or even a display name.
-         content: This is only used in the case the user supplies a malformed URL Scheme.
+         content: This is only used in the case the user supplies a malformed URI Scheme.
          
          - Returns: Human-readable error message specifying the problem, or unknown error if the problem is something not accounted for here.
          */
@@ -68,13 +68,13 @@ class LSWrappers {
             switch self {
             case .notAnApp: return "\(argument.app) is not a valid application."
             case .appNotFound: return "No application found for \(argument.app)"
-            case .invalidScheme: return "\(argument.content) is not a valid URL Scheme."
             case .invalidFileURL: return "\(argument.app) is not a valid filesystem URL."
             case .deletedApp: return "\(argument.app) cannot be accessed because it is in the Trash."
             case .serverErr: return "There was an error trying to communicate with the Launch Services Server."
             case .incompatibleSys: return "\(argument.app) is not compatible with the currently installed version of macOS."
             case .invalidBundle: return "\(argument.app) is not a valid Package."
             case .defaultErr: return "An unknown error has occurred."
+			case .invalidScheme: retValue += "\(argument.content!) is not a valid URI Scheme."
             }
         }
     }
@@ -174,12 +174,12 @@ class LSWrappers {
         }
     }
     /**
-     Groups functions dealing with URL Schemes.
+     Groups functions dealing with URI Schemes.
      */
     class Schemes {
         /**
-         Traverses Info dictionaries of possible handlers for an URL Scheme and gets a display name, if available.
-         - Parameter inScheme: An URL Scheme.
+         Traverses Info dictionaries of possible handlers for an URI Scheme and gets a display name, if available.
+         - Parameter inScheme: An URI Scheme.
          - Returns: A display name, or `nil` if none was found.
          */
         static func getNameForScheme (_ inScheme: String) -> String? {
@@ -207,8 +207,8 @@ class LSWrappers {
             return schemeName
         }
         /**
-         Creates a list of all currently registered URL Schemes and their default handler.
-         - Returns: A dictionary with URL Schemes as keys and bundle identifiers as values.
+         Creates a list of all currently registered URI Schemes and their default handler.
+         - Returns: A dictionary with URI Schemes as keys and bundle identifiers as values.
          */
         static func copySchemesAndHandlers() -> [String:String]? {
             var schemes_array: NSArray?
@@ -229,8 +229,8 @@ class LSWrappers {
             else { return nil }
         }
         /**
-         Copies the bundle identifier of the application currently registered as the default handler for a given URL Scheme.
-         - Parameter inScheme: A valid URL Scheme.
+         Copies the bundle identifier of the application currently registered as the default handler for a given URI Scheme.
+         - Parameter inScheme: A valid URI Scheme.
          - Returns: The Bundle identifier or POSIX path of an application, or nil if no valid handler was found.
          */
         static func copyDefaultHandler (_ inScheme:String, asPath: Bool = true) -> String? {
@@ -248,8 +248,8 @@ class LSWrappers {
             else { return nil }
         }
         /**
-         Creates a list of all currently registered handlers for a given URL Scheme.
-         - Parameter inScheme: A valid URL Scheme.
+         Creates a list of all currently registered handlers for a given URI Scheme.
+         - Parameter inScheme: A valid URI Scheme.
          - Returns: An array of strings corresponding to the Bundle identifiers or POSIX paths of all currently registered handlers, or nil of none were found.
          */
         static func copyAllHandlers (_ inScheme:String, asPath: Bool = true) -> Array<String>? {
@@ -270,11 +270,11 @@ class LSWrappers {
             return (handlers.isEmpty ? nil : handlers)
         }
         /**
-         Changes the default handler for a given URL Scheme.
+         Changes the default handler for a given URI Scheme.
          - See Also: `enum LSErrors` above.
          - Parameters:
-         - inScheme: A valid URL Scheme.
-         - inBundleID: A bundle-identifier referring to a valid application bundle. Specifying "None" will disable the default handler for that URL Scheme.
+         - inScheme: A valid URI Scheme.
+         - inBundleID: A bundle-identifier referring to a valid application bundle. Specifying "None" will disable the default handler for that URI Scheme.
          - Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
          */
         static func setDefaultHandler (_ inScheme: String, _ inBundleID: String) -> OSStatus {
@@ -416,13 +416,13 @@ class LSWrappers {
         return kLSUnknownErr
     }
     /**
-     Creates a list of UTIs and URL Schemes an application claims to be able to handle.
+     Creates a list of UTIs and URI Schemes an application claims to be able to handle.
      - Note: We perform little if any sanity checks in this function because it is not intended to be exposed to user input.
      - Parameter inApp: A POSIX path corresponding to a valid application bundle.
-     - Returns: A dictionary of sets containing a list of strings corresponding to URL Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
+     - Returns: A dictionary of sets containing a list of strings corresponding to URI Schemes and Uniform Type Identifiers listed in CFBundleURLTypes and CFBundleDocumentTypes respectively.
      */
     static func copySchemesAndUTIsForApp (_ inApp: String) -> [String:[String:Set<String>]]? {
-        var handledUrlSchemes: [String:Set<String>] = ["Viewer":[]]
+        var handledUriSchemes: [String:Set<String>] = ["Viewer":[]]
         var handledUTIs: [String:Set<String>] = ["Editor":[],"Viewer":[],"Shell":[]]
         var handledTypes: [String:[String:Set<String>]] = [:]
         if let infoDict = Bundle(path: inApp)?.infoDictionary {
@@ -430,7 +430,7 @@ class LSWrappers {
             if let schemeDicts = (infoDict["CFBundleURLTypes"] as? [[String:AnyObject]]) {
                 for schemeDict in schemeDicts {
                     if let schemesArray = (schemeDict["CFBundleURLSchemes"] as? [String]) {
-                        handledUrlSchemes["Viewer"]!.formUnion(schemesArray)
+                        handledUriSchemes["Viewer"]!.formUnion(schemesArray)
                     }
                 }
             }
@@ -455,7 +455,7 @@ class LSWrappers {
                 }
             }
         }
-        handledTypes["URLs"] = !handledUrlSchemes.isEmpty ? handledUrlSchemes : [:]
+        handledTypes["URIs"] = !handledUriSchemes.isEmpty ? handledUriSchemes : [:]
         handledTypes["UTIs"] = !handledUTIs.isEmpty ? handledUTIs : [:]
         return handledTypes
     }

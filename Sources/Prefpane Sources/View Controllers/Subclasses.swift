@@ -38,7 +38,7 @@ extension DRYView {
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowAppPath)
     }
     
-    /** The only tab where an "Add" button is at all meaningful is the URL Schemes. */
+    /** The only tab where an "Add" button is at all meaningful is the URI Schemes. */
     @objc var showAddRemoveBool: NSNumber {
         guard (self.currentTab != nil) else { return NSNumber(booleanLiteral:false) }
         return NSNumber(booleanLiteral:ControllersRef.TabData.shouldShowAddRemove)
@@ -103,7 +103,7 @@ class SWDATabTemplate: DRYView {
         }
     }
     
-    /** Add a custom URL Scheme and assign our dummy app as the default handler. In practice this should almost never be necessary but sometimes Launch Services move in mysterious ways. */
+    /** Add a custom URI Scheme and assign our dummy app as the default handler. In practice this should almost never be necessary but sometimes Launch Services move in mysterious ways. */
     @IBAction func addCustomScheme(_ sender: NSButton) {
         guard (customNewScheme?.stringValue != nil) && (customNewScheme?.stringValue != "") else { return }
         let result = LSWrappers.Schemes.setDefaultHandler(customNewScheme!.stringValue, "cl.fail.lordkamina.ThisAppDoesNothing")
@@ -216,7 +216,7 @@ class SWDATabViewController: NSTabViewController {
         top.identifier = "TabView Top"
 		let bottom = NSLayoutConstraint(item: ControllersRef.sharedInstance.theMainView!, attribute: .bottom    , relatedBy: .equal, toItem: self.tabView, attribute: .bottom  , multiplier: 1, constant: 10)
         bottom.identifier = "TabView Bottom"
-        let tabs = ["Internet", "URL Schemes", "Uniform Type Identifiers", "Applications"]
+        let tabs = ["Internet", "URI Schemes", "Uniform Type Identifiers", "Applications"]
         
         ControllersRef.sharedInstance.theMainView.addConstraints([centerX, leading, trailing, bottom, top])
         

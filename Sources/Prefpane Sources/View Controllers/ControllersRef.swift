@@ -27,14 +27,14 @@ final internal class ControllersRef: NSObject {
         /** Transform Tab names to abstract cases. */
         enum tabNames:String {
             case Internet
-            case URLs
+            case URIs
             case UTIs
             case Applications
             init? (value: String?) {
                 if let value = value {
                     switch value {
                     case "Internet": self = .Internet
-                    case "URL Schemes": self = .URLs
+                    case "URI Schemes": self = .URIs
                     case "Uniform Type Identifiers": self = .UTIs
                     case "Applications": self = .Applications
                     default: return nil
@@ -55,7 +55,7 @@ final internal class ControllersRef: NSObject {
             if let Tab = Tab {
                 switch Tab {
                 case "Internet": return "contentDescription"
-                case "URLs": return "contentName"
+                case "URIs": return "contentName"
                 case "UTIs": return "contentName"
                 case "Applications": return "displayName"
                 default: return "contentName"
@@ -71,7 +71,7 @@ final internal class ControllersRef: NSObject {
                 
                 switch Tab {
                 case "Internet": modelArray = #keyPath(SWDAHandlersModel.internetSchemes)
-                case "URLs": modelArray = #keyPath(SWDAHandlersModel.allSchemes)
+                case "URIs": modelArray = #keyPath(SWDAHandlersModel.allSchemes)
                 case "UTIs": modelArray = #keyPath(SWDAHandlersModel.allUTIs)
                 case "Applications": modelArray = #keyPath(SWDAHandlersModel.allApps)
                 default: modelArray = ""
@@ -102,7 +102,7 @@ final internal class ControllersRef: NSObject {
             if let Tab = Tab {
                 switch Tab {
                 case "Internet": return false
-                case "URLs": return true
+                case "URIs": return true
                 case "UTIs": return true
                 case "Applications": return true
                 default: return true
@@ -111,11 +111,11 @@ final internal class ControllersRef: NSObject {
             else { return true }
         }
         
-        /** Determines whether to show the "Add" button for custom URL Schemes. */
+        /** Determines whether to show the "Add" button for custom URI Schemes. */
         static var shouldShowAddRemove: Bool {
             if let Tab = Tab {
                 switch Tab {
-                case "URLs": return true
+                case "URIs": return true
                 default: return false
                 }
             }

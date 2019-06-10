@@ -16,7 +16,7 @@ enum SourceListRoleTypes:String {
 
 /** Represent possible kinds of NSObject conforming to SWDAContentProtocol */
 internal enum SWDAContentType: String {
-    case UTI, URL, Application
+    case UTI, URI, Application
 }
 
 
@@ -29,7 +29,7 @@ class SWDAHandlersModel: NSObject {
     
     /**
      This function is indirectly called by the contentArray variable in each SWDATabTemplate instance, it's responsible for asynchronously populating each model array with the appropriate content and sending messages for the ProgressAlert to update itself.
-     - Parameter view: The SWDATabView instance that requested the content. We pass this so we can then modify it's backing-store in a KVO-compliant manner via setValue(_:forKey:)
+     - Parameter view: The SWDATabView instance that requested the content. We pass this so we can then modify its backing-store in a KVO-compliant manner via setValue(_:forKey:)
      - Parameter type: String representation of what that SWDATabTemplate is asking for.
      - Parameter competionHandler: Code block to execute upon completion. In practice, what this does is invoke setValue(_:forKey:) with the resulting array as the value.
      */
@@ -54,16 +54,16 @@ class SWDAHandlersModel: NSObject {
         switch type {
         case "Internet":
             sourceItems = ["http","mailto","news","rss","ftp","im"]
-            sourceDescriptions = ["http":"Web Browser","mailto":"E-Mail","news":"News","rss":"RSS","ftp":"FTP","im":"Instant Messaging"] // In practice, these are just shortcuts for the most commonly-used URL Schemes.
+            sourceDescriptions = ["http":"Web Browser","mailto":"E-Mail","news":"News","rss":"RSS","ftp":"FTP","im":"Instant Messaging"] // In practice, these are just shortcuts for the most commonly-used URI Schemes.
             codeBlock = {
                 index in
                 let i = Int(index)
-                (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URL")!, sourceItems[i], sourceDescriptions[sourceItems[i]]))
+                (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i], sourceDescriptions[sourceItems[i]]))
                 DispatchQueue.main.async { [weak progressAlert] in
                     progressAlert?.increment(by: 1)
                 }
             }
-        case "URLs":
+        case "URIs":
             if let schemesHandlers = LSWrappers.Schemes.copySchemesAndHandlers() {
                 sourceItems = Array(schemesHandlers.keys)
             }
@@ -72,7 +72,7 @@ class SWDAHandlersModel: NSObject {
                 index in
                 let i = Int(index)
                 if sourceItems[i] != "*" {
-                    (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URL")!, sourceItems[i]))
+                    (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i]))
                 }
                 DispatchQueue.main.async { [weak progressAlert] in
                     progressAlert?.increment(by: 1)
