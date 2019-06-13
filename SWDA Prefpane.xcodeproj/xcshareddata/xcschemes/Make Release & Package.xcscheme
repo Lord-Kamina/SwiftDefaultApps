@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SWDA Prefpane.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_57"
+               BuildableName = "swda"
+               BlueprintName = "SwiftDefaultApps"
+               ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -74,7 +88,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10;cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/&#10;[ -d &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot; ] &amp;&amp; rm -Rv &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot;">
+               scriptText = "[ -d ~/Library/PreferencePanes/SwiftDefaultApps.prefpane ] &amp;&amp; rm -Rv ~/Library/PreferencePanes/SwiftDefaultApps.prefpane&#10;cp -Rf &quot;${CONFIGURATION_BUILD_DIR}/SwiftDefaultApps.prefpane&quot; ~/Library/PreferencePanes/&#10;[ -d &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot; ] &amp;&amp; rm -Rv &quot;${CONFIGURATION_BUILD_DIR}/ThisAppDoesNothing.app&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
