@@ -10,7 +10,7 @@
 import AppKit
 
 /** Abstract protocol adopted by SWDAContentItem and SWDAApplicationItem, which define the appropriate classes to populate the NSTableView with. */
-internal protocol SWDAContentProtocol: class {
+internal protocol SWDAContentProtocol: NSObject {
     var contentType: SWDAContentType { get set }
     var contentName: String { get set }
     var contentDescription: String { get set }
@@ -23,8 +23,8 @@ internal protocol SWDAContentProtocol: class {
 
 /** The main class adopting SWDAContentProtocol, represents either a UTI or an URL; it's name, associated handlers, description in the case of URI Schemes and associated file-extensions in the case of UTIs.*/
 class SWDAContentItem: NSObject, SWDAContentProtocol {
-    
     /** Generates the NSTreeView displaying all the handlers associated to this content type. Results are sorted alphabetically, with the exception of the special "Other..." and "Do Nothing" entries. */
+    
     @objc lazy var contentHandlers: [SWDATreeRow] = {
         var roles: [SWDATreeRow] = []
         var rolesArray: [SourceListRoleTypes] = []

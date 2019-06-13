@@ -43,22 +43,22 @@ class SWDAHandlersModel: NSObject {
         
         var codeBlock: (_ : Int) -> Void = { index in }
         var sourceItems: [String] = []
-        var sourceDescriptions: [String:String] = [:]
-        var outputItems: Any // By using the SynchronizedArray class, we can concurrently create the larger Content Arrays across multiple threads, in a safe manner.
-        if (type == "Applications") {
-            outputItems = SynchronizedArray<SWDAApplicationItem>()
-        }
-        else {
-            outputItems = SynchronizedArray<SWDAContentItem>()
-        }
-        switch type {
+        var sourceDescriptions: [String:String] = [:] 
+		// By using the SynchronizedArray class, we can concurrently c breyt6 te the larger Content Arrays across multiple threads, in a safe manner.
+		var outputItems: SynchronizedArray<SWDAContentProtocol>
+		if (type == "Applications") {
+			outputItems = SynchronizedArray([SWDAApplicationItem]())
+		} else {
+			outputItems = SynchronizedArray([SWDAContentItem]())
+		}
+		switch type {
         case "Internet":
             sourceItems = ["http","mailto","news","rss","ftp","im"]
             sourceDescriptions = ["http":"Web Browser","mailto":"E-Mail","news":"News","rss":"RSS","ftp":"FTP","im":"Instant Messaging"] // In practice, these are just shortcuts for the most commonly-used URI Schemes.
             codeBlock = {
                 index in
                 let i = Int(index)
-                (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i], sourceDescriptions[sourceItems[i]]))
+                outputItems.append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i], sourceDescriptions[sourceItems[i]]))
                 DispatchQueue.main.async { [weak progressAlert] in
                     progressAlert?.increment(by: 1)
                 }
@@ -72,7 +72,7 @@ class SWDAHandlersModel: NSObject {
                 index in
                 let i = Int(index)
                 if sourceItems[i] != "*" {
-                    (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i]))
+                    outputItems.append(SWDAContentItem(type:SWDAContentType(rawValue: "URI")!, sourceItems[i]))
                 }
                 DispatchQueue.main.async { [weak progressAlert] in
                     progressAlert?.increment(by: 1)
@@ -83,7 +83,7 @@ class SWDAHandlersModel: NSObject {
             codeBlock = {
                 index in
                 let i = Int(index)
-                (outputItems as! SynchronizedArray<SWDAContentItem>).append(SWDAContentItem(type:SWDAContentType(rawValue: "UTI")!, sourceItems[i]))
+                outputItems.append(SWDAContentItem(type:SWDAContentType(rawValue: "UTI")!, sourceItems[i]))
                 DispatchQueue.main.async { [weak progressAlert] in
                     progressAlert?.increment(by: 1)
                 }
@@ -97,12 +97,12 @@ class SWDAHandlersModel: NSObject {
                 index in
                 let i = Int(index)
                 let app = sourceItems[i]
-                if let wrappedApp = SWDAApplicationItem(app) {
-                    if ((outputItems as! SynchronizedArray<SWDAApplicationItem>).first() { $0.appBundleInfo?.appBundleID == wrappedApp.appBundleInfo?.appBundleID } == nil) { (outputItems as! SynchronizedArray<SWDAApplicationItem>).append(wrappedApp) }
-                }
-                DispatchQueue.main.async { [weak progressAlert] in
-                    progressAlert?.increment(by: 1)
-                }
+				if let wrappedApp = SWDAApplicationItem(app) {
+                    if (outputItems .first() { ($0 as! SWDAApplicationItem).appBundleInfo?.appBundleID == wrappedApp.appBundleInfo?.appBundleID } == nil) { outputItems.append(wrappedApp) }
+				}
+				DispatchQueue.main.async { [weak progressAlert] in
+					progressAlert?.increment(by: 1)
+				}
             }
         default: return
         }
@@ -112,13 +112,7 @@ class SWDAHandlersModel: NSObject {
             DispatchQueue.concurrentPerform(iterations: sourceItems.count, execute: codeBlock)
             
             DispatchQueue.main.sync { [weak window] in // Using sync for the finalization of the array ensures all the data is in place before reporting completion to the View Controller.
-                var finalArray: Array<AnyObject>
-                if (type == "Applications") {
-                    finalArray = (outputItems as! SynchronizedArray<SWDAApplicationItem>).innerArray
-                }
-                else {
-                    finalArray = (outputItems as! SynchronizedArray<SWDAContentItem>).innerArray
-                }
+				let finalArray = outputItems.innerArray
                 setValue(finalArray, forKey: ControllersRef.TabData.modelArrayKeyPath)
                 window?.endSheet(progressAlert.window)
                 completionHandler()
