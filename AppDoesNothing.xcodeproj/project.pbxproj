@@ -80,7 +80,6 @@
 					EBA7F0911E856279009EE061 = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -249,10 +248,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 33JDJVTQZT;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/DummyApp_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.ThisAppDoesNothing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -260,10 +263,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 33JDJVTQZT;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/DummyApp_Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = cl.fail.lordkamina.ThisAppDoesNothing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
