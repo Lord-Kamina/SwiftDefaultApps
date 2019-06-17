@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 1.1.3
-    - Date: 2018-11-15
+    - Version: 2.0.0
+    - Date: 2019-06-12
 
 ## Known Issues
 - 
@@ -44,6 +44,22 @@ The user-interface should be pretty self-explanatory; but, there are some things
 - Localizations
 
 # Release Notes
+
+## [2.0.0] - 2019-06-12
+  + ### Added
+    + Signed prefpane, CLI and Dummy apps.
+    + Both the prefpane and the CLI version will now automatically try to locate ThisAppDoesNothing.app if it does not appear registered with launch services.
+  + ### Changed
+    + SwiftCLI is now built and linked as a static library instead of a framework.
+    + Updated to Swift 5
+    + The content array is now populated by overriding `didSelect()` instead of relying on an arbitrary sleep timer.
+    + Changed the CLI app's name from lsreg to swda.
+    + Messages in both the CLI and Preference Pane are now a bit more verbose.
+    + Under the hood, folded most of the app's feedback to the user into a single `displayAlert()` function.
+  + ### Fixed
+  	+ Updated the Swift Package Manager manifest to version 5.
+  	+ Updated the SynchronizedArray code and corrected the attribution; Before, I had inadvertently credited an unrelated project with the same name.
+  	+ Various small optimizations, fixes and text corrections.
 
 ## [1.1.3] - 2018-11-15
   + ### Fixed
