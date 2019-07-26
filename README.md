@@ -34,8 +34,8 @@ The user-interface should be pretty self-explanatory; but, there are some things
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 2.0.0
-    - Date: 2019-06-12
+    - Version: 2.0.1
+    - Date: 2019-07-26
 
 ## Known Issues
 - 
@@ -44,6 +44,10 @@ The user-interface should be pretty self-explanatory; but, there are some things
 - Localizations
 
 # Release Notes
+
+## [2.0.1] - 2019-07-26
+  + ### Fixed
+  	+ CLI: Crash when displaying the results for setHandler with shortcuts such as internet, browser, email, etc.
 
 ## [2.0.0] - 2019-06-12
   + ### Added
