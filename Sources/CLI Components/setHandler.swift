@@ -68,7 +68,7 @@ class SetCommand: OptionCommand {
 	
 	func execute(arguments: CommandArguments) throws  {
 		statusCode = LSWrappers.getBundleID(self.inApplication, outBundleID: &bundleID)
-		guard (statusCode == 0) else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType!))) }
+		guard (statusCode == 0) else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType ?? self.kind))) }
 		switch(kind) {
 		case "UTI","URL":
 			if let contentString = self.contentType {
@@ -84,7 +84,7 @@ class SetCommand: OptionCommand {
 			break
 		}
 		do {
-			try displayAlert(error: statusCode, arg1: (bundleID != nil ? bundleID : inApplication), arg2: self.contentType!)
+			try displayAlert(error: statusCode, arg1: (bundleID != nil ? bundleID : inApplication), arg2: self.contentType ?? self.kind)
 		} catch { print(error) }
 	}
 }

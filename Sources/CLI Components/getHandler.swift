@@ -97,8 +97,7 @@ class ReadCommand: OptionCommand {
 			break
 		}
 		let arg: String
-		if (self.contentType != nil) { arg = self.contentType! }
-		else { arg = "<subtype>" }
+		arg = self.contentType ?? "<subtype>"
 		
 		if (nil != handler) {
 			print(handler!)
