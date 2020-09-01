@@ -22,6 +22,17 @@ brew install swiftdefaultappsprefpane
 
 then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
 
+:warning: The **Do Nothing** dummy app needs to be launched before to use it in the pref pane. For this, open a terminal and run the 2 following commands:
+
+```shell
+# Remove quanrantine flag
+xattr -r -d com.apple.quarantine /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+# Open the app
+open /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+```
+
+After these 2 steps, the **Do Nothing** app should work when you pick it up.
+
 ## Usage Notes
 
 This Preference pane will let you view and change default application associations for basically any URI Scheme and/or filetype in macOS.
