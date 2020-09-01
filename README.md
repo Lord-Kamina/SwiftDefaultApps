@@ -11,6 +11,17 @@ Feel free to contribute, comment or report issues at https://github.com/Lord-Kam
 	To install, double click on the .prefpane, and you will be prompted to install it.
 	To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the .prefpane file to the Trash.
 
+:warning: The **Do Nothing** dummy app needs to be launched before to use it in the pref pane. For this, open a terminal and run the 2 following commands:
+
+```shell
+# Remove quanrantine flag
+xattr -r -d com.apple.quarantine /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+# Open the app
+open /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+```
+
+After these 2 steps, the **Do Nothing** app should work when you pick it up.
+
 ## Usage Notes
 
 This Preference pane will let you view and change default application associations for basically any URI Scheme and/or filetype in macOS.
