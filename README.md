@@ -8,6 +8,7 @@ Feel free to contribute, comment or report issues at https://github.com/Lord-Kam
 
 ## Installing & Uninstalling
 	
+	Download latest release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases
 	To install, double click on the .prefpane, and you will be prompted to install it.
 	To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the .prefpane file to the Trash.
 
@@ -21,6 +22,12 @@ The user-interface should be pretty self-explanatory; but, there are some things
     - One of them is **"Do Nothing"**, what this does is register the item to be handled by a dummy application which basically does nothing. Its only function is being able to open any URI Scheme or UTI whatsoever, printing a line to the console (specifying whatever it was that launched it) and immediately quitting. By default this application should be located in the `Resources` folder inside the prefpane bundle; SwiftDefaultApps will, however, also look for it in the directory it is itself located in (for the CLI version) and every `Applications`folder in the computer.
     - The second is **"Other..."**, which obviously will allow you to select an application not in the list; with a caveat. In recent versions of macOS, the LaunchServices have become quite a bit smarter under the hood than they used to be. In practice, what this means is that although you can choose *any* application to handle anything, only valid associations will be preserved, as the LaunchServices is permanently looking for invalid or stale associations and removing them.
   - One final note: In the URI Schemes tab, you have the option of adding a custom URI Scheme (Removing them on demand is neither possible nor necessary, due to the same thing explained above). This options is provided for completeness' sake; you should virtually never need to use it, since Launch Services should be able to properly detect any valid URL Handlers. As a further cautionary note: If you add a custom URI Scheme when it is not needed, you may not be able to remove it except by uninstalling and reinstalling SwiftDefaultApps. Why? Because new schemes are by default associated to *"Do Nothing", which means Launch Services will always find a valid handler as long as SwiftDefaultApps is installed.
+
+### How to Find Out File UTI
+
+Run in your terminal the following command (replace my_song.mp3 by your file):
+
+`mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind my_song.mp3`
 
 ## Acknowledgments & Attributions
 
