@@ -359,7 +359,7 @@ class LSWrappers {
 	- Parameter outBundleID: This parameter is populated with a bundle identifier if a valid application bundle corresponding to the input parameter was found.
 	- Returns: A status-code. `0` on success, or a value corresponding to various possible errors.
 	*/
-	static func getBundleID (_ inParam: String, outBundleID: inout String? = nil) -> OSStatus {
+	static func getBundleID (_ inParam: String, outBundleID: inout String?) -> OSStatus {
 		var errCode = OSStatus()
 		let filemanager = FileManager.default
 		if (inParam == "None") { // None is a valid value for our dummy application.
