@@ -25,7 +25,7 @@
 	<key>NSPrefPaneIconFile</key>
 	<string></string>
 	<key>NSPrefPaneIconLabel</key>
-	<string>SwiftDefaultApps</string>
+	<string>Swift DefaultApps</string>
 	<key>NSPrincipalClass</key>
 	<string>SWDAMainPrefPane</string>
 </dict>
