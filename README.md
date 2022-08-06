@@ -14,6 +14,9 @@ Feel free to contribute, comment or report issues at https://github.com/Lord-Kam
 :warning: The **Do Nothing** dummy app needs to be launched before to use it in the pref pane. For this, open a terminal and run the 2 following commands:
 
 ```shell
+# If, when you installed the Preferences Pane, you only installed it for the current user,
+# replace /Library with ~/Library in the two commands below
+
 # Remove quanrantine flag
 xattr -r -d com.apple.quarantine /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
 # Open the app
