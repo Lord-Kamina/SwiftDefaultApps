@@ -11,6 +11,16 @@ Feel free to contribute, comment or report issues at https://github.com/Lord-Kam
 	Download latest release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases
 	To install, double click on the .prefpane, and you will be prompted to install it.
 	To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the .prefpane file to the Trash.
+	
+## Installting with brew
+
+run: 
+
+```bash
+brew install swiftdefaultappsprefpane
+``
+
+then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
 
 ## Usage Notes
 
