@@ -12,15 +12,15 @@ Feel free to contribute, comment or report issues at https://github.com/Lord-Kam
 	To install, double click on the .prefpane, and you will be prompted to install it.
 	To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the .prefpane file to the Trash.
 	
-## Installting with brew
+## Installing via Homebrew
 
-run: 
+Run: 
 
-```bash
+```shell
 brew install swiftdefaultappsprefpane
-``
+```
 
-then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
+Then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
 
 :warning: The **Do Nothing** dummy app needs to be launched before to use it in the pref pane. For this, open a terminal and run the 2 following commands:
 
