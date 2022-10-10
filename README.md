@@ -18,7 +18,7 @@ run:
 
 ```bash
 brew install swiftdefaultappsprefpane
-``
+```
 
 then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
 
