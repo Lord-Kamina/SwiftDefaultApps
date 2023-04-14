@@ -7,31 +7,34 @@ Additionally, I guess it was a good way to teach myself Swift.
 Feel free to contribute, comment or report issues at https://github.com/Lord-Kamina/SwiftDefaultApps.
 
 ## Installing & Uninstalling
-	
-	Download latest release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases
-	To install, double click on the .prefpane, and you will be prompted to install it.
-	To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the .prefpane file to the Trash.
-	
+
+* Download latest release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases
+* To install, double click on the `.prefpane`, and you will be prompted to install it.
+* To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the `.prefpane` file to the Trash.
+
 ## Installting with brew
 
-run: 
+Run:
 
 ```bash
 brew install swiftdefaultappsprefpane
-``
+```
 
-then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the system preferences and you find the app on the bottom of the icons.
+then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the System Preferences and you find the app on the bottom of the icons.
 
-:warning: The **Do Nothing** dummy app needs to be launched before to use it in the pref pane. For this, open a terminal and run the 2 following commands:
+## How to use the "Do Nothing" app
 
-```shell
-# If, when you installed the Preferences Pane, you only installed it for the current user,
-# replace /Library with ~/Library in the two commands below
+The **Do Nothing** dummy app needs to be launched before you can use it in the pref pane. For this, open a terminal and run the following commands:
+
+```bash
+appDir="/Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app"
+
+if ! [[ -d "$appDir" ]]; then appDir="$HOME/$appDir"; fi
 
 # Remove quanrantine flag
-xattr -r -d com.apple.quarantine /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+xattr -d com.apple.quarantine "$appDir"
 # Open the app
-open /Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app
+open "$appDir"
 ```
 
 After these 2 steps, the **Do Nothing** app should work when you pick it up.
@@ -65,13 +68,16 @@ Run in your terminal the following command (replace my_song.mp3 by your file):
 	- Gears designed by Freepik (http://www.freepik.com/free-vector/gray-background-of-gear_956712.htm)
 
 ## Current Version
-    - Version: 2.0.1
-    - Date: 2019-07-26
+
+- Version: 2.0.1
+- Date: 2019-07-26
 
 ## Known Issues
-- 
+
+See https://github.com/Lord-Kamina/SwiftDefaultApps/issues
 
 ## TO DO
+
 - Localizations
 
 # Release Notes
@@ -122,5 +128,3 @@ Run in your terminal the following command (replace my_song.mp3 by your file):
     + Initial release!
   + ### Changed
   + ### Fixed
-  
-  
