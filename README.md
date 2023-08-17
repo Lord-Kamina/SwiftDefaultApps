@@ -1,3 +1,6 @@
+ANNOUNCEMENT: I have recently noticed Apple has introduced replacements for the deprecated APIs used in this prefpane. As a result, slow as it may be, I plan to resume development. I will be taking PRs as well, if somebody wishes to contribute.
+========
+
 SwiftDefaultApps
 ========
 
