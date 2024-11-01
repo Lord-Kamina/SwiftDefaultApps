@@ -1,5 +1,13 @@
+# macOS
 .DS_Store
+.Trashes
+
+# Xcode
+Build/
 /.build
-/SwiftDefaultApps.xcodeproj/xcuserdata/Koji.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+# Project
+/SwiftDefaultApps.xcworkspace/xcuserdata
+/SwiftDefaultApps.xcodeproj/xcuserdata
 /SwiftDefaultApps CLI.xcodeproj/xcuserdata
 /AppDoesNothing.xcodeproj/xcuserdata
