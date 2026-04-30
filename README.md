@@ -32,7 +32,7 @@ The **Do Nothing** dummy app needs to be launched before you can use it in the p
 ```bash
 appDir="/Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app"
 
-if ! [[ -d "$appDir" ]]; then appDir="$HOME/$appDir"; fi
+if ! [[ -d "$appDir" ]]; then appDir="$HOME$appDir"; fi
 
 # Remove quanrantine flag
 xattr -d com.apple.quarantine "$appDir"
