@@ -59,6 +59,13 @@ Run in your terminal the following command (replace my_song.mp3 by your file):
 
 `mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind my_song.mp3`
 
+The CLI can also resolve a filename extension to its preferred UTI:
+
+```bash
+swda getHandler --extension 3mf
+swda setHandler --extension 3mf --app /Applications/YourApp.app
+```
+
 ## Acknowledgments & Attributions
 
 - Using jakeheis' SwiftCLI 2.0 as a base for the CLI version located inside the bundle. (https://github.com/jakeheis/SwiftCLI)

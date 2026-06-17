@@ -29,6 +29,10 @@ class ReadCommand: OptionCommand {
 			self.contentType = value
 			self.kind = "UTI"
 		}
+		options.add(keys: ["--extension", "--ext"], usage: "Return the default application for files with <extension>", valueSignature: "extension", group:"type") { [unowned self] (value) in
+			self.contentType = value
+			self.kind = "Extension"
+		}
 		options.add(keys: ["--URL"], usage: "Return the default application for <subtype>", valueSignature: "subtype", group:"type") { [unowned self] (value) in
 			self.contentType = value
 			self.kind = "URL"
@@ -68,20 +72,22 @@ class ReadCommand: OptionCommand {
 		
 		switch(kind,getAll) {
 			
-		case ("UTI",true),("URL",true):
+		case ("UTI",true),("Extension",true),("URL",true):
 			
 			if let contentString = self.contentType {
-				
-				handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes.copyAllHandlers(contentString) : LSWrappers.UTType.copyAllHandlers(contentString, inRoles: role)) )
+				let content = (kind == "Extension") ? LSWrappers.UTType.copyUTIForExtension(contentString) : contentString
+				guard let contentUTI = content else { throw CLIError.error("SwiftDefaultApps ERROR: Could not resolve \(contentString) to a UTI.") }
+				handler = copyStringArrayAsString( ((kind == "URL") ? LSWrappers.Schemes.copyAllHandlers(contentUTI) : LSWrappers.UTType.copyAllHandlers(contentUTI, inRoles: role)) )
 				
 			}
 			break
 			
-		case ("UTI",false),("URL",false):
+		case ("UTI",false),("Extension",false),("URL",false):
 			
 			if let contentString = self.contentType {
-				
-				handler = ((kind == "URL") ? LSWrappers.Schemes.copyDefaultHandler(contentString) : LSWrappers.UTType.copyDefaultHandler(contentString, inRoles: role))
+				let content = (kind == "Extension") ? LSWrappers.UTType.copyUTIForExtension(contentString) : contentString
+				guard let contentUTI = content else { throw CLIError.error("SwiftDefaultApps ERROR: Could not resolve \(contentString) to a UTI.") }
+				handler = ((kind == "URL") ? LSWrappers.Schemes.copyDefaultHandler(contentUTI) : LSWrappers.UTType.copyDefaultHandler(contentUTI, inRoles: role))
 			}
 			break
 		case ("http",Bool()),("mailto",Bool()),("ftp",Bool()),("rss",Bool()),("news",Bool()):
