@@ -59,6 +59,10 @@ Run in your terminal the following command (replace my_song.mp3 by your file):
 
 `mdls -name kMDItemContentType -name kMDItemContentTypeTree -name kMDItemKind my_song.mp3`
 
+## Related
+
+- [macOSDefaultApps](https://github.com/klabast/macOSDefaultApps) — an app and CLI for macOS 15 and later.
+
 ## Acknowledgments & Attributions
 
 - Using jakeheis' SwiftCLI 2.0 as a base for the CLI version located inside the bundle. (https://github.com/jakeheis/SwiftCLI)
