@@ -43,7 +43,7 @@ cd SwiftDefaultApps
 ./build.sh
 ```
 
-`build.sh` builds the pane for arm64 against a 12.0 deployment target, signs it with the first `Developer ID Application` identity in your keychain (falling back to an ad-hoc signature, which is sufficient for local use), and installs it into `~/Library/PreferencePanes`. Any previously installed version is moved to `backups/` rather than deleted.
+`build.sh` builds a universal binary (arm64 + x86_64), signs it with the first `Developer ID Application` identity in your keychain (falling back to an ad-hoc signature, which is sufficient for local use), and installs it into `~/Library/PreferencePanes`. Any previously installed version is moved to `backups/` rather than deleted.
 
 ```
 ./build.sh                 build, sign, install
@@ -51,14 +51,13 @@ cd SwiftDefaultApps
 ./build.sh --cli           also build the swda command line tool
 
 SIGN_ID="-"                force an ad-hoc signature
-ARCH="arm64 x86_64"        build a universal binary
+ARCH="arm64"               narrow the build (default: universal)
 DEPLOY_TARGET="12.0"       minimum macOS version
 ```
 
-Two things worth knowing when building this project on a current toolchain:
+One thing worth knowing when building this project: the `Packages/SwiftCLI-2.0.3` dependency has to be checked out at tag `2.0.3+swift5`. Tag `2.0.3` is Swift 3 code and fails to compile (`String.characters` was removed). `build.sh` fetches the correct tag automatically.
 
-- The `Packages/SwiftCLI-2.0.3` dependency has to be checked out at tag `2.0.3+swift5`. Tag `2.0.3` is Swift 3 code and fails to compile (`String.characters` was removed). `build.sh` fetches the correct tag automatically.
-- The Xcode projects declare `MACOSX_DEPLOYMENT_TARGET = 10.12`, which current Xcode rejects as below the supported range. `build.sh` overrides this on the command line instead of modifying the project files.
+The deployment target in the Xcode projects was raised from `10.12` to `12.0`, since `10.12` is below the range current Xcode accepts. No architecture settings were needed: the projects use `ARCHS_STANDARD`, which produces a universal binary on current toolchains by itself. The x86_64-only releases exist simply because they predate Apple Silicon.
 
 The deprecated LaunchServices calls the pane relies on (`LSSetDefaultHandlerForURLScheme`, `LSSetDefaultRoleHandlerForContentType`) and the private `_LSCopySchemesAndHandlerURLs` SPI were still functional when this was last verified; reading and writing handler associations both work.
 
