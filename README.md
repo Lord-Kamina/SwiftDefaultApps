@@ -25,6 +25,43 @@ brew install swiftdefaultappsprefpane
 
 then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the System Preferences and you find the app on the bottom of the icons.
 
+## Building from source (Apple Silicon)
+
+Releases published before Apple Silicon are `x86_64`-only. macOS hosts third-party preference panes in `legacyLoader-arm64`, and an arm64 process cannot load an x86_64 bundle — Rosetta translates whole processes, not individual plugins. On Apple Silicon such a build therefore never appears in System Settings at all: no error message, the pane is simply absent.
+
+To check what is installed:
+
+```bash
+lipo -info ~/Library/PreferencePanes/SwiftDefaultApps.prefpane/Contents/MacOS/SwiftDefaultApps
+```
+
+If that prints `x86_64`, rebuild it:
+
+```bash
+git clone https://github.com/Lord-Kamina/SwiftDefaultApps.git
+cd SwiftDefaultApps
+./build.sh
+```
+
+`build.sh` builds the pane for arm64 against a 12.0 deployment target, signs it with the first `Developer ID Application` identity in your keychain (falling back to an ad-hoc signature, which is sufficient for local use), and installs it into `~/Library/PreferencePanes`. Any previously installed version is moved to `backups/` rather than deleted.
+
+```
+./build.sh                 build, sign, install
+./build.sh --no-install    build and sign only
+./build.sh --cli           also build the swda command line tool
+
+SIGN_ID="-"                force an ad-hoc signature
+ARCH="arm64 x86_64"        build a universal binary
+DEPLOY_TARGET="12.0"       minimum macOS version
+```
+
+Two things worth knowing when building this project on a current toolchain:
+
+- The `Packages/SwiftCLI-2.0.3` dependency has to be checked out at tag `2.0.3+swift5`. Tag `2.0.3` is Swift 3 code and fails to compile (`String.characters` was removed). `build.sh` fetches the correct tag automatically.
+- The Xcode projects declare `MACOSX_DEPLOYMENT_TARGET = 10.12`, which current Xcode rejects as below the supported range. `build.sh` overrides this on the command line instead of modifying the project files.
+
+The deprecated LaunchServices calls the pane relies on (`LSSetDefaultHandlerForURLScheme`, `LSSetDefaultRoleHandlerForContentType`) and the private `_LSCopySchemesAndHandlerURLs` SPI were still functional when this was last verified; reading and writing handler associations both work.
+
 ## How to use the "Do Nothing" app
 
 The **Do Nothing** dummy app needs to be launched before you can use it in the pref pane. For this, open a terminal and run the following commands:
