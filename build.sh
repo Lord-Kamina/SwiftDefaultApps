@@ -14,7 +14,7 @@
 #
 # Environment overrides:
 #   SIGN_ID="..."              signing identity ("-" for ad-hoc)
-#   ARCH="arm64 x86_64"        build a universal binary
+#   ARCH="arm64"               narrow the build (default: universal)
 #   DEPLOY_TARGET="12.0"       minimum macOS version
 
 set -euo pipefail
@@ -29,7 +29,9 @@ SWIFTCLI_DIR="$REPO/Packages/SwiftCLI-2.0.3"
 SWIFTCLI_URL="https://github.com/Lord-Kamina/SwiftCLI.git"
 SWIFTCLI_TAG="2.0.3+swift5"
 
-ARCH="${ARCH:-arm64}"
+# Universal by default: an x86_64-only pane cannot be loaded by
+# legacyLoader-arm64, and an arm64-only one leaves Intel Macs out.
+ARCH="${ARCH:-arm64 x86_64}"
 DEPLOY_TARGET="${DEPLOY_TARGET:-12.0}"
 
 DO_INSTALL=1
