@@ -107,6 +107,16 @@ class LSWrappers {
 			else { return nil }
 		}
 		/**
+		Copies the preferred UTI for a file extension.
+		- Parameter inExtension: A filename extension, with or without a leading dot.
+		- Returns: The preferred Uniform Type Identifier for the extension, or nil.
+		*/
+		static func copyUTIForExtension(_ inExtension: String) -> String? {
+			let fileExtension = inExtension.trimmingCharacters(in: CharacterSet(charactersIn: "."))
+			guard (fileExtension.isEmpty == false) else { return nil }
+			return UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)?.takeRetainedValue() as String?
+		}
+		/**
 		Copies the bundle identifier of the application currently registered as the default handler for a given UTI.
 		- Parameter inUTI: A Uniform Type Identifier.
 		- Parameter inRoles: The specified Launch Services Role to query. Can correspond to "Editor", "Viewer", "Shell" or "None". By default, we are only concerned with viewers and editors (in that order).

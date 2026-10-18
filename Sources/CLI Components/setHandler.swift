@@ -30,6 +30,10 @@ class SetCommand: OptionCommand {
 			self.contentType = value
 			self.kind = "UTI"
 		}
+		options.add(keys: ["--extension", "--ext"], usage: "Change the default application for files with <extension>", valueSignature: "extension", group:"type") { [unowned self] (value) in
+			self.contentType = value
+			self.kind = "Extension"
+		}
 		options.add(keys: ["--URL"], usage: "Change the default application for <subtype>", valueSignature: "subtype", group:"type") { [unowned self] (value) in
 			self.contentType = value
 			self.kind = "URL"
@@ -70,9 +74,12 @@ class SetCommand: OptionCommand {
 		statusCode = LSWrappers.getBundleID(self.inApplication, outBundleID: &bundleID)
 		guard (statusCode == 0) else { throw CLIError.error(LSWrappers.LSErrors.init(value: statusCode).print(argument: (app: inApplication, content: self.contentType ?? self.kind))) }
 		switch(kind) {
-		case "UTI","URL":
+		case "UTI","Extension","URL":
 			if let contentString = self.contentType {
-				statusCode = ((kind == "URL") ? LSWrappers.Schemes.setDefaultHandler(contentString, bundleID!) : LSWrappers.UTType.setDefaultHandler(contentString, bundleID!, self.role))
+				let content = (kind == "Extension") ? LSWrappers.UTType.copyUTIForExtension(contentString) : contentString
+				guard let contentUTI = content else { throw CLIError.error("SwiftDefaultApps ERROR: Could not resolve \(contentString) to a UTI.") }
+				statusCode = ((kind == "URL") ? LSWrappers.Schemes.setDefaultHandler(contentUTI, bundleID!) : LSWrappers.UTType.setDefaultHandler(contentUTI, bundleID!, self.role))
+				self.contentType = contentUTI
 			}
 			break
 		case "http","mailto","ftp","rss","news":
