@@ -1,41 +1,29 @@
-ANNOUNCEMENT: I have recently noticed Apple has introduced replacements for the deprecated APIs used in this prefpane. As a result, slow as it may be, I plan to resume development. I will be taking PRs as well, if somebody wishes to contribute.
+ANNOUNCEMENT: I have recently noticed Apple has introduced replacements for the deprecated APIs used in this app. As a result, slow as it may be, I plan to resume development. I will be taking PRs as well, if somebody wishes to contribute.
 ========
 
 SwiftDefaultApps
 ========
 
-This Preference pane is chiefly intended to be a modern replacement for the amazing RCDefaultApp developed way back when by Carl Lindberg, which stopped working in 10.12 due to deprecation of ObjC Garbage collection.
+SwiftDefaultApps is a macOS app for viewing and changing the default applications for URL schemes and file types. It is chiefly intended to be a modern replacement for the amazing RCDefaultApp developed way back when by Carl Lindberg, which stopped working in 10.12 due to deprecation of ObjC Garbage collection.
 Additionally, I guess it was a good way to teach myself Swift.
 
 Feel free to contribute, comment or report issues at https://github.com/Lord-Kamina/SwiftDefaultApps.
 
 ## Installing & Uninstalling
 
-* Download latest release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases
-* To install, double click on the `.prefpane`, and you will be prompted to install it.
-* To uninstall, simply Ctrl+Click on the Prefpane icon and remove it, or move the `.prefpane` file to the Trash.
+* Download the latest app release from https://github.com/Lord-Kamina/SwiftDefaultApps/releases.
+* Drag `SwiftDefaultApps.app` to Applications, then open it from Finder or Spotlight.
+* To uninstall, quit SwiftDefaultApps and move the app to the Trash.
 
-## Installting with brew
+The app requires macOS 13 or later and supports both Apple Silicon and Intel Macs.
 
-Run:
+## Installing with brew
 
-```bash
-brew install swiftdefaultappsprefpane
-```
+The Homebrew formula needs updating for the standalone app. Until then, install the app manually or build it from source.
 
-then use Spotlight to open the `SwiftDefaultApps.prefpane`. It will open the System Preferences and you find the app on the bottom of the icons.
+## Building from source
 
-## Building from source (Apple Silicon)
-
-Releases published before Apple Silicon are `x86_64`-only. macOS hosts third-party preference panes in `legacyLoader-arm64`, and an arm64 process cannot load an x86_64 bundle — Rosetta translates whole processes, not individual plugins. On Apple Silicon such a build therefore never appears in System Settings at all: no error message, the pane is simply absent.
-
-To check what is installed:
-
-```bash
-lipo -info ~/Library/PreferencePanes/SwiftDefaultApps.prefpane/Contents/MacOS/SwiftDefaultApps
-```
-
-If that prints `x86_64`, rebuild it:
+With Xcode 15.2 or later installed:
 
 ```bash
 git clone https://github.com/Lord-Kamina/SwiftDefaultApps.git
@@ -43,7 +31,7 @@ cd SwiftDefaultApps
 ./build.sh
 ```
 
-`build.sh` builds a universal binary (arm64 + x86_64), signs it with the first `Developer ID Application` identity in your keychain (falling back to an ad-hoc signature, which is sufficient for local use), and installs it into `~/Library/PreferencePanes`. Any previously installed version is moved to `backups/` rather than deleted.
+`build.sh` builds a universal app (arm64 + x86_64), signs the embedded `ThisAppDoesNothing.app` and then the main app with hardened runtime, and verifies the signature. It uses the first `Developer ID Application` identity in your keychain, falling back to an ad-hoc signature for local use. Before installing into `~/Applications`, it quits a running SwiftDefaultApps instance and moves any previously installed copy to `backups/`.
 
 ```
 ./build.sh                 build, sign, install
@@ -52,40 +40,43 @@ cd SwiftDefaultApps
 
 SIGN_ID="-"                force an ad-hoc signature
 ARCH="arm64"               narrow the build (default: universal)
-DEPLOY_TARGET="12.0"       minimum macOS version
+DEPLOY_TARGET="13.0"       minimum macOS version
 ```
 
-One thing worth knowing when building this project: the `Packages/SwiftCLI-2.0.3` dependency has to be checked out at tag `2.0.3+swift5`. Tag `2.0.3` is Swift 3 code and fails to compile (`String.characters` was removed). `build.sh` fetches the correct tag automatically.
+The app is built at `build/Release/SwiftDefaultApps.app`; with `--cli`, the command line tool is built at `build/Release/swda`. You can also open `SwiftDefaultApps.xcworkspace` or `SwiftDefaultApps.xcodeproj` in Xcode and run the **Build App** scheme.
 
-The deployment target in the Xcode projects was raised from `10.12` to `12.0`, since `10.12` is below the range current Xcode accepts. No architecture settings were needed: the projects use `ARCHS_STANDARD`, which produces a universal binary on current toolchains by itself. The x86_64-only releases exist simply because they predate Apple Silicon.
+The CLI dependency at `Packages/SwiftCLI-2.0.3` must use tag `2.0.3+swift5`. Tag `2.0.3` is Swift 3 code and fails to compile (`String.characters` was removed). `build.sh` fetches the correct tag if the dependency is missing.
 
-The deprecated LaunchServices calls the pane relies on (`LSSetDefaultHandlerForURLScheme`, `LSSetDefaultRoleHandlerForContentType`) and the private `_LSCopySchemesAndHandlerURLs` SPI were still functional when this was last verified; reading and writing handler associations both work.
+### App UI
+
+Use the segmented picker in the window toolbar to switch between Internet, URL Schemes, File Types and Applications. The resizable window has a searchable list on the left and the selected item's handlers on the right. Closing the window quits the app; **About SwiftDefaultApps** is in the app menu.
+
+Search matches names, identifiers, bundle IDs and file extensions (type `.md` on the File Types tab to find Markdown), and ↑/↓ move through the results without leaving the search field. File Types can be grouped by kind or by the application that currently opens them; click a group header to collapse it, Option-click to collapse or expand every group. The sidebar is an `NSOutlineView`, so lists with thousands of types stay responsive.
+
+The Applications tab lists every scheme and type an application declares. Launch Services cannot clear a default, only replace it, so rows the application already owns offer a menu to hand them to another application, and the other rows offer "Make Default".
+
+Some changes, such as the default web browser, only take effect once you confirm a system prompt. The app waits for Launch Services to report the new handler (or for the prompt to be declined) and shows the handler actually in place.
+
+The app uses the deprecated Launch Services calls `LSSetDefaultHandlerForURLScheme` and `LSSetDefaultRoleHandlerForContentType`, and the private `_LSCopySchemesAndHandlerURLs` SPI, to read and write handler associations.
 
 ## How to use the "Do Nothing" app
 
-The **Do Nothing** dummy app needs to be launched before you can use it in the pref pane. For this, open a terminal and run the following commands:
+SwiftDefaultApps automatically locates and launches the embedded **Do Nothing** app when it needs to register it with Launch Services. To launch it manually after installing with `build.sh`, run:
 
 ```bash
-appDir="/Library/PreferencePanes/SwiftDefaultApps.prefPane/Contents/Resources/ThisAppDoesNothing.app"
-
-if ! [[ -d "$appDir" ]]; then appDir="$HOME/$appDir"; fi
-
-# Remove quanrantine flag
-xattr -d com.apple.quarantine "$appDir"
-# Open the app
-open "$appDir"
+open "$HOME/Applications/SwiftDefaultApps.app/Contents/Resources/ThisAppDoesNothing.app"
 ```
 
-After these 2 steps, the **Do Nothing** app should work when you pick it up.
+If you installed into `/Applications`, use `/Applications/SwiftDefaultApps.app/Contents/Resources/ThisAppDoesNothing.app` instead.
 
 ## Usage Notes
 
-This Preference pane will let you view and change default application associations for basically any URI Scheme and/or filetype in macOS.
+SwiftDefaultApps lets you view and change default application associations for basically any URI Scheme and/or filetype in macOS.
 The user-interface should be pretty self-explanatory; but, there are some things that might require an explanation:
 	
 - Selecting any URI Scheme or File type (always represented by a UTI), will give you a list of all valid applications for each LaunchServices role. This data is generated by LaunchServices itself.
   - There's two additional options: 
-    - One of them is **"Do Nothing"**, what this does is register the item to be handled by a dummy application which basically does nothing. Its only function is being able to open any URI Scheme or UTI whatsoever, printing a line to the console (specifying whatever it was that launched it) and immediately quitting. By default this application should be located in the `Resources` folder inside the prefpane bundle; SwiftDefaultApps will, however, also look for it in the directory it is itself located in (for the CLI version) and every `Applications`folder in the computer.
+    - One of them is **"Do Nothing"**, what this does is register the item to be handled by a dummy application which basically does nothing. Its only function is being able to open any URI Scheme or UTI whatsoever, printing a line to the console (specifying whatever it was that launched it) and immediately quitting. By default this application should be located in the `Resources` folder inside the app bundle; SwiftDefaultApps will, however, also look for it in the directory it is itself located in (for the CLI version) and every `Applications`folder in the computer.
     - The second is **"Other..."**, which obviously will allow you to select an application not in the list; with a caveat. In recent versions of macOS, the LaunchServices have become quite a bit smarter under the hood than they used to be. In practice, what this means is that although you can choose *any* application to handle anything, only valid associations will be preserved, as the LaunchServices is permanently looking for invalid or stale associations and removing them.
   - One final note: In the URI Schemes tab, you have the option of adding a custom URI Scheme (Removing them on demand is neither possible nor necessary, due to the same thing explained above). This options is provided for completeness' sake; you should virtually never need to use it, since Launch Services should be able to properly detect any valid URL Handlers. As a further cautionary note: If you add a custom URI Scheme when it is not needed, you may not be able to remove it except by uninstalling and reinstalling SwiftDefaultApps. Why? Because new schemes are by default associated to *"Do Nothing", which means Launch Services will always find a valid handler as long as SwiftDefaultApps is installed.
 

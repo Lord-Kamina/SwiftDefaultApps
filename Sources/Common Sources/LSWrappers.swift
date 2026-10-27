@@ -324,8 +324,7 @@ class LSWrappers {
 	*/
 	static func isAppInstalled (withBundleID: String) -> Bool {
 		if (withBundleID == "cl.fail.lordkamina.ThisAppDoesNothing" && NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "cl.fail.lordkamina.ThisAppDoesNothing") == nil) {
-			if (!areWeCLI() && prefPaneLocation() == nil) { return false }
-			let appSearchPaths: [URL] = [ areWeCLI() ? Bundle.main.bundleURL : Bundle(url: prefPaneLocation()!)!.resourceURL! ] +
+			let appSearchPaths: [URL] = [ areWeCLI() ? Bundle.main.bundleURL : Bundle.main.resourceURL! ] +
 				FileManager.default.urls(for: FileManager.SearchPathDirectory.applicationDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask)
 			var appPath: URL?
 			for path in appSearchPaths {

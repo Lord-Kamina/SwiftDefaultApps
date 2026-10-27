@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 #
-# Build SwiftDefaultApps as an arm64 (or universal) preference pane, sign it
-# and install it into ~/Library/PreferencePanes.
-#
-# Why this exists: releases built before Apple Silicon are x86_64-only. System
-# Settings hosts third-party panes in legacyLoader-arm64, and an arm64 process
-# cannot load an x86_64 bundle, so those panes silently fail to appear. Building
-# for arm64 fixes that.
+# Build, sign and install SwiftDefaultApps into ~/Applications.
 #
 #   ./build.sh                 build, sign, install
 #   ./build.sh --no-install    build and sign only
@@ -15,24 +9,22 @@
 # Environment overrides:
 #   SIGN_ID="..."              signing identity ("-" for ad-hoc)
 #   ARCH="arm64"               narrow the build (default: universal)
-#   DEPLOY_TARGET="12.0"       minimum macOS version
+#   DEPLOY_TARGET="13.0"       minimum macOS version
 
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="$REPO/build/Release"
 BACKUP_DIR="$REPO/backups"
-INSTALL_DIR="$HOME/Library/PreferencePanes"
-PANE="SwiftDefaultApps.prefpane"
+INSTALL_DIR="$HOME/Applications"
+APP="SwiftDefaultApps.app"
 
 SWIFTCLI_DIR="$REPO/Packages/SwiftCLI-2.0.3"
 SWIFTCLI_URL="https://github.com/Lord-Kamina/SwiftCLI.git"
 SWIFTCLI_TAG="2.0.3+swift5"
 
-# Universal by default: an x86_64-only pane cannot be loaded by
-# legacyLoader-arm64, and an arm64-only one leaves Intel Macs out.
 ARCH="${ARCH:-arm64 x86_64}"
-DEPLOY_TARGET="${DEPLOY_TARGET:-12.0}"
+DEPLOY_TARGET="${DEPLOY_TARGET:-13.0}"
 
 DO_INSTALL=1
 DO_CLI=0
@@ -40,7 +32,7 @@ for arg in "$@"; do
 	case "$arg" in
 		--no-install) DO_INSTALL=0 ;;
 		--cli)        DO_CLI=1 ;;
-		-h|--help)    sed -n '2,20p' "${BASH_SOURCE[0]}"; exit 0 ;;
+		-h|--help)    sed -n '2,12p' "${BASH_SOURCE[0]}"; exit 0 ;;
 		*) echo "Unknown option: $arg" >&2; exit 2 ;;
 	esac
 done
@@ -87,16 +79,16 @@ TS_FLAG=(--timestamp)
 [ "$SIGN_ID" = "-" ] && TS_FLAG=(--timestamp=none)
 
 # ---------------------------------------------------------------------- build
-step "Building prefpane ($ARCH, deployment target $DEPLOY_TARGET)"
-xcodebuild -project "$REPO/SWDA Prefpane.xcodeproj" \
+step "Building app ($ARCH, deployment target $DEPLOY_TARGET)"
+xcodebuild -project "$REPO/SwiftDefaultApps.xcodeproj" \
 	-target SwiftDefaultApps \
 	-configuration Release \
 	ARCHS="$ARCH" ONLY_ACTIVE_ARCH=NO \
 	MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" \
 	CODE_SIGN_IDENTITY="-" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="" \
-	2>&1 | grep -E '^/.*(error|warning):|^\*\* BUILD' || true
+	2>&1 | sed -nE '/^\/.*(error|warning):|^\*\* BUILD/p'
 
-[ -d "$BUILD_DIR/$PANE" ] || { echo "build product missing: $BUILD_DIR/$PANE" >&2; exit 1; }
+[ -d "$BUILD_DIR/$APP" ] || { echo "build product missing: $BUILD_DIR/$APP" >&2; exit 1; }
 
 if [ "$DO_CLI" = 1 ]; then
 	step "Building CLI"
@@ -105,8 +97,8 @@ if [ "$DO_CLI" = 1 ]; then
 		-configuration Release \
 		ARCHS="$ARCH" ONLY_ACTIVE_ARCH=NO \
 		MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" \
-		CODE_SIGN_IDENTITY="-" CODE_SIGNING_REQUIRED=NO DEVELOPMENT_TEAM="" \
-		2>&1 | grep -E '^/.*error:|^\*\* BUILD' || true
+		CODE_SIGN_IDENTITY="-" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="" \
+		2>&1 | sed -nE '/^\/.*(error|warning):|^\*\* BUILD/p'
 	echo "CLI built at: $BUILD_DIR/swda"
 fi
 
@@ -114,38 +106,38 @@ fi
 # Nested bundles must be signed before the enclosing one.
 step "Signing"
 codesign --force --options runtime "${TS_FLAG[@]}" --sign "$SIGN_ID" \
-	"$BUILD_DIR/$PANE/Contents/Resources/ThisAppDoesNothing.app"
+	"$BUILD_DIR/$APP/Contents/Resources/ThisAppDoesNothing.app"
 codesign --force --options runtime "${TS_FLAG[@]}" --sign "$SIGN_ID" \
-	"$BUILD_DIR/$PANE"
+	"$BUILD_DIR/$APP"
 
-codesign --verify --deep --strict "$BUILD_DIR/$PANE" && echo "signature verified"
-codesign -dv "$BUILD_DIR/$PANE" 2>&1 | grep -E '^(Identifier|Format)='
-lipo -info "$BUILD_DIR/$PANE/Contents/MacOS/SwiftDefaultApps"
+codesign --verify --deep --strict "$BUILD_DIR/$APP" && echo "signature verified"
+codesign -dv "$BUILD_DIR/$APP" 2>&1 | grep -E '^(Identifier|Format)='
+lipo -info "$BUILD_DIR/$APP/Contents/MacOS/SwiftDefaultApps"
 
 if [ "$DO_INSTALL" = 0 ]; then
 	step "Done (not installed)"
-	echo "$BUILD_DIR/$PANE"
+	echo "$BUILD_DIR/$APP"
 	exit 0
 fi
 
 # -------------------------------------------------------------------- install
-# legacyLoader keeps the installed bundle open, so copying over a pane that is
-# currently loaded would overwrite a bundle in use.
-step "Quitting System Settings"
-osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
-sleep 2
+step "Quitting SwiftDefaultApps"
+if pgrep -x SwiftDefaultApps >/dev/null; then
+	osascript -e 'quit app id "cl.fail.lordkamina.SwiftDefaultApps"'
+	sleep 2
+fi
 
 step "Installing into $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR" "$BACKUP_DIR"
-if [ -e "$INSTALL_DIR/$PANE" ]; then
-	BAK="$BACKUP_DIR/$PANE.backup-$(date +%Y%m%d-%H%M%S)"
-	mv "$INSTALL_DIR/$PANE" "$BAK"
+if [ -e "$INSTALL_DIR/$APP" ]; then
+	BAK="$BACKUP_DIR/$APP.backup-$(date +%Y%m%d-%H%M%S)"
+	mv "$INSTALL_DIR/$APP" "$BAK"
 	echo "previous version kept at: $BAK"
 fi
-cp -R "$BUILD_DIR/$PANE" "$INSTALL_DIR/$PANE"
+cp -R "$BUILD_DIR/$APP" "$INSTALL_DIR/$APP"
 
 step "Verifying"
-lipo -info "$INSTALL_DIR/$PANE/Contents/MacOS/SwiftDefaultApps"
-codesign --verify --strict "$INSTALL_DIR/$PANE" && echo "signature ok"
+lipo -info "$INSTALL_DIR/$APP/Contents/MacOS/SwiftDefaultApps"
+codesign --verify --deep --strict "$INSTALL_DIR/$APP" && echo "signature ok"
 echo
-echo "Installed. Open with:  open \"$INSTALL_DIR/$PANE\""
+echo "Installed. Open with:  open \"$INSTALL_DIR/$APP\""

@@ -13,20 +13,12 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>BNDL</string>
+	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>334</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 Gregorio Litenstein Goldzweig. All rights reserved.</string>
-	<key>NSMainNibFile</key>
-	<string>SWDAPrefpaneMain</string>
-	<key>NSPrefPaneIconFile</key>
-	<string></string>
-	<key>NSPrefPaneIconLabel</key>
-	<string>SwiftDefaultApps</string>
-	<key>NSPrincipalClass</key>
-	<string>SWDAMainPrefPane</string>
 </dict>
 </plist>

@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
-            BuildableName = "SwiftDefaultApps.prefPane"
+            BlueprintIdentifier = "OBJ_57"
+            BuildableName = "swda"
             BlueprintName = "SwiftDefaultApps"
-            ReferencedContainer = "container:SwiftDefaultApps/SwiftDefaultApps.prefpnae.xcodeproj">
+            ReferencedContainer = "container:SwiftDefaultApps CLI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -51,24 +51,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <PreActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "EBD61FD81E47EC3C00549EE8"
-                     BuildableName = "SwiftDefaultApps.prefPane"
-                     BlueprintName = "SwiftDefaultApps"
-                     ReferencedContainer = "container:SwiftDefaultApps/SwiftDefaultApps.prefpnae.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
-            </ActionContent>
-         </ExecutionAction>
-      </PreActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

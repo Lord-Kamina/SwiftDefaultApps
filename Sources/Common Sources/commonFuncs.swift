@@ -183,75 +183,11 @@ extension Dictionary
 	}
 }
 
-#if Prefpane
-extension LSRolesMask {
-	/**
-	Bridge our custom type to the actual values used in LaunchServices methods.
-	*/
-	init (from value: SourceListRoleTypes) {
-		switch value {
-		case .Viewer: self = .viewer
-		case .Editor: self = .editor
-		case .Shell: self = .shell
-		case .All: self = .all
-		}
-	}
-}
 
-extension NSControl {
-	/** Shrinks a text label until it fits in a single line in its container. */
-	func fitWidth() {
-		var absoluteMaxWidth: CGFloat = 0.0
-		if let tempWidth = (self.superview?.frame.width) {
-			absoluteMaxWidth = tempWidth
-			absoluteMaxWidth -= (self.alignmentRectInsets.left + self.alignmentRectInsets.right)
-		}
-		
-		let text = self.stringValue
-		guard self.font != nil else { return }
-		var font = self.font!
-		
-		if ControllersRef.sharedInstance.originalFonts[self] == nil {
-			ControllersRef.sharedInstance.originalFonts[self] = font
-		}
-		else { font = ControllersRef.sharedInstance.originalFonts[self]! }
-		
-		let richText = NSTextFieldCell(textCell:text)
-		richText.font = font
-		var neededWidth: CGFloat = richText.cellSize.width
-		var fontSize = font.pointSize
-		var newFont = font
-		guard absoluteMaxWidth > 0.0 else { return }
-		while (neededWidth >= absoluteMaxWidth) {
-			guard fontSize > 0.0 else { return }
-			fontSize -= 0.5
-			newFont = NSFont(descriptor:font.fontDescriptor, size: fontSize)!
-			richText.font = newFont
-			neededWidth = richText.cellSize.width
-		}
-		self.setValue(newFont, forKey:"font")
-	}
-}
-#endif
-
-/** Determines whether the app is running in Prefpane or CLI form by checking the Main Bundle Identifier. */
+/** Determines whether the app is running in app or CLI form by checking the Main Bundle Identifier. */
 func areWeCLI() -> Bool {
 	return (Bundle.main.bundleIdentifier == nil)
 }
-
-/** Determines the URL for the location of the SwiftDefaultApps prefpane, is any. */
-func prefPaneLocation() -> URL? {
-	if let bundle = Bundle(identifier:"cl.fail.lordkamina.SwiftDefaultApps") {
-		return bundle.bundleURL	
-	}
-	let prefpaneSearchPaths: [URL] = FileManager.default.urls(for: FileManager.SearchPathDirectory.preferencePanesDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask)
-	for path in prefpaneSearchPaths {
-		if (FileManager.default.isExecutableFile(atPath: path.appendingPathComponent("SwiftDefaultApps.prefpane").absoluteURL.path) == true) {
-			return path.appendingPathComponent("SwiftDefaultApps.prefpane").absoluteURL
-		}
-	}	
-	return nil
-} 
 
 /** 
 Display a modal alert
@@ -263,7 +199,7 @@ func displayAlert(error: OSStatus = Int32.min, arg1: String?, arg2: String?) thr
 	if (error != 0 && (arg1 == nil || arg2 == nil)) { throw ("Arguments cannot be nil when displaying an error.") }
 	if (!areWeCLI()) {
 		let alert = NSAlert()
-		alert.icon = NSWorkspace.shared.icon(forFile: Bundle(identifier: "cl.fail.lordkamina.SwiftDefaultApps")!.bundlePath)
+		alert.icon = NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath)
 		alert.addButton(withTitle: "OK")
 		if (error != Int32.min) {
 			alert.informativeText = LSWrappers.LSErrors(value: error).print(argument: (app: arg1, content: arg2))
@@ -300,28 +236,5 @@ func displayAlert(error: OSStatus = Int32.min, arg1: String?, arg2: String?) thr
 			guard (arg1 != nil) else { throw("SwiftDefaultApps ERROR: Called displayAlert() with an undefined error code and message.") }
 			print(arg1!)
 		}
-	}
-}
-
-/** NSFont extensions to style the different kinds of row in the NSTreeView. */
-extension NSFont {
-	/** Returns a SmallCaps version of the font it is invoked on. */
-	func smallCaps() -> NSFont? {
-		let settings = [[NSFontDescriptor.FeatureKey.typeIdentifier: kLowerCaseType, NSFontDescriptor.FeatureKey.selectorIdentifier: kLowerCaseSmallCapsSelector]]
-		let attributes: [NSFontDescriptor.AttributeName: AnyObject] = [NSFontDescriptor.AttributeName.featureSettings: settings as AnyObject, NSFontDescriptor.AttributeName.name: fontName as AnyObject]
-		return NSFont(descriptor: NSFontDescriptor(fontAttributes: attributes), size: pointSize)
-	}
-	/** Returns a **Bold** version of the font it is invoked on. */
-	func bold() -> NSFont? {
-		let fontManager = NSFontManager.shared
-		return fontManager.convert(self, toHaveTrait: .boldFontMask)
-	}
-	/**
-	Returns an _Italic_ version of the font it is invoked on.
-	- Note: Not currently used.
-	*/
-	func italic() -> NSFont? {
-		let fontManager = NSFontManager.shared
-		return fontManager.convert(self, toHaveTrait: .italicFontMask)
 	}
 }

@@ -3,8 +3,9 @@ import PackageDescription
 
 let package = Package(
 	name: "SwiftDefaultApps",
+	platforms: [.macOS("13.0")],
 	products: [
-		.executable(name: "Prefpane", targets: ["SWDA-Prefpane"]),
+		.executable(name: "SwiftDefaultApps", targets: ["SWDA-App"]),
 		.executable(name: "CLI", targets: ["SWDA-CLI"])
 	],
 	dependencies: [
@@ -28,10 +29,10 @@ let package = Package(
 			sources: ["CLI Components/"]
 		),
 		.target(
-			name: "SWDA-Prefpane",
+			name: "SWDA-App",
 			dependencies: ["SWDA-Common", "DummyApp"],
 			path: "Sources",
-			sources: ["Prefpane Sources/"]
+			sources: ["App Sources/"]
 		)
 	],
 	swiftLanguageVersions: [.v4, .v4_2, .v5]
